@@ -4,26 +4,26 @@ Antonio Brown, PIT        -- gone|nn
 Julio Jones, ATL          -- gone|nn                    
 Odell Beckham Jr., NYG    -- gone|nn
 DeAndre Hopkins, HOU      -- gone|nn                    
-Jordy Nelson, GB          -- mehh|40|nominate, don't want -- I already have cobb
+Jordy Nelson, GB          -- valu|40|nominate, don't want -- I already have cobb
 Dez Bryant, DAL           -- gone|nn                     
-A.J. Green, CIN           -- mehh|40|nominate, don't want -- already have hill,  inconsistent
+A.J. Green, CIN           -- valu|40|nominate, don't want -- already have hill,  inconsistent
 Allen Robinson, JAC       -- like|40|overvalued? 23, young, good
 Alshon Jeffery, CHI       -- like|35|26, hurt last year, could have down year
 Brandon Marshall, NYJ     -- like|35|32, getting old, bad situation?
 Sammy Watkins, BUF        -- gone|nn                     
-Mike Evans, TB            -- mehh|30|nominate, don't want -- young, rather get Vincent Jackson for much cheaper
+Mike Evans, TB            -- valu|30|nominate, don't want -- young, rather get Vincent Jackson for much cheaper
 T.Y. Hilton, IND          -- gone|nn                     
-Keenan Allen, SD          -- mehh|30|nominate, don't want -- always hurt
-Brandin Cooks, NO         -- mehh|30|nominate, don't want -- bust
+Keenan Allen, SD          -- valu|30|nominate, don't want -- always hurt
+Brandin Cooks, NO         -- valu|30|nominate, don't want -- bust
 Amari Cooper, OAK         -- gone|nn                     
 Golden Tate, DET          -- gone|nn                     
 Kelvin Benjamin, CAR      -- gone|nn                     
 Jeremy Maclin, KC         -- unkn|nn|nominate, don't want --
 Doug Baldwin, SEA         -- unkn|nn|nominate, don't want -- overvalued
-Randall Cobb, GB          -- unkn|47|************
+Randall Cobb, GB          -- ownd|47|************
 Eric Decker, NYJ          -- unkn|nn|at good price
 Demaryius Thomas, DEN     -- unkn|nn|wish list -- bad year, could be good value, rebound
-Jarvis Landry, MIA        -- unkn|7|************
+Jarvis Landry, MIA        -- ownd|7|************
 Michael Floyd, ARI        -- unkn|nn|nominate, don't want -- rather have Brown
 Larry Fitzgerald, ARI     -- unkn|nn|nominate, don't want -- rather have Brown
 Julian Edelman, NE        -- gone|nn                     
@@ -110,29 +110,29 @@ Leonte Carroo, MIA        --
 RB
 ---------------------------------------------------------
 Le'Veon Bell, PIT         -- gone|nn                     
-David Johnson, ARI        -- unkn|nn|too expensive for keeper
+David Johnson, ARI        -- like|55|potential for bust? 
 Todd Gurley, LA           -- gone|nn                     
-Adrian Peterson, MIN      -- unkn|nn|31 years old, don't want as keeper
-Jamaal Charles, KC        -- unkn|nn|older, (might get a deal?) don't want as keeper
+Adrian Peterson, MIN      -- like|55|31 yo
+Jamaal Charles, KC        -- love|55|29 yo
 Lamar Miller, HOU         -- gone|nn                     
-Ezekiel Elliott, DAL      -- unkn|nn|rookie - good for keeper
+Ezekiel Elliott, DAL      -- love|55|rookie
 Devonta Freeman, ATL      -- gone|nn                     
 Mark Ingram, NO           -- gone|nn                     
 LeSean McCoy, BUF         -- gone|nn                     
 Eddie Lacy, GB            -- gone|nn                     
-Doug Martin, TB           -- unkn|nn|27 years old. very solid late 1st round pick.
+Doug Martin, TB           -- like|40|27 years old. very solid late 1st round pick.
 C.J. Anderson, DEN        -- gone|nn                     
-Matt Forte, NYJ           -- unkn|nn|Old, risky
+Matt Forte, NYJ           -- like|30|Old, risky
 DeMarco Murray, TEN       -- gone|nn                     
-Thomas Rawls, SEA         -- unkn|nn|young, got hurt. possible bust
+Thomas Rawls, SEA         -- like|30|young, got hurt. possible bust
 Carlos Hyde, SF           -- gone|nn                     
 Latavius Murray, OAK      -- gone|nn                     
-Jeremy Hill, CIN          -- unkn|51|************
-Jeremy Langford, CHI      -- unkn|nn|young, could be overrated
-Matt Jones, WAS           --
+Jeremy Hill, CIN          -- ownd|51|************
+Jeremy Langford, CHI      -- valu|25|young, could be overrated
+Matt Jones, WAS           -- valu|25|
 Jonathan Stewart, CAR     -- gone|nn                     
-Jay Ajayi, MIA            -- unkn|nn|splitting time with Arian Foster. Could be a good handcuff?
-Dion Lewis, NE            -- unkn|nn|unlikely to get a deal
+Jay Ajayi, MIA            -- valu|15|splitting time with Arian Foster. Could be a good handcuff?
+Dion Lewis, NE            -- like|25|unlikely to get a deal
 Ryan Mathews, PHI         -- unkn|nn|unlikely to get a deal
 Frank Gore, IND           -- gone|nn                     
 Danny Woodhead, SD        -- unkn|nn|unlikely to get a deal

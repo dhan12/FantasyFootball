@@ -38,7 +38,7 @@ class Player:
         self.expectedCost = 0
 
         self.status = 'unkn'
-        self.price = 0
+        self.willingToPay = 0
         self.notes = ''
 
         items = notes.split('|')
@@ -47,24 +47,31 @@ class Player:
 
         if len(items) > 1:
             try:
-                self.price = int(items[1].strip())
+                self.willingToPay = int(items[1].strip())
             except:
-                self.price = 0
+                self.willingToPay = 0
         else:
-                self.price = 0
+                self.willingToPay = 0
 
         if len(items) > 2:
             self.notes = items[2].strip()
 
 
     def __str__(self):
-        value = '    '
-        diff = self.price - self.expectedCost
+
+        # Override status based on value.
+        status = self.status
+        if self.status not in ['gone','ownd','like','love','hate'] :
+            diff = self.willingToPay - self.expectedCost
+            if diff > 1:
+                status = '++++'
+            elif diff < -1:
+                status = '----'
 
         return '{:25.25} {} {:2d} {:>3.1f} {}'.format(
             self.name, 
-            self.status,
-            self.price,
+            status,
+            self.willingToPay,
             self.expectedCost,
             self.notes)
 
