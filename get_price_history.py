@@ -57,7 +57,7 @@ def average(vals):
     if len(vals) == 0: 
         return 0
     else: 
-        return sum(vals) * 1.0 /(len(vals)) * 1.0
+        return (sum(vals) * 1.0) /(len(vals) * 1.0)
 
 def getPricesFor(players=None, position=None):
     prices = [p.price for p in players if p.position == position]

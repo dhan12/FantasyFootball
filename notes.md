@@ -37,7 +37,7 @@ DeSean Jackson, WAS       -- gone|12
 Allen Hurns, JAC          --
 Tyler Lockett, SEA        -- unkn|nn|2nd year, cheap, explosive
 Marvin Jones, DET         -- unkn|nn|Lot of opportunity
-Kevin White, CHI          --
+Kevin White, CHI          -- unkn|11|rookie
 Steve Smith Sr., BAL      --
 Willie Snead, NO          --
 Corey Coleman, CLE        --
@@ -52,7 +52,7 @@ Travis Benjamin, SD       --
 Kenny Britt, LA           --
 Laquon Treadwell, MIN     -- unkn|nn|ddd rookie
 Mike Wallace, BAL         --
-Phillip Dorsett, IND      --
+Phillip Dorsett, IND      -- like|05|RB3 on a good offense
 Mohamed Sanu, ATL         --
 Dorial Green-Beckham, TEN -- gone|3
 Michael Thomas, NO        --
@@ -143,7 +143,7 @@ Ameer Abdullah, DET       -- gone|13
 T.J. Yeldon, JAC          -- gone|25
 Rashad Jennings, NYG      -- unkn|nn|projected to get more carries. Could be good value.
 Isaiah Crowell, CLE       -- unkn|nn|I'd rather have Duke Johnson
-Charles Sims, TB          -- unkn|nn|may not be known, so i could get a deal. 3rd year player. has 3rd down role. good floor. could step in if doug martin struggles.
+Charles Sims, TB          -- keep|7|may not be known, so i could get a deal. 3rd year player. has 3rd down role. good floor. could step in if doug martin struggles.
 LeGarrette Blount, NE     -- unkn|nn|td potential. out of shape.
 Justin Forsett, BAL       -- gone|30
 Chris Ivory, JAC          -- unkn|nn|splitting time with tj yeldon
@@ -173,7 +173,7 @@ Robert Turbin, IND        --
 Roy Helu, OAK             --
 Chris Thompson, WAS       --
 Mike Gillislee, BUF       --
-DeAndre Washington, OAK   -- unkn|nn|rookie backup for Lat Murray. Can be similar Gio Bernard.
+DeAndre Washington, OAK   -- love|5|rookie backup for Lat Murray. Can be similar Gio Bernard.
 Spencer Ware, KC          -- unkn|nn|back up for Jamal Charles, might get a role. battling with Charcandrick
 Cameron Artis-Payne, CAR  --
 Benny Cunningham, LA      --
@@ -222,12 +222,12 @@ Jordan Reed, WAS          --
 Greg Olsen, CAR           --
 Delanie Walker, TEN       --
 Gary Barnidge, CLE        --
-Coby Fleener, NO          --
+Coby Fleener, NO          -- valu|8|Good offense for tight ends
 Travis Kelce, KC          --
 Tyler Eifert, CIN         -- unkn|nn|dont want, already have Hill
 Antonio Gates, SD         --
-Ladarius Green, PIT       --
-Zach Ertz, PHI            --
+Ladarius Green, PIT       -- valu|5|On good team. athletic. break out time? 
+Zach Ertz, PHI            -- valu|4|bad offense, might start having valu
 Zach Miller, CHI          --
 Jimmy Graham, SEA         --
 Julius Thomas, JAC        --
@@ -238,7 +238,7 @@ Austin Seferian-Jenkins, TB --
 Charles Clay, BUF         --
 Richard Rodgers, GB       --
 Kyle Rudolph, MIN         --
-Jordan Cameron, MIA       --
+Jordan Cameron, MIA       -- valu|3|New system might see him thrive.
 Martellus Bennett, NE     --
 Clive Walford, OAK        --
 Will Tye, NYG             --
@@ -276,7 +276,7 @@ Matthew Stafford, DET     -- gone|24
 Derek Carr, OAK           -- gone|1
 Alex Smith, KC            --
 Tony Romo, DAL            --
-Ryan Tannehill, MIA       -- like|2
+Ryan Tannehill, MIA       -- mehh|2|Double points with landry. adds some volatility
 Marcus Mariota, TEN       --
 Joe Flacco, BAL           --
 Brock Osweiler, HOU       -- like|1

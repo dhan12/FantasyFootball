@@ -129,7 +129,7 @@ if __name__ == '__main__':
         if pos == 'KI': pos = 'K'
         if pos in prices:
             if p.posRank < len(prices[pos]):
-                p.expectedCost = prices[pos][p.posRank]
+                p.expectedCost = prices[pos][p.posRank-1]
         else:
             raise Exception('cannot find ' + pos)
 
