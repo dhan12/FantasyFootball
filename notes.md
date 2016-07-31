@@ -1,23 +1,23 @@
 WR
 ---------------------------------------------------------
-Antonio Brown, PIT        -- gone|nn                    
-Julio Jones, ATL          -- gone|nn                    
-Odell Beckham Jr., NYG    -- gone|nn
-DeAndre Hopkins, HOU      -- gone|nn                    
+Antonio Brown, PIT        -- gone|52                    
+Julio Jones, ATL          -- gone|32
+Odell Beckham Jr., NYG    -- gone|3
+DeAndre Hopkins, HOU      -- gone|30                    
 Jordy Nelson, GB          -- valu|40|nominate, don't want -- I already have cobb
-Dez Bryant, DAL           -- gone|nn                     
+Dez Bryant, DAL           -- gone|40                     
 A.J. Green, CIN           -- valu|40|nominate, don't want -- already have hill,  inconsistent
-Allen Robinson, JAC       -- like|40|overvalued? 23, young, good
-Alshon Jeffery, CHI       -- like|35|26, hurt last year, could have down year
-Brandon Marshall, NYJ     -- like|35|32, getting old, bad situation?
-Sammy Watkins, BUF        -- gone|nn                     
+Allen Robinson, JAC       -- valu|40|23 yo
+Alshon Jeffery, CHI       -- valu|35|26 yo, hurt last year, could have down year
+Brandon Marshall, NYJ     -- valu|35|32 yo, getting old
+Sammy Watkins, BUF        -- gone|18
 Mike Evans, TB            -- valu|30|nominate, don't want -- young, rather get Vincent Jackson for much cheaper
-T.Y. Hilton, IND          -- gone|nn                     
+T.Y. Hilton, IND          -- gone|38
 Keenan Allen, SD          -- valu|30|nominate, don't want -- always hurt
 Brandin Cooks, NO         -- valu|30|nominate, don't want -- bust
-Amari Cooper, OAK         -- gone|nn                     
-Golden Tate, DET          -- gone|nn                     
-Kelvin Benjamin, CAR      -- gone|nn                     
+Amari Cooper, OAK         -- gone|20
+Golden Tate, DET          -- gone|11
+Kelvin Benjamin, CAR      -- gone|10
 Jeremy Maclin, KC         -- unkn|nn|nominate, don't want --
 Doug Baldwin, SEA         -- unkn|nn|nominate, don't want -- overvalued
 Randall Cobb, GB          -- ownd|47|************
@@ -26,19 +26,19 @@ Demaryius Thomas, DEN     -- unkn|nn|wish list -- bad year, could be good value,
 Jarvis Landry, MIA        -- ownd|7|************
 Michael Floyd, ARI        -- unkn|nn|nominate, don't want -- rather have Brown
 Larry Fitzgerald, ARI     -- unkn|nn|nominate, don't want -- rather have Brown
-Julian Edelman, NE        -- gone|nn                     
+Julian Edelman, NE        -- gone|18                     
 John Brown, ARI           -- unkn|nn|wish list, might be too pricey, explosive
 Donte Moncrief, IND       -- unkn|nn|young, break out star
 DeVante Parker, MIA       --
 Jordan Matthews, PHI      --
 Michael Crabtree, OAK     --
 Emmanuel Sanders, DEN     -- unkn|nn|Bad year last year, good rebound?
-DeSean Jackson, WAS       -- gone|nn                     
+DeSean Jackson, WAS       -- gone|12                     
 Allen Hurns, JAC          --
 Tyler Lockett, SEA        -- unkn|nn|2nd year, cheap, explosive
 Marvin Jones, DET         -- unkn|nn|Lot of opportunity
 Kevin White, CHI          --
-Steve Smith Sr., BAL          --
+Steve Smith Sr., BAL      --
 Willie Snead, NO          --
 Corey Coleman, CLE        --
 Torrey Smith, SF          --
@@ -54,7 +54,7 @@ Laquon Treadwell, MIN     -- unkn|nn|ddd rookie
 Mike Wallace, BAL         --
 Phillip Dorsett, IND      --
 Mohamed Sanu, ATL         --
-Dorial Green-Beckham, TEN -- gone|nn                     
+Dorial Green-Beckham, TEN -- gone|3
 Michael Thomas, NO        --
 Rishard Matthews, TEN     --
 Pierre Garcon, WAS        --
@@ -93,11 +93,11 @@ Jarius Wright, MIN        --
 Jamison Crowder, WAS      --
 Eddie Royal, CHI          --
 Jeff Janis, GB            --
-Davante Adams, GB         -- gone|nn                     
+Davante Adams, GB         -- gone|18                     
 J.J. Nelson, ARI          --
 Ty Montgomery, GB         --
 Marqise Lee, JAC          --
-Josh Gordon, CLE          -- gone|nn
+Josh Gordon, CLE          -- gone|9
 Chris Conley, KC          --
 Bruce Ellington, SF       --
 Kenny Stills, MIA         --
@@ -109,43 +109,43 @@ Leonte Carroo, MIA        --
 
 RB
 ---------------------------------------------------------
-Le'Veon Bell, PIT         -- gone|nn                     
+Le'Veon Bell, PIT         -- gone|24
 David Johnson, ARI        -- like|55|potential for bust? 
-Todd Gurley, LA           -- gone|nn                     
+Todd Gurley, LA           -- gone|29
 Adrian Peterson, MIN      -- like|55|31 yo
 Jamaal Charles, KC        -- love|55|29 yo
-Lamar Miller, HOU         -- gone|nn                     
+Lamar Miller, HOU         -- gone|35
 Ezekiel Elliott, DAL      -- love|55|rookie
-Devonta Freeman, ATL      -- gone|nn                     
-Mark Ingram, NO           -- gone|nn                     
-LeSean McCoy, BUF         -- gone|nn                     
-Eddie Lacy, GB            -- gone|nn                     
-Doug Martin, TB           -- like|40|27 years old. very solid late 1st round pick.
-C.J. Anderson, DEN        -- gone|nn                     
+Devonta Freeman, ATL      -- gone|4
+Mark Ingram, NO           -- gone|30
+LeSean McCoy, BUF         -- gone|51
+Eddie Lacy, GB            -- gone|46
+Doug Martin, TB           -- like|40|27 yo. solid late 1st round pick.
+C.J. Anderson, DEN        -- gone|55
 Matt Forte, NYJ           -- like|30|Old, risky
-DeMarco Murray, TEN       -- gone|nn                     
+DeMarco Murray, TEN       -- gone|52
 Thomas Rawls, SEA         -- like|30|young, got hurt. possible bust
-Carlos Hyde, SF           -- gone|nn                     
-Latavius Murray, OAK      -- gone|nn                     
+Carlos Hyde, SF           -- gone|32
+Latavius Murray, OAK      -- gone|25                     
 Jeremy Hill, CIN          -- ownd|51|************
-Jeremy Langford, CHI      -- valu|25|young, could be overrated
-Matt Jones, WAS           -- valu|25|
-Jonathan Stewart, CAR     -- gone|nn                     
+Jeremy Langford, CHI      -- valu|20|young, could be overrated
+Matt Jones, WAS           -- valu|20|young. will be primary back. good physicals.
+Jonathan Stewart, CAR     -- gone|13                     
 Jay Ajayi, MIA            -- valu|15|splitting time with Arian Foster. Could be a good handcuff?
-Dion Lewis, NE            -- like|25|unlikely to get a deal
-Ryan Mathews, PHI         -- unkn|nn|unlikely to get a deal
-Frank Gore, IND           -- gone|nn                     
+Dion Lewis, NE            -- like|25|
+Ryan Mathews, PHI         -- unkn|15|bad offense. injuries.
+Frank Gore, IND           -- gone|24|
 Danny Woodhead, SD        -- unkn|nn|unlikely to get a deal
 Giovani Bernard, CIN      -- unkn|nn|don't want, already have hill
-Melvin Gordon, SD         -- gone|nn                     
+Melvin Gordon, SD         -- gone|35                     
 Duke Johnson Jr., CLE     -- unkn|nn|established affordable
-Ameer Abdullah, DET       -- gone|nn                     
-T.J. Yeldon, JAC          -- gone|nn                     
+Ameer Abdullah, DET       -- gone|13
+T.J. Yeldon, JAC          -- gone|25
 Rashad Jennings, NYG      -- unkn|nn|projected to get more carries. Could be good value.
 Isaiah Crowell, CLE       -- unkn|nn|I'd rather have Duke Johnson
 Charles Sims, TB          -- unkn|nn|may not be known, so i could get a deal. 3rd year player. has 3rd down role. good floor. could step in if doug martin struggles.
 LeGarrette Blount, NE     -- unkn|nn|td potential. out of shape.
-Justin Forsett, BAL       -- gone|nn                     
+Justin Forsett, BAL       -- gone|30
 Chris Ivory, JAC          -- unkn|nn|splitting time with tj yeldon
 Theo Riddick, DET         -- unkn|nn|3rd down back. capped ceiling?
 Karlos Williams, BUF      --
@@ -154,7 +154,7 @@ Shane Vereen, NYG         -- unkn|nn|low ceiling and floor is 0. not really wort
 Derrick Henry, TEN        -- unkn|nn|next best prospect after EE. much cheaper. big guy. vulture tds.
 Bilal Powell, NYJ         --
 James Starks, GB          --
-Ronnie Hillman, DEN       -- gone|nn                     
+Ronnie Hillman, DEN       -- gone|1
 Jordan Howard, CHI        --
 Javorius Allen, BAL       --
 C.J. Prosise, SEA         -- unkn|nn|good for ppr more than standard
@@ -186,15 +186,15 @@ Wendell Smallwood, PHI    --
 Keith Marshall, WAS       --
 Khiry Robinson, NYJ       --
 Andre Ellington, ARI      --
-C.J. Spiller, NO          -- gone|nn                     
+C.J. Spiller, NO          -- gone|12
 Zach Zenner, DET          --
 Ka'Deem Carey, CHI        --
 Kenjon Barner, PHI        --
 Jordan Todman, IND        --
 Zach Line, MIN            --
-Alfred Blue, HOU          -- gone|nn                     
+Alfred Blue, HOU          -- gone|1                     
 Matt Asiata, MIN          --
-Alfred Morris, DAL        -- gone|nn                     
+Alfred Morris, DAL        -- gone|33
 Dexter McCluster, TEN     --
 Damien Williams, MIA      --
 Kelvin Taylor, SF         --
@@ -208,7 +208,7 @@ Stevan Ridley, DET        --
 James White, NE           --
 Branden Oliver, SD        --
 Jonathan Williams, BUF    --
-Arian Foster, MIA         -- gone|nn
+Arian Foster, MIA         -- gone|35
 Tim Hightower, NO         --
 Will Fuller, HOU          --
 Alex Collins, SEA         --
@@ -217,7 +217,7 @@ Benjamin Cunningham, LA   --
 
 TE
 ---------------------------------------------------------
-Rob Gronkowski, NE        -- gone|nn                     
+Rob Gronkowski, NE        -- gone|49
 Jordan Reed, WAS          --
 Greg Olsen, CAR           --
 Delanie Walker, TEN       --
@@ -233,7 +233,7 @@ Jimmy Graham, SEA         --
 Julius Thomas, JAC        --
 Jason Witten, DAL         --
 Eric Ebron, DET           -- unkn|nn|very young, room to step in, role might be hurt by boldin
-Dwayne Allen, IND         -- gone|nn                     
+Dwayne Allen, IND         -- gone|1
 Austin Seferian-Jenkins, TB --
 Charles Clay, BUF         --
 Richard Rodgers, GB       --
@@ -257,33 +257,33 @@ Blake Bell, SF            --
 
 QB
 ---------------------------------------------------------
-Cam Newton, CAR           --
-Aaron Rodgers, GB         --
-Russell Wilson, SEA       --
-Andrew Luck, IND          --
-Tom Brady, NE             --
-Drew Brees, NO            -- gone|nn                     
-Ben Roethlisberger, PIT   --
-Tyrod Taylor, BUF         --
-Blake Bortles, JAC        -- gone|nn                     
-Philip Rivers, SD         --
-Eli Manning, NYG          --
-Kirk Cousins, WAS         --
+Cam Newton, CAR           -- valu|19
+Aaron Rodgers, GB         -- valu|19
+Russell Wilson, SEA       -- valu|22
+Andrew Luck, IND          -- valu|18
+Tom Brady, NE             -- valu|9
+Drew Brees, NO            -- gone|22
+Ben Roethlisberger, PIT   -- valu|8
+Tyrod Taylor, BUF         -- like|9
+Blake Bortles, JAC        -- gone|1
+Philip Rivers, SD         -- valu|8
+Eli Manning, NYG          -- valu|8
+Kirk Cousins, WAS         -- love|5
 Jameis Winston, TB        --
 Andy Dalton, CIN          --
 Carson Palmer, ARI        --
-Matthew Stafford, DET     -- gone|nn                     
-Derek Carr, OAK           -- gone|nn                     
+Matthew Stafford, DET     -- gone|24
+Derek Carr, OAK           -- gone|1
 Alex Smith, KC            --
 Tony Romo, DAL            --
-Ryan Tannehill, MIA       --
+Ryan Tannehill, MIA       -- like|2
 Marcus Mariota, TEN       --
 Joe Flacco, BAL           --
-Brock Osweiler, HOU       --
-Matt Ryan, ATL            --
-Ryan Fitzpatrick, FA      --
+Brock Osweiler, HOU       -- like|1
+Matt Ryan, ATL            -- like|2
+Ryan Fitzpatrick, FA      -- like|2
 Jay Cutler, CHI           --
-Teddy Bridgewater, MIN    -- gone|nn                     
+Teddy Bridgewater, MIN    -- gone|5
 Robert Griffin, CLE       --
 Jared Goff, LA            --
 Blaine Gabbert, SF        --
@@ -323,7 +323,7 @@ Steven Hauschka, SEA      --
 Dan Bailey, DAL           --
 Justin Tucker, BAL        --
 Adam Vinatieri, IND       --
-Mason Crosby, GB          --
+Mason Crosby, GB          -- 2
 Josh Brown, NYG           --
 Graham Gano, CAR          --
 Blair Walsh, MIN          --

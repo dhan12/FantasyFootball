@@ -66,7 +66,7 @@ class Player:
             if diff > 1:
                 status = '++++'
             elif diff < -1:
-                status = '----'
+                status = 'xxxx'
 
         return '{:25.25} {} {:2d} {:>3.1f} {}'.format(
             self.name, 
