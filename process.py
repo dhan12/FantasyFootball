@@ -99,7 +99,7 @@ if __name__ == '__main__':
     currentOverallRank = None
 
     # Get espn rankings
-    filename = 'espn.rankings.md'
+    filename = 'data/espn.rankings.md'
     with open(filename, 'r') as input:
         for line in input:
             if len(line.strip()) == 0: continue
