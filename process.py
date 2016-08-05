@@ -1,4 +1,5 @@
-#!/usr/bin/python
+
+from colorama import Fore, Back, Style
 
 LAST_RANK = 999
 
@@ -61,19 +62,38 @@ class Player:
 
         # Override status based on value.
         status = self.status
-        if self.status not in ['gone','ownd','like','love','hate'] :
+        fg_color = Fore.BLACK
+        bg_color = Back.RESET
+        if self.status in ['gone']:
+            fg_color = Fore.WHITE
+        elif self.status in ['ownd']:
+            fg_color = Fore.WHITE
+            bg_color = Back.BLACK
+        elif self.status in ['like','love'] :
+            fg_color = Fore.BLUE
+            bg_color = Back.WHITE
+        elif self.status in ['hate']:
+            fg_color = Fore.RED
+        else:
             diff = self.willingToPay - self.expectedCost
             if diff > 1:
                 status = '++++'
+                fg_color = Fore.BLUE 
+                bg_color = Back.WHITE
             elif diff < -1:
                 status = 'xxxx'
+                fg_color = Fore.RED 
+            else:
+                pass
 
-        return '{:25.25} {} {:2d} {:>3.1f} {}'.format(
+        return fg_color + bg_color + \
+            '{:2d} {:25.25} {} {:2d} {:>3.1f} {}'.format(
+            self.posRank,
             self.name, 
             status,
             self.willingToPay,
             self.expectedCost,
-            self.notes)
+            self.notes) + Fore.RESET + Back.RESET
 
 if __name__ == '__main__':
     import sys
@@ -135,3 +155,4 @@ if __name__ == '__main__':
 
     # Final result
     printPlayers(players)
+    print(Style.RESET_ALL)
