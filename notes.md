@@ -173,7 +173,7 @@ James Starks, GB          -- valu|5|30yo, good handcuff
 
 Ronnie Hillman, DEN       -- gone|1
 Darren Sproles, PHI       -- valu|5|old, 3rd down role.
-Shane Vereen, NYG         -- valu|5|low ceiling and floor is 0. not really worth it.
+Shane Vereen, NYG         -- valu|1|low ceiling and floor is 0. not really worth it.
 Jay Ajayi, MIA            -- valu|5|splitting time with Arian Foster. Could be a good handcuff?
 Derrick Henry, TEN        -- valu|3|next best prospect after EE. much cheaper. big guy. vulture tds.
 Theo Riddick, DET         -- valu|5|3rd down back. capped ceiling?

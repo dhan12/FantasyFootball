@@ -17,7 +17,6 @@ def getRank(line):
     return True, posRank, overallRank
 
 def printPlayersFor(players=None, position=None):
-    print position
 
     pp = [p for _, p in players.iteritems() if p.pos == position]
     pp.sort(key=lambda x:x.posRank)
@@ -25,9 +24,14 @@ def printPlayersFor(players=None, position=None):
     for p in pp: 
         print p
 
-def printPlayers(players):
-    positions = ['RB','WR','QB','TE','DF','KI']
+def printPlayers(players=None, pos=None):
+    if pos:
+        positions = [pos]
+    else:
+        positions = ['RB','WR','QB','TE','DF','KI']
+
     for p in positions:
+        print p
         printPlayersFor(players, p)
 
 class Player: 
@@ -98,6 +102,14 @@ class Player:
 if __name__ == '__main__':
     import sys
 
+    if len(sys.argv) > 1:
+        # Show data for a position
+        posToDisplay = sys.argv[1]
+    else:
+        # Show data for all positions
+        posToDisplay = None
+
+
     # Get my notes
     notesFile = 'notes.md'
     pos = None
@@ -154,5 +166,5 @@ if __name__ == '__main__':
             raise Exception('cannot find ' + pos)
 
     # Final result
-    printPlayers(players)
+    printPlayers(players=players, pos=posToDisplay)
     print(Style.RESET_ALL)
