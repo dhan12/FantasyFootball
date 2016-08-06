@@ -34,6 +34,30 @@ def printPlayers(players=None, pos=None):
         print p
         printPlayersFor(players, p)
 
+def printPlayersInColumns(players=None, pos=None):
+    positions = ['RB','WR','QB','TE']
+
+    positionToPlayers = {}
+    for pos in positions:
+        pp = [p for _, p in players.iteritems() if p.pos == pos]
+        pp.sort(key=lambda x:x.posRank)
+
+        positionToPlayers[pos] = pp
+
+    index = 0
+    quit = False
+    while not quit:
+        quit = True
+        line = '{:3.3}'.format(str(index + 1))
+        for pos in positions:
+            if len(positionToPlayers[pos]) > index:
+                line = line + '  | ' + str(positionToPlayers[pos][index])
+                quit = False
+            else:
+                line = line + '  |                                              '
+        print line
+        index = index + 1
+
 class Player: 
     def __init__(self, pos, name, notes):
         self.pos = pos
@@ -65,38 +89,42 @@ class Player:
     def __str__(self):
 
         # Override status based on value.
-        status = self.status
         fg_color = Fore.BLACK
         bg_color = Back.RESET
+        status = ' '
         if self.status in ['gone']:
             fg_color = Fore.WHITE
+            status = 'g'
         elif self.status in ['ownd']:
             fg_color = Fore.WHITE
             bg_color = Back.BLACK
+            status = 'o'
         elif self.status in ['like','love'] :
             fg_color = Fore.BLUE
             bg_color = Back.WHITE
+            status = 'y'
         elif self.status in ['hate']:
             fg_color = Fore.RED
+            status = 'h'
         else:
             diff = self.willingToPay - self.expectedCost
             if diff > 1:
-                status = '++++'
                 fg_color = Fore.BLUE 
                 bg_color = Back.WHITE
+                status = '+'
             elif diff < -1:
-                status = 'xxxx'
+                status = 'x'
                 fg_color = Fore.RED 
             else:
                 pass
 
         return fg_color + bg_color + \
-            '{:2d} {:25.25} {} {:2d} {:>3.1f} {}'.format(
-            self.posRank,
+            '{} {:2.2} {:18.18} {:2d} {:4.4} {:13.13}'.format(
+            status, 
+            str(self.posRank),
             self.name, 
-            status,
             self.willingToPay,
-            self.expectedCost,
+            str(self.expectedCost),
             self.notes) + Fore.RESET + Back.RESET
 
 if __name__ == '__main__':
@@ -166,5 +194,6 @@ if __name__ == '__main__':
             raise Exception('cannot find ' + pos)
 
     # Final result
-    printPlayers(players=players, pos=posToDisplay)
+    # printPlayers(players=players, pos=posToDisplay)
+    printPlayersInColumns(players=players, pos=posToDisplay)
     print(Style.RESET_ALL)
