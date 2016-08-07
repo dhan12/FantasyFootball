@@ -16,30 +16,15 @@ def getRank(line):
 
     return True, posRank, overallRank
 
-def printPlayersFor(players=None, position=None):
-
-    pp = [p for _, p in players.iteritems() if p.pos == position]
-    pp.sort(key=lambda x:x.posRank)
-
-    for p in pp: 
-        print p
-
-def printPlayers(players=None, pos=None):
-    if pos:
-        positions = [pos]
-    else:
-        positions = ['RB','WR','QB','TE','DF','KI']
-
-    for p in positions:
-        print p
-        printPlayersFor(players, p)
-
-def printPlayersInColumns(players=None, pos=None):
+def printPlayersInColumns(players=None, onlyShowAvailable=None):
     positions = ['RB','WR','QB','TE']
 
     positionToPlayers = {}
     for pos in positions:
-        pp = [p for _, p in players.iteritems() if p.pos == pos]
+        if onlyShowAvailable:
+            pp = [p for _, p in players.iteritems() if p.pos == pos and p.status != 'gone']
+        else: 
+            pp = [p for _, p in players.iteritems() if p.pos == pos]
         pp.sort(key=lambda x:x.posRank)
 
         positionToPlayers[pos] = pp
@@ -100,19 +85,19 @@ class Player:
             bg_color = Back.BLACK
             status = 'o'
         elif self.status in ['like','love'] :
-            fg_color = Fore.BLUE
-            bg_color = Back.WHITE
+            fg_color = Fore.BLACK
+            bg_color = Back.LIGHTYELLOW_EX
             status = 'y'
         elif self.status in ['hate']:
             fg_color = Fore.RED
             status = 'h'
         else:
             diff = self.willingToPay - self.expectedCost
-            if diff > 1:
+            if diff >= 1:
                 fg_color = Fore.BLUE 
                 bg_color = Back.WHITE
                 status = '+'
-            elif diff < -1:
+            elif diff <= -1:
                 status = 'x'
                 fg_color = Fore.RED 
             else:
@@ -130,12 +115,9 @@ class Player:
 if __name__ == '__main__':
     import sys
 
+    onlyShowAvailable = False
     if len(sys.argv) > 1:
-        # Show data for a position
-        posToDisplay = sys.argv[1]
-    else:
-        # Show data for all positions
-        posToDisplay = None
+        onlyShowAvailable = True
 
 
     # Get my notes
@@ -159,7 +141,7 @@ if __name__ == '__main__':
     currentOverallRank = None
 
     # Get espn rankings
-    filename = 'data/espn.rankings.md'
+    filename = 'data/espn.rankings.aug04.md'
     with open(filename, 'r') as input:
         for line in input:
             if len(line.strip()) == 0: continue
@@ -194,6 +176,5 @@ if __name__ == '__main__':
             raise Exception('cannot find ' + pos)
 
     # Final result
-    # printPlayers(players=players, pos=posToDisplay)
-    printPlayersInColumns(players=players, pos=posToDisplay)
+    printPlayersInColumns(players=players, onlyShowAvailable=onlyShowAvailable)
     print(Style.RESET_ALL)

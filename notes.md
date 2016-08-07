@@ -4,43 +4,43 @@ Antonio Brown, PIT        -- gone|52|top tier
 Julio Jones, ATL          -- gone|32|top tier
 Odell Beckham Jr., NYG    -- gone|3|top tier
 DeAndre Hopkins, HOU      -- gone|30|tier 1a                    
-Jordy Nelson, GB          -- valu|38|nominate, don't want, already have cobb. injury risk
-A.J. Green, CIN           -- valu|38|nominate, don't want, already have hill,  inconsistent
-
-Allen Robinson, JAC       -- valu|38|2nd year
 Dez Bryant, DAL           -- gone|40|tier 1a             
-Alshon Jeffery, CHI       -- valu|25|prime age, hurt last year, could have down year
-Brandon Marshall, NYJ     -- valu|25|32 yo, getting old
-Mike Evans, TB            -- valu|30|
+A.J. Green, CIN           -- valu|40|nominate, don't want, already have hill,  inconsistent
+
+Mike Evans, TB            -- valu|35|
+Allen Robinson, JAC       -- valu|35|2nd year
+Brandon Marshall, NYJ     -- valu|34|32 yo, getting old
+Alshon Jeffery, CHI       -- valu|33|prime age, hurt last year, could have down year
+Jordy Nelson, GB          -- valu|33|nominate, don't want, already have cobb. injury risk
 Randall Cobb, GB          -- ownd|47|************
 
 T.Y. Hilton, IND          -- gone|38
-Sammy Watkins, BUF        -- gone|18|
-Jeremy Maclin, KC         -- valu|20|nominate, don't want --
-Brandin Cooks, NO         -- valu|30|
-Doug Baldwin, SEA         -- valu|20|nominate, don't want -- overvalued
-Demaryius Thomas, DEN     -- valu|25|wish list -- bad year, could be good value, rebound
-
+Sammy Watkins, BUF        -- gone|18
 Amari Cooper, OAK         -- gone|20
-Keenan Allen, SD          -- valu|30|
-DeSean Jackson, WAS       -- gone|12                     
+Brandin Cooks, NO         -- valu|31|
+Keenan Allen, SD          -- valu|29|
+Demaryius Thomas, DEN     -- valu|27|28 yo, bad qb, rebound
+
 Eric Decker, NYJ          -- valu|25|at good price
+Jeremy Maclin, KC         -- valu|20|nominate, don't want --
+Doug Baldwin, SEA         -- valu|20|nominate, don't want -- overvalued
+DeSean Jackson, WAS       -- gone|12                     
 Julian Edelman, NE        -- gone|14                     
+Larry Fitzgerald, ARI     -- valu|15|nominate, don't want -- rather have Brown
+
 Emmanuel Sanders, DEN     -- valu|14|Bad year last year, good rebound?
-
-Kelvin Benjamin, CAR      -- gone|10
-Larry Fitzgerald, ARI     -- valu|14|nominate, don't want -- rather have Brown
-Jarvis Landry, MIA        -- ownd|7|************
-Jordan Matthews, PHI      -- valu|5|is he good?
-Golden Tate, DET          -- gone|11
-Allen Hurns, JAC          --
-
-DeVante Parker, MIA       -- valu|7|clash with landry
-Marvin Jones, DET         -- valu|9|Lot of opportunity
-Stefon Diggs, MIN         -- valu|3|2nd year, low scoring
-Steve Smith Sr., BAL      --
 Donte Moncrief, IND       -- valu|13|young, break out star
-Michael Floyd, ARI        -- valu|20|nominate, don't want -- rather have Brown
+Kelvin Benjamin, CAR      -- gone|10
+Jarvis Landry, MIA        -- ownd|7|************
+Jordan Matthews, PHI      -- valu|7|is he good?
+Golden Tate, DET          -- gone|11
+Allen Hurns, JAC          -- valu|8
+
+DeVante Parker, MIA       -- valu|4|clash with landry
+Marvin Jones, DET         -- valu|9|Lot of opportunity
+Michael Floyd, ARI        -- valu|8|nominate, don't want -- rather have Brown
+Stefon Diggs, MIN         -- valu|5|2nd year, low scoring
+Steve Smith Sr., BAL      -- valu|5
 
 Torrey Smith, SF          -- valu|5|old guy, lead WR
 Vincent Jackson, TB       -- valu|3|Cheaper version of Mike Evans
@@ -86,7 +86,7 @@ Danny Amendola, NE        --
 
 Robert Woods, BUF         --
 Bruce Ellington, SF       -- valu|3
-Phillip Dorsett, IND      -- like|3|RB3 on a good offense
+Phillip Dorsett, IND      -- like|3|WR3 on a good offense
 Chris Hogan, NE           -- like|1|could be wr3 for new england
 
 Michael Thomas, NO        --
@@ -122,47 +122,47 @@ Leonte Carroo, MIA        --
 
 RB
 ---------------------------------------------------------
-Adrian Peterson, MIN      -- like|55|31 yo
-Jamaal Charles, KC        -- love|55|29 yo
-David Johnson, ARI        -- like|55|potential for bust? 
+Jamaal Charles, KC        -- valu|51|29 yo
+Adrian Peterson, MIN      -- valu|51|31 yo
+Ezekiel Elliott, DAL      -- valu|51|rookie
+David Johnson, ARI        -- valu|51|potential for bust? 
 Todd Gurley, LA           -- gone|29
-Devonta Freeman, ATL      -- gone|4|24yo
-Lamar Miller, HOU         -- gone|35
-
-Doug Martin, TB           -- like|40|27yo. solid late 1st round pick.
-Ezekiel Elliott, DAL      -- love|55|rookie
-Eddie Lacy, GB            -- gone|46
-LeSean McCoy, BUF         -- gone|51
-Mark Ingram, NO           -- gone|30
 Le'Veon Bell, PIT         -- gone|24
 
-Thomas Rawls, SEA         -- like|20|young, got hurt. possible bust
-Ryan Mathews, PHI         -- valu|15|bad offense. injuries.
+Eddie Lacy, GB            -- gone|46
+Lamar Miller, HOU         -- gone|35
+Devonta Freeman, ATL      -- gone|4|24yo
+LeSean McCoy, BUF         -- gone|51
+Mark Ingram, NO           -- gone|30
+C.J. Anderson, DEN        -- gone|55
+
+Doug Martin, TB           -- valu|30|27yo. solid late 1st round pick.
+Dion Lewis, NE            -- valu|27|
+Thomas Rawls, SEA         -- valu|27|young, got hurt. possible bust
 Latavius Murray, OAK      -- gone|25                     
 Jonathan Stewart, CAR     -- gone|13                     
-Ameer Abdullah, DET       -- gone|13
 Carlos Hyde, SF           -- gone|32
 
-C.J. Anderson, DEN        -- gone|55
-Matt Forte, NYJ           -- like|20|Old, risky
-Matt Jones, WAS           -- valu|14|young. will be primary back. poor year 1.
+Jeremy Langford, CHI      -- valu|21|young, could be overrated
+Ryan Mathews, PHI         -- valu|20|bad offense. injuries.
+Matt Forte, NYJ           -- valu|20|Old, risky
+Matt Jones, WAS           -- valu|20|young. will be primary back. poor year 1.
 DeMarco Murray, TEN       -- gone|52
-Dion Lewis, NE            -- like|25|
-Jeremy Langford, CHI      -- valu|20|young, could be overrated
+Ameer Abdullah, DET       -- gone|13
 
+Rashad Jennings, NYG      -- valu|15|projected to get more carries. Could be good value.
 Danny Woodhead, SD        -- valu|15|unlikely to get a deal
+Charles Sims, TB          -- keep|7|unknown, 3rd year player. has 3rd down role. handcuff
 Melvin Gordon, SD         -- gone|35                     
 Frank Gore, IND           -- gone|24|
 Jeremy Hill, CIN          -- ownd|51|************
-Giovani Bernard, CIN      -- valu|5|don't want, already have hill
 LeGarrette Blount, NE     -- valu|5|td potential. out of shape.
 
 Duke Johnson Jr., CLE     -- valu|11|established affordable
+Giovani Bernard, CIN      -- valu|5|don't want, already have hill
 T.J. Yeldon, JAC          -- gone|25
 Arian Foster, MIA         -- gone|35
 Isaiah Crowell, CLE       -- valu|5|I'd rather have Duke Johnson
-Rashad Jennings, NYG      -- valu|15|projected to get more carries. Could be good value.
-Charles Sims, TB          -- keep|5|may not be known, 3rd year player. has 3rd down role. handcuff
 
 Karlos Williams, BUF      -- valu|3
 DeAngelo Williams, PIT    -- valu|7|33yo. good for first couple weeks. good handcuff for year
@@ -249,23 +249,24 @@ TE
 Rob Gronkowski, NE        -- gone|49
 Jordan Reed, WAS          -- valu|9
 Greg Olsen, CAR           -- valu|8
-Coby Fleener, NO          -- love|7|Good offense for tight ends
+Coby Fleener, NO          -- valu|6|Good offense for tight ends
 Travis Kelce, KC          -- valu|7
 Delanie Walker, TEN       -- valu|5
 Gary Barnidge, CLE        -- valu|4
 Tyler Eifert, CIN         -- valu|6|dont want, already have Hill
-Antonio Gates, SD         -- valu|5|Ok floor
-Ladarius Green, PIT       -- love|5|On good team. athletic. break out time? 
-Zach Ertz, PHI            -- valu|4|bad offense, might start having valu
-Zach Miller, CHI          -- valu|4
-Jimmy Graham, SEA         -- valu|3
-Julius Thomas, JAC        -- valu|3
-Jason Witten, DAL         -- valu|3
-Eric Ebron, DET           -- valu|3|young, room to step in, role might be hurt by boldin
+Antonio Gates, SD         -- valu|4|Ok floor
+Ladarius Green, PIT       -- love|4|On good team. athletic. break out time? 
+Zach Ertz, PHI            -- valu|3|bad offense, might start having valu
+Zach Miller, CHI          -- valu|2
+Jimmy Graham, SEA         -- valu|2
+Julius Thomas, JAC        -- valu|2
+Jason Witten, DAL         -- valu|2
+Eric Ebron, DET           -- valu|2|young, room to step in, role might be hurt by boldin
 Dwayne Allen, IND         -- gone|1
-Austin Seferian-Jenkins, TB -- valu|3
-Jordan Cameron, MIA       -- valu|3|New system might see him thrive.
-Martellus Bennett, NE     -- valu|2
+Austin Seferian-Jenkins, TB -- valu|0
+Cameron Brate, TB         -- valu|1
+Jordan Cameron, MIA       -- valu|2|New system might see him thrive.
+Martellus Bennett, NE     -- valu|3
 Jacob Tamme, ATL          -- valu|0
 Charles Clay, BUF         --
 Richard Rodgers, GB       --
@@ -313,19 +314,19 @@ Blake Bortles, JAC        -- gone|1
 Derek Carr, OAK           -- gone|1
 Brock Osweiler, HOU       -- like|1
 Matt Ryan, ATL            -- like|2
-Ryan Fitzpatrick, FA      -- like|2
+Ryan Fitzpatrick, NYJ     -- like|2
 
 Alex Smith, KC            -- valu|1
 Jay Cutler, CHI           -- valu|1
 
 Robert Griffin, CLE       --
 Jared Goff, LA            --
-Blaine Gabbert, SF        --
+Blaine Gabbert, SF        -- valu|1
 Sam Bradford, PHI         --
 Mark Sanchez, DEN         --
 Geno Smith, NYJ           --
 Brian Hoyer, CHI          --
-Colin Kaepernick, SF      --
+Colin Kaepernick, SF      -- valu|1
 Jimmy Garoppolo, NE       --
 Carson Wentz, PHI         --
 Case Keenum, LA           --
