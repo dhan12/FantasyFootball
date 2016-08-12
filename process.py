@@ -1,7 +1,8 @@
+from player import Player
+from colorama import Style
 
-from colorama import Fore, Back, Style
 
-LAST_RANK = 999
+POSITIONS = ['RB','WR','QB','TE']
 
 def getRank(line):
     items = line.replace('.','').replace(')','').replace('(','').split()
@@ -17,10 +18,9 @@ def getRank(line):
     return True, posRank, overallRank
 
 def printPlayersInColumns(players=None, onlyShowAvailable=None):
-    positions = ['RB','WR','QB','TE']
 
     positionToPlayers = {}
-    for pos in positions:
+    for pos in POSITIONS:
         if onlyShowAvailable:
             pp = [p for _, p in players.iteritems() if p.pos == pos and p.status != 'gone']
         else: 
@@ -34,83 +34,50 @@ def printPlayersInColumns(players=None, onlyShowAvailable=None):
     while not quit:
         quit = True
         line = '{:3.3}'.format(str(index + 1))
-        for pos in positions:
+        for pos in POSITIONS:
             if len(positionToPlayers[pos]) > index:
-                line = line + '  | ' + str(positionToPlayers[pos][index])
+                line = line + ' | ' + str(positionToPlayers[pos][index])
                 quit = False
             else:
-                line = line + '  |                                              '
+                line = line + ' |                                               '
         print line
         index = index + 1
 
-class Player: 
-    def __init__(self, pos, name, notes):
-        self.pos = pos
-        self.name = name
-        self.posRank = LAST_RANK
-        self.overallRank = LAST_RANK
-        self.expectedCost = 0
+from difflib import SequenceMatcher
+def findMatch(players, aName):
 
-        self.status = 'unkn'
-        self.willingToPay = 0
-        self.notes = ''
+    # TODO: check position and use that to help compare. 
+    pos = ''
+    for p in POSITIONS:
+        if aName.find(p) > -1:
+            pos = p
+            break
 
-        items = notes.split('|')
-        if len(items) > 0 and len(items[0].strip()) == 4:
-            self.status = items[0]
+    cleanedName = aName.replace(')','')\
+        .replace(' (QB','')\
+        .replace(' (RB','')\
+        .replace(' (TE','')\
+        .replace(' (WR','')\
+        .replace('WSH', 'WAS')
 
-        if len(items) > 1:
-            try:
-                self.willingToPay = int(items[1].strip())
-            except:
-                self.willingToPay = 0
-        else:
-                self.willingToPay = 0
+    if cleanedName in players:
+        return cleanedName
 
-        if len(items) > 2:
-            self.notes = items[2].strip()
+    maxMatch = 0
+    bestMatch = ''
+    for key, p in players.iteritems():
+        if p.pos != pos: continue
 
+        m = SequenceMatcher(None, key, cleanedName).ratio()
+        if m > maxMatch: 
+            maxMatch = m
+            bestMatch = key
 
-    def __str__(self):
-
-        # Override status based on value.
-        fg_color = Fore.BLACK
-        bg_color = Back.RESET
-        status = ' '
-        if self.status in ['gone']:
-            fg_color = Fore.WHITE
-            status = 'g'
-        elif self.status in ['ownd']:
-            fg_color = Fore.WHITE
-            bg_color = Back.BLACK
-            status = 'o'
-        elif self.status in ['like','love'] :
-            fg_color = Fore.BLACK
-            bg_color = Back.LIGHTYELLOW_EX
-            status = 'y'
-        elif self.status in ['hate']:
-            fg_color = Fore.RED
-            status = 'h'
-        else:
-            diff = self.willingToPay - self.expectedCost
-            if diff >= 1:
-                fg_color = Fore.BLUE 
-                bg_color = Back.WHITE
-                status = '+'
-            elif diff <= -1:
-                status = 'x'
-                fg_color = Fore.RED 
-            else:
-                pass
-
-        return fg_color + bg_color + \
-            '{} {:2.2} {:18.18} {:2d} {:4.4} {:13.13}'.format(
-            status, 
-            str(self.posRank),
-            self.name, 
-            self.willingToPay,
-            str(self.expectedCost),
-            self.notes) + Fore.RESET + Back.RESET
+    if maxMatch >= .6:
+        return bestMatch
+    else:
+        print 'no match found', aName
+        return ''
 
 if __name__ == '__main__':
     import sys
@@ -139,6 +106,28 @@ if __name__ == '__main__':
 
     currentPosRank = None
     currentOverallRank = None
+
+    # Get numberfire projected points
+    filename = 'data/number.fire.aug.11.md'
+    playerToProjections = {}
+    with open(filename, 'r') as input:
+        fire_players = []
+        projections = []
+
+        for line in input:
+            if len(line.strip()) == 0: continue
+            if line[0] == '#':
+                p = float(line[:-1].split()[-1])
+                projections.append(p)
+            else:
+                fire_players.append(line[:-1])
+
+        assert(len(fire_players) == len(projections))
+        numPlayers = len(fire_players)
+        for i in xrange(numPlayers):
+            name = findMatch(players, fire_players[i])
+            if name != '':
+                players[name].projection = projections[i]
 
     # Get espn rankings
     filename = 'data/espn.rankings.aug04.md'
@@ -176,5 +165,6 @@ if __name__ == '__main__':
             raise Exception('cannot find ' + pos)
 
     # Final result
+    print '\n\n\n\nResults:\n\n\n\n'
     printPlayersInColumns(players=players, onlyShowAvailable=onlyShowAvailable)
     print(Style.RESET_ALL)
