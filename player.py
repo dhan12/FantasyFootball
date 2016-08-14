@@ -78,3 +78,14 @@ class Player:
             str(int(self.projection)),
             self.notes) + Fore.RESET + Back.RESET
 
+def getAverage(players):
+    ''' get the average cost and projection for the set of players '''
+    numPlayers = len(players) * 1.0
+    retPlayer = Player('','','')
+    for p in players:
+        retPlayer.expectedCost += (p.expectedCost) / numPlayers
+        retPlayer.projection += (p.projection) / numPlayers
+
+    return retPlayer
+
+

@@ -7,8 +7,8 @@ DeAndre Hopkins, HOU      -- gone|30|tier 1a
 Dez Bryant, DAL           -- gone|40|tier 1a             
 A.J. Green, CIN           -- valu|40|nominate, don't want, already have hill,  inconsistent
 
+Allen Robinson, JAC       -- like|39|2nd year
 Mike Evans, TB            -- valu|35|
-Allen Robinson, JAC       -- valu|35|2nd year
 Brandon Marshall, NYJ     -- valu|34|32 yo, getting old
 Alshon Jeffery, CHI       -- valu|33|prime age, hurt last year, could have down year
 Jordy Nelson, GB          -- valu|33|nominate, don't want, already have cobb. injury risk
@@ -22,7 +22,7 @@ Keenan Allen, SD          -- valu|29|
 Demaryius Thomas, DEN     -- valu|27|28 yo, bad qb, rebound
 
 Eric Decker, NYJ          -- valu|25|at good price
-Jeremy Maclin, KC         -- valu|20|nominate, don't want --
+Jeremy Maclin, KC         -- like|20|  AAA
 Doug Baldwin, SEA         -- valu|20|nominate, don't want -- overvalued
 DeSean Jackson, WAS       -- gone|12                     
 Julian Edelman, NE        -- gone|14                     
@@ -128,7 +128,7 @@ Marquess Wilson, CHI      --
 
 RB
 ---------------------------------------------------------
-Jamaal Charles, KC        -- like|51|29 yo
+Jamaal Charles, KC        -- like|51|  AAA  29 yo
 Adrian Peterson, MIN      -- valu|51|31 yo
 Ezekiel Elliott, DAL      -- valu|51|rookie
 David Johnson, ARI        -- valu|51|potential for bust? 
@@ -142,7 +142,7 @@ LeSean McCoy, BUF         -- gone|51
 Mark Ingram, NO           -- gone|30
 C.J. Anderson, DEN        -- gone|55
 
-Doug Martin, TB           -- valu|35|27yo. solid late 1st round pick.
+Doug Martin, TB           -- valu|39|27yo. solid late 1st round pick.
 Dion Lewis, NE            -- valu|27|
 Thomas Rawls, SEA         -- valu|27|young, got hurt. possible bust
 Latavius Murray, OAK      -- gone|25                     
@@ -208,8 +208,8 @@ Kenneth Dixon, BAL        -- valu|2|rookie. 3rd down role. forsett handcuff. com
 Robert Turbin, IND        --
 C.J. Spiller, NO          -- gone|12
 Shaun Draughn, SF         --
-Paul Perkins, NYG         --
-Tim Hightower, NO             --
+Paul Perkins, NYG         -- like|1
+Tim Hightower, NO         --
 
 Jerick McKinnon, MIN      -- like|5|ddd keeper, pay up to 8
 Josh Ferguson, IND        -- like|2|rookie, colts, might get a role if gore is hurt
@@ -305,7 +305,7 @@ Tom Brady, NE             -- valu|10
 Tyrod Taylor, BUF         -- like|9
 Eli Manning, NYG          -- valu|8
 Philip Rivers, SD         -- valu|7|Danger, his receiving crew has injuries
-Carson Palmer, ARI        -- valu|7
+Carson Palmer, ARI        -- like|7|  AAA
 Ben Roethlisberger, PIT   -- valu|6|Is more like a QB2
 
 Kirk Cousins, WAS         -- like|5|Soft schedule pumped up his numbers last year
