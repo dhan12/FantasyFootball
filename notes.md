@@ -52,7 +52,7 @@ Markus Wheaton, PIT       --
 Josh Gordon, CLE          -- gone|9
 Terrance Williams, DAL    -- valu|nn|suspended for a couple of games, good handcuff otherwise.
 Pierre Garcon, WAS        --
-Travis Benjamin, SD       --
+Travis Benjamin, SD       -- like|1
 Dorial Green-Beckham, TEN -- gone|3
 Tyler Lockett, SEA        -- like|9|2nd year, cheap, explosive
 
@@ -61,7 +61,7 @@ Laquon Treadwell, MIN     -- valu|1|not enough scoring
 Tavon Austin, LA          --
 Ted Ginn Jr., CAR         --
 Corey Coleman, CLE        -- valu|4|rookie
-Jermaine Kearse, SEA      -- valu|nn|
+Jermaine Kearse, SEA      -- valu|1|???
 Breshad Perriman, BAL     -- valu|2|young, hurt last year. hurt a bit this, basically a rookie
 
 Mohamed Sanu, ATL         -- like|3
@@ -260,7 +260,7 @@ Travis Kelce, KC          -- valu|7
 Delanie Walker, TEN       -- valu|5
 Gary Barnidge, CLE        -- valu|4
 Tyler Eifert, CIN         -- valu|6|dont want, already have Hill
-Antonio Gates, SD         -- valu|4|Ok floor
+Antonio Gates, SD         -- like|4|Ok floor
 Ladarius Green, PIT       -- valu|1|Retire? On good team. athletic. break out time? 
 Zach Ertz, PHI            -- like|3|bad offense, might start having valu
 Zach Miller, CHI          -- valu|2
