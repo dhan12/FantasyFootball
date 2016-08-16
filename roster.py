@@ -1,5 +1,6 @@
-from util import POSITIONS
 import copy
+from util import POSITIONS
+from player import Player
 
 class Roster():
 
@@ -17,57 +18,87 @@ class Roster():
             poolOfPlayers[pos].sort(key=lambda p: p.expectedCost, reverse=True)
             poolOfPlayers[pos].sort(key=lambda p: p.projection, reverse=True)
 
-
-        rb_as_flex = ['QB', 'RB', 'RB', 'RB', 'WR', 'WR', 'TE']
         owned = self._getOwnedPlayers(players)
-        needed = self._getNeededPositions(owned, rb_as_flex)
-        print 'looking for RB as flex owned={}, needed={}'.format(
-                ', '.join([p.name for p in owned]),
-                ', '.join(needed))
-        self._getBestCombination(poolOfPlayers, owned, needed)
+        comboPlayer = Player('combo', ', '.join([p.name for p in owned]),'')
+        comboPlayer.expectedCost = sum([p.expectedCost for p in owned])
+        comboPlayer.projection = sum([p.projection for p in owned])
 
+        print 'WR as flex'
+        combo = [comboPlayer]
+        for pos in self._getNeededPositions(owned,
+                ['QB', 'RB', 'RB', 'WR', 'WR', 'WR', 'TE']):
+            combo = self._makeCombinations(combo, poolOfPlayers[pos])
+        combo.sort(key=lambda p: p.projection, reverse=True)
+        for i in xrange(20):
+            print 'Team: cost={:4.4}, proj={}, {}'.format(
+                    combo[i].expectedCost,
+                    combo[i].projection,
+                    combo[i].name)
 
-        wr_as_flex = ['QB', 'RB', 'RB', 'WR', 'WR', 'WR', 'TE']
-        owned = self._getOwnedPlayers(players)
-        needed = self._getNeededPositions(owned, wr_as_flex)
-        print 'looking for WR as flex owned={}, needed={}'.format(
-                ', '.join([p.name for p in owned]),
-                ', '.join(needed))
-        self._getBestCombination(poolOfPlayers, owned, needed)
+        print 'RB as flex'
+        combo = [comboPlayer]
+        for pos in self._getNeededPositions(owned,
+                ['QB', 'RB', 'RB', 'RB', 'WR', 'WR', 'TE']):
+            combo = self._makeCombinations(combo, poolOfPlayers[pos])
+        combo.sort(key=lambda p: p.projection, reverse=True)
+        for i in xrange(20):
+            print 'Team: cost={:4.4}, proj={}, {}'.format(
+                    combo[i].expectedCost,
+                    combo[i].projection,
+                    combo[i].name)
 
+    def _makeCombinations(self, set_a, set_b):
+        num_a = len(set_a)
+        num_b = len(set_b)
 
-    def _getBestCombination(self, availablePool, owned, neededPositions):
-        currentSalary = sum([p.expectedCost for p in owned])
+        combos = []
+        for a in set_a:
+            for b in set_b:
+                if b.name in a.name: continue
+                p = Player('combo', a.name + ', ' + b.name, '')
+                p.expectedCost = a.expectedCost + b.expectedCost
+                p.projection = a.projection + b.projection
+                # print p.name, p.expectedCost, p.projection
+                if p.expectedCost <= (self.TOTAL_BUDGET - self.SALARY_BUFFER):
+                    combos.append(p)
 
-        for pos in neededPositions:
-            needed = copy.deepcopy(neededPositions)
-            needed.remove(pos)
-
-            for p in availablePool[pos]:
-                if currentSalary + p.expectedCost + self.SALARY_BUFFER > self.TOTAL_BUDGET: continue
-                if p.name in [o.name for o in owned]: continue
-
-                # tryOwned = copy.deepcopy(owned)
-                # tryOwned.append(p)
-                owned.append(p)
-
-                if len(needed) == 0: 
-                    projection = sum([p.projection for p in owned])
-
-                    if projection > self.BEST_PROJECTION:
-                        self.BEST_PROJECTION = projection
-                        self.BEST_TEAM = owned
-                        print 'Better team: cost={:4.4}, proj={}, {}'.format(
-                                str(sum([p.expectedCost for p in owned]) + self.SALARY_BUFFER),
-                                projection, 
-                                ', '.join([p.name for p in owned]))
-                else:
-                    self._getBestCombination(availablePool, owned, needed)
-
-                owned.remove(p)
+        print 'out of {} possible,'.format(num_a*num_b),
+        combos.sort(key=lambda p: p.projection) # , reverse=True)
+        # combos.sort(key=lambda p: p.expectedCost, reverse=True)
+        combos = self._filter(combos)
+        print '{} created'.format(len(combos))
+        return combos
 
     def _getOwnedPlayers(self, players):
         return [ p for _, p in players.iteritems() if p.status == 'ownd']
+
+    def _filter(self, items):
+        playersToDelete = set()
+        numPlayers = len(items)
+        
+        benchmark = items[-1]
+        for i in xrange(numPlayers-1):
+            playerToCompare = items[numPlayers - i - 1]    
+            if (playerToCompare.expectedCost > benchmark.expectedCost) and \
+                (playerToCompare.projection < benchmark.projection):
+                # print 'deleting {} {} {} for {} {} {}'.format(
+                #         playerToCompare.name, playerToCompare.projection, playerToCompare.expectedCost,
+                #        benchmark.name, benchmark.projection, benchmark.expectedCost)
+                del items[numPlayers-i-1]
+            else:
+                benchmark = playerToCompare
+
+        '''
+        for i in xrange(numPlayers):
+            for j in xrange(numPlayers):
+                if i == j: continue
+                if (items[i].expectedCost > items[j].expectedCost) and \
+                    (items[i].projection < items[j].projection):
+                    playersToDelete.add(items[i].name)
+                    break
+        items = [p for p in items if p.name not in playersToDelete]
+        '''
+        return items
 
     def _getFilteredPlayers(self, players, pos):
         play = [p for _, p in players.iteritems() 
@@ -78,19 +109,7 @@ class Roster():
                 ]
         print 'original num players for pos {} was {}'.format(pos, len(play)),
 
-        playersToDelete = set()
-        numPlayers = len(play)
-        for i in range(numPlayers):
-            for j in range(numPlayers):
-                if i == j: continue
-                if (play[i].expectedCost > play[j].expectedCost) and \
-                (play[i].projection < play[j].projection):
-                    if pos == 'QB':
-                        pass
-                        # print 'good={}, bad={}'.format(play[j].name, play[i].name)
-                    playersToDelete.add(play[i].name)
-
-        play = [p for p in play if p.name not in playersToDelete]
+        play = self._filter(play)
 
         print ' final num players for pos {} was {}'.format(pos, len(play))
         #print 'players are:'

@@ -213,7 +213,7 @@ Tim Hightower, NO         --
 
 Jerick McKinnon, MIN      -- like|5|ddd keeper, pay up to 8
 Josh Ferguson, IND        -- like|2|rookie, colts, might get a role if gore is hurt
-Spencer Ware, KC          -- valu|1|handcuff, battling with Charcandrick
+Spencer Ware, KC          -- valu|1|handcuff. touchdown potential
 
 
 Kenyan Drake, MIA         --

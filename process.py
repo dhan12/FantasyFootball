@@ -1,3 +1,4 @@
+import time
 from player import getAverage
 from colorama import Fore, Back, Style
 from time import strftime, localtime
@@ -50,6 +51,7 @@ def printPlayersInColumns(players=None, onlyShowAvailable=None):
 
 if __name__ == '__main__':
     import sys
+    start = time.time()
 
     onlyShowAvailable = False
     if len(sys.argv) > 1:
@@ -70,3 +72,6 @@ if __name__ == '__main__':
     printPlayersInColumns(players=players, onlyShowAvailable=onlyShowAvailable)
 
     r = Roster(players)
+
+    end = time.time()
+    print 'running time {}'.format(int(end) - int(start))
