@@ -43,11 +43,11 @@ class AuctionPlayer():
 class AuctionHistory():
     def __init__(self):
 
-
         files = [ 'data/' + x for x in [
             'draft.2013.raw.txt', 
             'draft.2014.raw.txt', 
-            'draft.2015.raw.txt'] ]
+            'draft.2015.raw.txt',
+            'draft.2016.raw.txt'] ]
 
 
         '''
@@ -56,16 +56,16 @@ class AuctionHistory():
         RB -> [3,2,1...]
               [3,2,1...]
         '''
-        positionToValues = {}
+        self.positionToValues = {}
 
         for f in files: 
             players = self._makePlayers(f)
             for p in positions:
                 prices = self._getPricesFor(players, p)
-                if p in positionToValues:
-                    positionToValues[p].append(prices)
+                if p in self.positionToValues:
+                    self.positionToValues[p].append(prices)
                 else:
-                    positionToValues[p] = [prices]
+                    self.positionToValues[p] = [prices]
 
         '''
             Get average values by position
@@ -76,7 +76,7 @@ class AuctionHistory():
         self.prices = {}
         for p in positions:
             self.prices[p] = []
-            zipped = zip(*positionToValues[p])
+            zipped = zip(*self.positionToValues[p])
             for i in zipped:
                 self.prices[p].append(self._average(i))
 
@@ -129,12 +129,12 @@ class AuctionHistory():
 
 if __name__ == '__main__':
 
-    positionToValues = doWork()
-
+    ah = AuctionHistory()
+    positionToValues = ah.positionToValues
 
     # Print output
     for p in positions:
         print p
         zipped = zip(*positionToValues[p])
         for i in zipped:
-            print str(average(i)) + ',', ', '.join(str(x) for x in i)
+            print ', '.join(str(x) for x in i)

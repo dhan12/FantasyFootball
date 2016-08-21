@@ -8,6 +8,7 @@ from espn import Espn
 from util import POSITIONS
 from auction_history import AuctionHistory
 from roster import Roster
+from curated_lineups import CuratedLineups
 
 
 def printPlayersInColumns(players=None, onlyShowAvailable=None):
@@ -60,10 +61,11 @@ if __name__ == '__main__':
     pn = PersonalNotes('notes.md')
     players = pn.players
 
-    nf = NumberFire('data/number.fire.aug.11.md')
+    nf = NumberFire('data/number.fire.aug.19.md')
     nf.addProjectionToPlayers(players)
 
-    er = Espn('data/espn.rankings.aug12.md')
+    er = Espn('data/espn.rankings.aug12.md',
+            'data/espn.projection.order.aug19.md')
     er.addRankingsToPlayers(players)
 
     ah = AuctionHistory()
@@ -72,6 +74,15 @@ if __name__ == '__main__':
     printPlayersInColumns(players=players, onlyShowAvailable=onlyShowAvailable)
 
     r = Roster(players)
+    r.make()
 
+    line = CuratedLineups([
+        'data/lineups.rb0.md',
+        'data/lineups.rb1wr2.md',
+        'data/lineups.rbs.md',
+        'data/lineups.committee.md',
+    ])
+    line.printLineup()
+    
     end = time.time()
     print 'running time {}'.format(int(end) - int(start))
