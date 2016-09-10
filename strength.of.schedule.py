@@ -182,11 +182,11 @@ if __name__ == '__main__':
                 print 'cant find', team
 
     # Print week headings
-    print '{:3.3}'.format(''),
+    print '{:10.10}'.format(''),
     for i in xrange(17):
         print 'Week {:2.2}'.format(str(i + 1)),
     print ''
-    print '{:3.3}'.format(''),
+    print '{:10.10}'.format(''),
     for i in xrange(17):
         print '-------',
     print ''
@@ -199,7 +199,7 @@ if __name__ == '__main__':
             teamName = teamAbbr[abbr]
         except StopIteration as e:
             break
-        print '{:3.3}'.format(teamName),
+        print '{:10.10}'.format(teamName),
         for opp in schedule[abbr]:
             # Get the rank
             opponent = opp.replace('@','')
