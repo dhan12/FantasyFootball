@@ -2,9 +2,60 @@ import sys
 import argparse
 from colorama import Fore, Back, Style
 
+# Load up the team schedule, from
+# http://www.espn.com/nfl/schedulegrid
+schedule = {}
+scheduleFile = 'data/schedule.2016.txt'
+with open(scheduleFile,'r') as input:
+    for line in input:
+        items = line.split()
+        schedule[items[0]] = items[1:]
+
 # pulled data from files like:
 # http://www.espn.com/nfl/statistics/team/_/stat/rushing/position/defense
+dataFiles = [
+    {'pos': 'qb', 'name': 'data/espn.nfl.defense.passing.2015.txt', 'numGames': 16, 'weight': 1},
+    {'pos': 'qb', 'name': 'data/espn.nfl.defense.passing.2016.txt', 'numGames': 1, 'weight': 1},
+    {'pos': 'rb', 'name': 'data/espn.nfl.defense.rushing.2015.txt', 'numGames': 16, 'weight': 1},
+    {'pos': 'rb', 'name': 'data/espn.nfl.defense.rushing.2016.txt', 'numGames': 1, 'weight': 1},
+    {'pos': 'wr', 'name': 'data/espn.nfl.defense.receiving.2015.txt', 'numGames': 16, 'weight': 1},
+    {'pos': 'wr', 'name': 'data/espn.nfl.defense.receiving.2016.txt', 'numGames': 1, 'weight': 1}
+]
 
+teamAbbr = {
+    'NO': 'New-Orleans',
+    'DAL': 'Dallas',
+    'WSH': 'Washington',
+    'MIN': 'Minnesota',
+    'DEN': 'Denver',
+    'TB': 'Tampa-Bay',
+    'CLE': 'Cleveland',
+    'CAR': 'Carolina',
+    'ARI': 'Arizona',
+    'PIT': 'Pittsburgh',
+    'CHI': 'Chicago',
+    'SF': 'San-Francisco',
+    'KC': 'Kansas-City',
+    'ATL': 'Atlanta',
+    'NYG': 'NY-Giants',
+    'JAX': 'Jacksonville',
+    'MIA': 'Miami',
+    'GB': 'Green-Bay',
+    'DET': 'Detroit',
+    'PHI': 'Philadelphia',
+    'IND': 'Indianapolis',
+    'NE': 'New-England',
+    'BUF': 'Buffalo',
+    'BAL': 'Baltimore',
+    'HOU': 'Houston',
+    'OAK': 'Oakland',
+    'CIN': 'Cincinnati',
+    'SD': 'San-Diego',
+    'TEN': 'Tennessee',
+    'NYJ': 'NY-Jets',
+    'LA': 'Los-Angeles',
+    'SEA': 'Seattle',
+}
 def cleanName(line):
     return line.replace('Green Bay', 'Green-Bay') \
             .replace('NY Jets', 'NY-Jets')\
@@ -17,147 +68,73 @@ def cleanName(line):
             .replace('San Francisco', 'San-Francisco')\
             .replace('Kansas City', 'Kansas-City')\
 
-teamAbbr = {
-'NO': 'New-Orleans',
-'DAL': 'Dallas',
-'WSH': 'Washington',
-'MIN': 'Minnesota',
-'DEN': 'Denver',
-'TB': 'Tampa-Bay',
-'CLE': 'Cleveland',
-'CAR': 'Carolina',
-'ARI': 'Arizona',
-'PIT': 'Pittsburgh',
-'CHI': 'Chicago',
-'SF': 'San-Francisco',
-'KC': 'Kansas-City',
-'ATL': 'Atlanta',
-'NYG': 'NY-Giants',
-'JAX': 'Jacksonville',
-'MIA': 'Miami',
-'GB': 'Green-Bay',
-'DET': 'Detroit',
-'PHI': 'Philadelphia',
-'IND': 'Indianapolis',
-'NE': 'New-England',
-'BUF': 'Buffalo',
-'BAL': 'Baltimore',
-'HOU': 'Houston',
-'OAK': 'Oakland',
-'CIN': 'Cincinnati',
-'SD': 'San-Diego',
-'TEN': 'Tennessee',
-'NYJ': 'NY-Jets',
-'LA': 'Los-Angeles',
-'SEA': 'Seattle',
-}
-    
+# Put all data here    
 teams = {}
+for dataInput in dataFiles:
+    with open(dataInput['name'],'r') as input:
+        for line in input:
+            items = cleanName(line).split()
+            if len(items) < 9: continue
+            try:
+                int(items[0])
+            except:
+                continue
 
+            pos = dataInput['pos']
+            if pos == 'qb':
+                yards = float(items[5])
+                tds = float(items[8])
+                ints = float(items[9])
+                totalPoints = (yards * .04) + (tds * 4) - (ints * 2)
+            elif pos == 'rb':
+                yards = float(items[3])
+                tds = float(items[6])
+                fumbles = float(items[9])
+                totalPoints = (yards * .1) + (tds * 6) - (fumbles * 2)
+            elif pos == 'wr':
+                yards = float(items[3])
+                tds = float(items[6])
+                fumbles = float(items[9])
+                totalPoints = (yards * .1) + (tds * 6) - (fumbles * 2)
 
-qbFile = 'data/espn.nfl.defense.passing.2015.txt'
+            name = items[1]
+            totalPerGame = totalPoints / dataInput['numGames']
+
+            # Initial add
+            if name not in teams:
+                teams[name] = { 'name': name }
+            if pos not in teams[name]:
+                teams[name][pos] = 0
+            if pos + 'Weight' not in teams[name]:
+                teams[name][pos + 'Weight'] = 0
+
+            # Increment values
+            teams[name][pos] += totalPerGame * dataInput['weight']
+            teams[name][pos + 'Weight'] += dataInput['weight']
+
+# Set ranks
 qbData = []
-# print 'analyzing qbFile -- '
-with open(qbFile,'r') as input:
-    for line in input:
-        items = cleanName(line).split()
-        if len(items) < 9: continue
-        try:
-            int(items[0])
-        except:
-            continue
-
-        name = items[1]
-        yards = float(items[5])
-        tds = float(items[8])
-        ints = float(items[9])
-        totalPoints = (yards * .04) + (tds * 4) - (ints * 2)
-        totalPerGame = totalPoints / 16
-
-        qbData.append({ 'name': name, 'qb' : totalPerGame })
-        teams[name] = { 'name': name, 'qb' : totalPerGame }
-
-        # print name, yards, tds, ints, totalPoints, totalPerGame
+rbData = []
+wrData = []
+for t in teams:
+    qbData.append({ 'name': t, 'qb' : teams[t]['qb'] / teams[t]['qbWeight'] })
+    rbData.append({ 'name': t, 'rb' : teams[t]['rb'] / teams[t]['rbWeight'] })
+    wrData.append({ 'name': t, 'wr' : teams[t]['wr'] / teams[t]['wrWeight'] })
 
 qbData.sort(key = lambda x: x['qb'])
 for i in xrange(len(qbData)):
     teams[qbData[i]['name']]['qbRank'] = i + 1
 
-
-
-
-# print 'analyzing rbFile -- '
-rbFile = 'data/espn.nfl.defense.rushing.2015.txt'
-rbData = []
-with open(rbFile,'r') as input:
-    for line in input:
-        items = cleanName(line).split()
-        if len(items) < 8: continue
-        try:
-            int(items[0])
-        except:
-            continue
-
-        name = items[1]
-        yards = float(items[3])
-        tds = float(items[6])
-        fumbles = float(items[9])
-        totalPoints = (yards * .1) + (tds * 6) - (fumbles * 2)
-        totalPerGame = totalPoints / 16
-
-        rbData.append({'name': name, 'rb': totalPerGame})
-        teams[name]['rb'] = totalPerGame 
-        # print name, yards, tds, ints, totalPoints, totalPerGame
-
 rbData.sort(key = lambda x: x['rb'])
 for i in xrange(len(rbData)):
     teams[rbData[i]['name']]['rbRank'] = i + 1
-
-# print 'analyzing wrFile -- '
-wrFile = 'data/espn.nfl.defense.receiving.2015.txt'
-wrData = []
-with open(rbFile,'r') as input:
-    for line in input:
-        items = cleanName(line).split()
-        if len(items) < 8: continue
-        try:
-            int(items[0])
-        except:
-            continue
-
-        name = items[1]
-        yards = float(items[3])
-        tds = float(items[6])
-        fumbles = float(items[9])
-        totalPoints = (yards * .1) + (tds * 6) - (fumbles * 2)
-        totalPerGame = totalPoints / 16
-
-        wrData.append({'name': name, 'wr': totalPerGame})
-        teams[name]['wr'] = totalPerGame 
-        # print name, yards, tds, ints, totalPoints, totalPerGame
 
 wrData.sort(key = lambda x: x['wr'])
 for i in xrange(len(wrData)):
     teams[wrData[i]['name']]['wrRank'] = i + 1
 
-'''
-for t in teams:
-    print t, teams[t]['qbRank'], teams[t]['qb'], 
-    print t, teams[t]['rbRank'], teams[t]['rb'],
-    print t, teams[t]['wrRank'], teams[t]['wr']
 
-'''
-
-# Load up the team schedule
-# pulled data from
-# http://www.espn.com/nfl/schedulegrid
-schedule = {}
-scheduleFile = 'data/schedule.2016.txt'
-with open(scheduleFile,'r') as input:
-    for line in input:
-        items = line.split()
-        schedule[items[0]] = items[1:]
-
+# Process command line arguments and print results
 if __name__ == '__main__':
 
     parser = argparse.ArgumentParser()
@@ -208,7 +185,10 @@ if __name__ == '__main__':
                 rank = 0
             else:
                 fullName = teamAbbr[opponent]
-                rank = teams[ fullName ]['qbRank']
+                if args.position.upper() == 'TE':
+                    rank = teams[ fullName ]['wrRank']
+                else:
+                    rank = teams[ fullName ][args.position.lower() + 'Rank']
 
             # Color code the results
             color = Fore.RESET
