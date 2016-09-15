@@ -14,7 +14,7 @@ with open(scheduleFile,'r') as input:
 # pulled data from files like:
 # http://www.espn.com/nfl/statistics/team/_/stat/rushing/position/defense
 dataFiles = [
-    #{'pos': 'qb', 'name': 'data/espn.nfl.defense.passing.2015.txt', 'numGames': 16, 'weight': 1},
+    {'pos': 'qb', 'name': 'data/espn.nfl.defense.passing.2015.txt', 'numGames': 16, 'weight': 1},
     {'pos': 'rb', 'name': 'data/espn.nfl.defense.rushing.2015.txt', 'numGames': 16, 'weight': 1},
     {'pos': 'wr', 'name': 'data/espn.nfl.defense.receiving.2015.txt', 'numGames': 16, 'weight': 1},
     {'pos': 'qb', 'name': 'data/espn.nfl.defense.passing.2016.txt', 'numGames': 1, 'weight': 1},
@@ -212,7 +212,7 @@ if __name__ == '__main__':
             # opponent = opp.replace('@','')
             if opponent == 'BYE':
                 opponent = '----'
-                rank = '-'
+                rank = '--'
             else:
                 fullName = teamAbbr[opponent.replace('@','')]
                 try:
@@ -224,7 +224,7 @@ if __name__ == '__main__':
 
             # Color code the results
             color = Fore.RESET
-            if rank == '-':
+            if rank == '--':
                 color = Fore.WHITE
             elif rank <= positionFormats[pos]['low']:
                 color = Fore.RED
