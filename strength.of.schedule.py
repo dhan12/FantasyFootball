@@ -14,11 +14,11 @@ with open(scheduleFile,'r') as input:
 # pulled data from files like:
 # http://www.espn.com/nfl/statistics/team/_/stat/rushing/position/defense
 dataFiles = [
-    {'pos': 'qb', 'name': 'data/espn.nfl.defense.passing.2015.txt', 'numGames': 16, 'weight': 1},
-    {'pos': 'qb', 'name': 'data/espn.nfl.defense.passing.2016.txt', 'numGames': 1, 'weight': 1},
+    #{'pos': 'qb', 'name': 'data/espn.nfl.defense.passing.2015.txt', 'numGames': 16, 'weight': 1},
     {'pos': 'rb', 'name': 'data/espn.nfl.defense.rushing.2015.txt', 'numGames': 16, 'weight': 1},
-    {'pos': 'rb', 'name': 'data/espn.nfl.defense.rushing.2016.txt', 'numGames': 1, 'weight': 1},
     {'pos': 'wr', 'name': 'data/espn.nfl.defense.receiving.2015.txt', 'numGames': 16, 'weight': 1},
+    {'pos': 'qb', 'name': 'data/espn.nfl.defense.passing.2016.txt', 'numGames': 1, 'weight': 1},
+    {'pos': 'rb', 'name': 'data/espn.nfl.defense.rushing.2016.txt', 'numGames': 1, 'weight': 1},
     {'pos': 'wr', 'name': 'data/espn.nfl.defense.receiving.2016.txt', 'numGames': 1, 'weight': 1}
 ]
 
@@ -68,8 +68,20 @@ def cleanName(line):
             .replace('San Francisco', 'San-Francisco')\
             .replace('Kansas City', 'Kansas-City')\
 
-# Put all data here    
+# Initialize data.
 teams = {}
+for key in teamAbbr:
+    name = teamAbbr[key]
+    teams[name] = { 
+        'name': name,
+        'qb': 0,
+        'qbWeight': 0,
+        'rb': 0,
+        'rbWeight': 0,
+        'wr': 0,
+        'wrWeight': 0,
+    }
+
 for dataInput in dataFiles:
     with open(dataInput['name'],'r') as input:
         for line in input:
@@ -100,14 +112,6 @@ for dataInput in dataFiles:
             name = items[1]
             totalPerGame = totalPoints / dataInput['numGames']
 
-            # Initial add
-            if name not in teams:
-                teams[name] = { 'name': name }
-            if pos not in teams[name]:
-                teams[name][pos] = 0
-            if pos + 'Weight' not in teams[name]:
-                teams[name][pos + 'Weight'] = 0
-
             # Increment values
             teams[name][pos] += totalPerGame * dataInput['weight']
             teams[name][pos + 'Weight'] += dataInput['weight']
@@ -117,9 +121,18 @@ qbData = []
 rbData = []
 wrData = []
 for t in teams:
-    qbData.append({ 'name': t, 'qb' : teams[t]['qb'] / teams[t]['qbWeight'] })
-    rbData.append({ 'name': t, 'rb' : teams[t]['rb'] / teams[t]['rbWeight'] })
-    wrData.append({ 'name': t, 'wr' : teams[t]['wr'] / teams[t]['wrWeight'] })
+    try:
+        qbData.append({ 'name': t, 'qb' : teams[t]['qb'] / teams[t]['qbWeight'] })
+    except ZeroDivisionError:
+        qbData.append({ 'name': t, 'qb' : 0 })
+    try:
+        rbData.append({ 'name': t, 'rb' : teams[t]['rb'] / teams[t]['rbWeight'] })
+    except ZeroDivisionError:
+        rbData.append({ 'name': t, 'rb' : 0 })
+    try:
+        wrData.append({ 'name': t, 'wr' : teams[t]['wr'] / teams[t]['wrWeight'] })
+    except ZeroDivisionError:
+        wrData.append({ 'name': t, 'wr' : 0 })
 
 qbData.sort(key = lambda x: x['qb'])
 for i in xrange(len(qbData)):
@@ -133,6 +146,12 @@ wrData.sort(key = lambda x: x['wr'])
 for i in xrange(len(wrData)):
     teams[wrData[i]['name']]['wrRank'] = i + 1
 
+positionFormats = {
+    'qb': { 'low': 10, 'hi': 18},
+    'rb': { 'low': 10, 'hi': 18},
+    'wr': { 'low': 28, 'hi': 41},
+}
+
 
 # Process command line arguments and print results
 if __name__ == '__main__':
@@ -143,60 +162,75 @@ if __name__ == '__main__':
             help='List teams like "MIA SEA"')
     args = parser.parse_args()
 
+    pos = args.position.lower()
     print 'Displaying position = {}, teams = {}\n'.format(
-            args.position, args.teams)
+            pos.upper(), args.teams)
+    if pos == 'te':
+        pos = 'wr'
 
+    teamsToShow = []
     numTeams = len(args.teams)
     if numTeams == 0:
-        teamsToShow = schedule
+        it = iter(sorted(schedule.keys()))
+        while True:
+            try:
+                abbr = it.next()
+                teamsToShow.append({'team': abbr, 'opponents': schedule[abbr]})
+            except StopIteration as e:
+                break
     else:
-        teamsToShow = {}
+        teamsToShow = []
         for a in xrange(numTeams):
             team = args.teams[a]
             if team in schedule:
-                teamsToShow[team] = schedule[team]
+                teamsToShow.append({'team': team, 'opponents': schedule[team]})
             else:
                 print 'cant find', team
 
     # Print week headings
     print '{:10.10}'.format(''),
-    for i in xrange(17):
-        print 'Week {:2.2}'.format(str(i + 1)),
+    for i in xrange(16):
+        print 'Week {:3.3}'.format(str(i + 1)),
     print ''
     print '{:10.10}'.format(''),
-    for i in xrange(17):
-        print '-------',
+    for i in xrange(16):
+        print '--------',
     print ''
 
     # Show rankings 
-    it = iter(sorted(teamsToShow.keys()))
-    while True:
-        try:
-            abbr = it.next()
-            teamName = teamAbbr[abbr]
-        except StopIteration as e:
-            break
+    for t in teamsToShow:
+        abbr = t['team']
+        teamName = teamAbbr[abbr]
         print '{:10.10}'.format(teamName),
-        for opp in schedule[abbr]:
+
+        week = 1
+        for opponent in schedule[abbr]:
+            if week >= 17: break
+            week += 1 
+
             # Get the rank
-            opponent = opp.replace('@','')
+            # opponent = opp.replace('@','')
             if opponent == 'BYE':
-                opponent = 'xxx'
-                rank = 0
+                opponent = '----'
+                rank = '-'
             else:
-                fullName = teamAbbr[opponent]
-                if args.position.upper() == 'TE':
-                    rank = teams[ fullName ]['wrRank']
-                else:
-                    rank = teams[ fullName ][args.position.lower() + 'Rank']
+                fullName = teamAbbr[opponent.replace('@','')]
+                try:
+                    #rank = int(teams[ fullName ][args.position.lower() + 'Rank'])
+                    rank = int(teams[ fullName ][pos + ''] / 
+                               teams[ fullName ][pos + 'Weight'] )
+                except ZeroDivisionError:
+                    rank = 0
 
             # Color code the results
             color = Fore.RESET
-            if rank <= 5:
+            if rank == '-':
+                color = Fore.WHITE
+            elif rank <= positionFormats[pos]['low']:
                 color = Fore.RED
-            elif rank >= 27:
+            elif rank >= positionFormats[pos]['hi']:
                 color = Fore.GREEN
-            print color + '{:<2.2} {:3.3}{:1.1}'.format(
+            print color + '{:>2.2} {:>4.4}{:1.1}'.format(
                 str(rank), opponent,'') + Fore.RESET,
         print ''
     print ''
