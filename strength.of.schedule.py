@@ -14,12 +14,12 @@ with open(scheduleFile,'r') as input:
 # pulled data from files like:
 # http://www.espn.com/nfl/statistics/team/_/stat/rushing/position/defense
 dataFiles = [
-    {'pos': 'qb', 'name': 'data/espn.nfl.defense.passing.2015.txt', 'numGames': 16, 'weight': 1},
-    {'pos': 'rb', 'name': 'data/espn.nfl.defense.rushing.2015.txt', 'numGames': 16, 'weight': 1},
-    {'pos': 'wr', 'name': 'data/espn.nfl.defense.receiving.2015.txt', 'numGames': 16, 'weight': 1},
-    {'pos': 'qb', 'name': 'data/espn.nfl.defense.passing.2016.txt', 'numGames': 1, 'weight': 1},
-    {'pos': 'rb', 'name': 'data/espn.nfl.defense.rushing.2016.txt', 'numGames': 1, 'weight': 1},
-    {'pos': 'wr', 'name': 'data/espn.nfl.defense.receiving.2016.txt', 'numGames': 1, 'weight': 1}
+    {'pos': 'qb', 'name': 'data/espn.nfl.defense.passing.2015.txt', 'weight': 2},
+    {'pos': 'rb', 'name': 'data/espn.nfl.defense.rushing.2015.txt', 'weight': 2},
+    {'pos': 'wr', 'name': 'data/espn.nfl.defense.receiving.2015.txt', 'weight': 2},
+    {'pos': 'qb', 'name': 'data/espn.nfl.defense.passing.2016.txt', 'weight': 1},
+    {'pos': 'rb', 'name': 'data/espn.nfl.defense.rushing.2016.txt', 'weight': 1},
+    {'pos': 'wr', 'name': 'data/espn.nfl.defense.receiving.2016.txt', 'weight': 1}
 ]
 
 teamAbbr = {
@@ -95,22 +95,26 @@ for dataInput in dataFiles:
             pos = dataInput['pos']
             if pos == 'qb':
                 yards = float(items[5])
+                yardsPerGame = float(items[13])
                 tds = float(items[8])
                 ints = float(items[9])
                 totalPoints = (yards * .04) + (tds * 4) - (ints * 2)
             elif pos == 'rb':
                 yards = float(items[3])
+                yardsPerGame = float(items[7])
                 tds = float(items[6])
                 fumbles = float(items[9])
                 totalPoints = (yards * .1) + (tds * 6) - (fumbles * 2)
             elif pos == 'wr':
                 yards = float(items[3])
+                yardsPerGame = float(items[7])
                 tds = float(items[6])
                 fumbles = float(items[9])
                 totalPoints = (yards * .1) + (tds * 6) - (fumbles * 2)
 
             name = items[1]
-            totalPerGame = totalPoints / dataInput['numGames']
+            numGames = yards / yardsPerGame
+            totalPerGame = totalPoints / numGames
 
             # Increment values
             teams[name][pos] += totalPerGame * dataInput['weight']
