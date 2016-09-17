@@ -2,6 +2,8 @@ import sys
 import argparse
 from colorama import Fore, Back, Style
 
+from cleanName import cleanName
+
 # Load up the team schedule, from
 # http://www.espn.com/nfl/schedulegrid
 schedule = {}
@@ -14,9 +16,9 @@ with open(scheduleFile,'r') as input:
 # pulled data from files like:
 # http://www.espn.com/nfl/statistics/team/_/stat/rushing/position/defense
 dataFiles = [
-    {'pos': 'qb', 'name': 'data/espn.nfl.defense.passing.2015.txt', 'weight': 2},
-    {'pos': 'rb', 'name': 'data/espn.nfl.defense.rushing.2015.txt', 'weight': 2},
-    {'pos': 'wr', 'name': 'data/espn.nfl.defense.receiving.2015.txt', 'weight': 2},
+    {'pos': 'qb', 'name': 'data/espn.nfl.defense.passing.2015.txt', 'weight': 1},
+    {'pos': 'rb', 'name': 'data/espn.nfl.defense.rushing.2015.txt', 'weight': 1},
+    {'pos': 'wr', 'name': 'data/espn.nfl.defense.receiving.2015.txt', 'weight': 1},
     {'pos': 'qb', 'name': 'data/espn.nfl.defense.passing.2016.txt', 'weight': 1},
     {'pos': 'rb', 'name': 'data/espn.nfl.defense.rushing.2016.txt', 'weight': 1},
     {'pos': 'wr', 'name': 'data/espn.nfl.defense.receiving.2016.txt', 'weight': 1}
@@ -56,17 +58,6 @@ teamAbbr = {
     'LA': 'Los-Angeles',
     'SEA': 'Seattle',
 }
-def cleanName(line):
-    return line.replace('Green Bay', 'Green-Bay') \
-            .replace('NY Jets', 'NY-Jets')\
-            .replace('NY Giants', 'NY-Giants')\
-            .replace('San Diego', 'San-Diego')\
-            .replace('Los Angeles', 'Los-Angeles')\
-            .replace('New Orleans', 'New-Orleans')\
-            .replace('Tampa Bay', 'Tampa-Bay')\
-            .replace('New England', 'New-England')\
-            .replace('San Francisco', 'San-Francisco')\
-            .replace('Kansas City', 'Kansas-City')\
 
 # Initialize data.
 teams = {}
