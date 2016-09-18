@@ -1,9 +1,9 @@
-from cleanName import cleanName
+import team_names
 filename = 'data/point.spread.week2.txt'
 
 with open(filename, 'r') as data:
     for line in data:
-        items = cleanName(line).replace('At ','').split()
+        items = team_names.cleanName(line).replace('At ','').split()
         if len(items) < 4: continue
 
         try:

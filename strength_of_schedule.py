@@ -2,7 +2,7 @@ import sys
 import argparse
 from colorama import Fore, Back, Style
 
-from cleanName import cleanName
+import team_names 
 
 # Load up the team schedule, from
 # http://www.espn.com/nfl/schedulegrid
@@ -24,46 +24,12 @@ dataFiles = [
     {'pos': 'wr', 'name': 'data/espn.nfl.defense.receiving.2016.txt', 'weight': 1}
 ]
 
-teamAbbr = {
-    'NO': 'New-Orleans',
-    'DAL': 'Dallas',
-    'WSH': 'Washington',
-    'MIN': 'Minnesota',
-    'DEN': 'Denver',
-    'TB': 'Tampa-Bay',
-    'CLE': 'Cleveland',
-    'CAR': 'Carolina',
-    'ARI': 'Arizona',
-    'PIT': 'Pittsburgh',
-    'CHI': 'Chicago',
-    'SF': 'San-Francisco',
-    'KC': 'Kansas-City',
-    'ATL': 'Atlanta',
-    'NYG': 'NY-Giants',
-    'JAX': 'Jacksonville',
-    'MIA': 'Miami',
-    'GB': 'Green-Bay',
-    'DET': 'Detroit',
-    'PHI': 'Philadelphia',
-    'IND': 'Indianapolis',
-    'NE': 'New-England',
-    'BUF': 'Buffalo',
-    'BAL': 'Baltimore',
-    'HOU': 'Houston',
-    'OAK': 'Oakland',
-    'CIN': 'Cincinnati',
-    'SD': 'San-Diego',
-    'TEN': 'Tennessee',
-    'NYJ': 'NY-Jets',
-    'LA': 'Los-Angeles',
-    'SEA': 'Seattle',
-}
 
 # Initialize data.
-teams = {}
-for key in teamAbbr:
-    name = teamAbbr[key]
-    teams[name] = { 
+team_scores = {}
+for key in team_names.abbreviations:
+    name = team_names.abbreviations[key]
+    team_scores[name] = { 
         'name': name,
         'qb': 0,
         'qbWeight': 0,
@@ -76,7 +42,7 @@ for key in teamAbbr:
 for dataInput in dataFiles:
     with open(dataInput['name'],'r') as input:
         for line in input:
-            items = cleanName(line).split()
+            items = team_names.cleanName(line).split()
             if len(items) < 9: continue
             try:
                 int(items[0])
@@ -108,44 +74,65 @@ for dataInput in dataFiles:
             totalPerGame = totalPoints / numGames
 
             # Increment values
-            teams[name][pos] += totalPerGame * dataInput['weight']
-            teams[name][pos + 'Weight'] += dataInput['weight']
+            team_scores[name][pos] += totalPerGame * dataInput['weight']
+            team_scores[name][pos + 'Weight'] += dataInput['weight']
 
 # Set ranks
 qbData = []
 rbData = []
 wrData = []
-for t in teams:
+for t in team_scores:
     try:
-        qbData.append({ 'name': t, 'qb' : teams[t]['qb'] / teams[t]['qbWeight'] })
+        qbData.append({ 'name': t, 'qb' : team_scores[t]['qb'] / team_scores[t]['qbWeight'] })
     except ZeroDivisionError:
         qbData.append({ 'name': t, 'qb' : 0 })
     try:
-        rbData.append({ 'name': t, 'rb' : teams[t]['rb'] / teams[t]['rbWeight'] })
+        rbData.append({ 'name': t, 'rb' : team_scores[t]['rb'] / team_scores[t]['rbWeight'] })
     except ZeroDivisionError:
         rbData.append({ 'name': t, 'rb' : 0 })
     try:
-        wrData.append({ 'name': t, 'wr' : teams[t]['wr'] / teams[t]['wrWeight'] })
+        wrData.append({ 'name': t, 'wr' : team_scores[t]['wr'] / team_scores[t]['wrWeight'] })
     except ZeroDivisionError:
         wrData.append({ 'name': t, 'wr' : 0 })
 
 qbData.sort(key = lambda x: x['qb'])
 for i in xrange(len(qbData)):
-    teams[qbData[i]['name']]['qbRank'] = i + 1
+    team_scores[qbData[i]['name']]['qbRank'] = i + 1
 
 rbData.sort(key = lambda x: x['rb'])
 for i in xrange(len(rbData)):
-    teams[rbData[i]['name']]['rbRank'] = i + 1
+    team_scores[rbData[i]['name']]['rbRank'] = i + 1
 
 wrData.sort(key = lambda x: x['wr'])
 for i in xrange(len(wrData)):
-    teams[wrData[i]['name']]['wrRank'] = i + 1
+    team_scores[wrData[i]['name']]['wrRank'] = i + 1
 
 positionFormats = {
     'qb': { 'low': 10, 'hi': 18},
     'rb': { 'low': 10, 'hi': 18},
     'wr': { 'low': 28, 'hi': 41},
 }
+
+def getSchedules(teams):
+    teamsToShow = []
+    numTeams = len(teams)
+    if numTeams == 0:
+        it = iter(sorted(schedule.keys()))
+        while True:
+            try:
+                abbr = it.next()
+                teamsToShow.append({'team': abbr, 'opponents': schedule[abbr]})
+            except StopIteration as e:
+                break
+    else:
+        teamsToShow = []
+        for a in xrange(numTeams):
+            team = teams[a]
+            if team in schedule:
+                teamsToShow.append({'team': team, 'opponents': schedule[team]})
+            else:
+                print 'cant find', team
+    return teamsToShow
 
 
 # Process command line arguments and print results
@@ -163,24 +150,7 @@ if __name__ == '__main__':
     if pos == 'te':
         pos = 'wr'
 
-    teamsToShow = []
-    numTeams = len(args.teams)
-    if numTeams == 0:
-        it = iter(sorted(schedule.keys()))
-        while True:
-            try:
-                abbr = it.next()
-                teamsToShow.append({'team': abbr, 'opponents': schedule[abbr]})
-            except StopIteration as e:
-                break
-    else:
-        teamsToShow = []
-        for a in xrange(numTeams):
-            team = args.teams[a]
-            if team in schedule:
-                teamsToShow.append({'team': team, 'opponents': schedule[team]})
-            else:
-                print 'cant find', team
+    teamsToShow = getSchedules(args.teams)
 
     # Print week headings
     print '{:10.10}'.format(''),
@@ -195,7 +165,7 @@ if __name__ == '__main__':
     # Show rankings 
     for t in teamsToShow:
         abbr = t['team']
-        teamName = teamAbbr[abbr]
+        teamName = team_names.abbreviations[abbr]
         print '{:10.10}'.format(teamName),
 
         week = 1
@@ -209,11 +179,11 @@ if __name__ == '__main__':
                 opponent = '----'
                 rank = '--'
             else:
-                fullName = teamAbbr[opponent.replace('@','')]
+                fullName = team_names.abbreviations[opponent.replace('@','')]
                 try:
                     #rank = int(teams[ fullName ][args.position.lower() + 'Rank'])
-                    rank = int(teams[ fullName ][pos + ''] / 
-                               teams[ fullName ][pos + 'Weight'] )
+                    rank = int(team_scores[ fullName ][pos + ''] / 
+                               team_scores[ fullName ][pos + 'Weight'] )
                 except ZeroDivisionError:
                     rank = 0
 
