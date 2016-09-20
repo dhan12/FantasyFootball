@@ -107,7 +107,7 @@ wrData.sort(key = lambda x: x['wr'])
 for i in xrange(len(wrData)):
     team_scores[wrData[i]['name']]['wrRank'] = i + 1
 
-positionFormats = {
+score_tiers = {
     'qb': { 'low': 10, 'hi': 18},
     'rb': { 'low': 10, 'hi': 18},
     'wr': { 'low': 28, 'hi': 41},
@@ -191,9 +191,9 @@ if __name__ == '__main__':
             color = Fore.RESET
             if rank == '--':
                 color = Fore.WHITE
-            elif rank <= positionFormats[pos]['low']:
+            elif rank <= score_tiers[pos]['low']:
                 color = Fore.RED
-            elif rank >= positionFormats[pos]['hi']:
+            elif rank >= score_tiers[pos]['hi']:
                 color = Fore.GREEN
             print color + '{:>2.2} {:>4.4}{:1.1}'.format(
                 str(rank), opponent,'') + Fore.RESET,

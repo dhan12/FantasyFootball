@@ -1,5 +1,62 @@
+{% import "bootstrap/wtf.html" as wtf %}
 {% if base_html is defined %}{% extends base_html %}{% endif %}
 
 {% block page_content %}
+
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+
+        td.low {
+            color: green;
+        }
+        td.hi {
+            color: red;
+        }
+        td.na {
+            color: grey;
+        }
+    </style>
+
+    <!-- User input area --> 
+    <h1>Input area</h1>
+    <div class="row">
+        <div class="col-md-3">
+            {{ wtf.quick_form(form) }}
+        </div>
+    </div>
+
+    <!-- User output area --> 
+    <table>
+        {% for col in headers %}
+            <th class="">{{col}}</th>
+        {% endfor %}
+        {% for row in scoresTable %}
+            <tr>
+                {% for col in row %}
+                    {% if col.name is defined %}
+                        <td class="">{{col.name}}</td>
+                    {% else %}
+                        <td class={{col.tier}}>{{col.score}} {{col.opponent}}</td>
+                    {% endif %}
+                {% endfor %}
+            </tr>
+        {% endfor %}
+    </table>
+
     {{ content }}
+
 {% endblock %}
