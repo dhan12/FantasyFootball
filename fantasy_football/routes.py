@@ -23,22 +23,27 @@ def content():
 
     # Get arguments
     form = TeamsForm()
+
+    passingTeams  = []
+    rushingTeams  = []
+    receivingTeams  = []
+    receivingTeams2  = []
     if form.validate_on_submit():
-        print 'in forms validate'
-        teams = teams=form.teams.data
-        print 'in forms validate', teams
+        passingTeams  = form.passingTeams.data.split()
+        rushingTeams  = form.rushingTeams.data.split()
+        receivingTeams  = form.receivingTeams.data.split()
+        receivingTeams2  = form.receivingTeams2.data.split()
 
-        return redirect(url_for('fantasy_football.content', teams=teams))
 
-    if 'teams' in request.args:
-        teams = request.args['teams'].split()
-    else:
-        teams = []
+    posToTeamsMap = {
+        'qb': passingTeams,
+        'rb': rushingTeams,
+        'wr': receivingTeams,
+        'te': receivingTeams2,
+    }
 
-    pos = 'qb'
 
     # Get input data
-    teamsToShow = strength_of_schedule.getSchedules(teams)
     team_scores = strength_of_schedule.team_scores
     schedule = strength_of_schedule.schedule
     score_tiers = strength_of_schedule.score_tiers
@@ -46,42 +51,53 @@ def content():
     # Output
     headers = ['']
     for i in xrange(16): headers.append('Week ' + str(i + 1))
-    scoresTable = []
+    scoresTable = {
+        'qb': [],
+        'rb': [],
+        'wr': [],
+        'te': []
+    }
 
     # Process data
-    for t in teamsToShow:
-        abbr = t['team']
-        teamName = team_names.abbreviations[abbr]
-        row = [{'name': teamName}]
+    for pos in posToTeamsMap:
+        teamsToShow = strength_of_schedule.getSchedules(posToTeamsMap[pos])
 
-        week = 1
-        for opponent in schedule[abbr]:
-            if week >= 17: break
-            week += 1 
+        dataset = pos
+        if dataset == 'te': dataset = 'wr'
 
-            # Get the score
-            if opponent == 'BYE':
-                opponent = 'BYE'
-                score = -1
-            else:
-                fullName = team_names.abbreviations[opponent.replace('@','')]
-                try:
-                    score = int(team_scores[ fullName ][pos + ''] / 
-                               team_scores[ fullName ][pos + 'Weight'] )
-                except ZeroDivisionError:
-                    score = 0
+        for t in teamsToShow:
+            abbr = t['team']
+            teamName = team_names.abbreviations[abbr]
+            row = [{'name': teamName}]
 
-            if   score == -1:
-                tier = 'na'
-                score = ''
-            elif score <= score_tiers[pos]['low']:
-                tier = 'low'
-            elif score >= score_tiers[pos]['hi']:
-                tier = 'hi'
-            else:
-                tier = 'default'
+            week = 1
+            for opponent in schedule[abbr]:
+                if week >= 17: break
+                week += 1 
 
-            row.append({ 'score': score, 'opponent': opponent, 'tier': tier} )
-        scoresTable.append(row)
+                # Get the score
+                if opponent == 'BYE':
+                    opponent = 'BYE'
+                    score = -1
+                else:
+                    fullName = team_names.abbreviations[opponent.replace('@','')]
+                    try:
+                        score = int(team_scores[ fullName ][dataset + ''] / 
+                                team_scores[ fullName ][dataset + 'Weight'] )
+                    except ZeroDivisionError:
+                        score = 0
+
+                if   score == -1:
+                    tier = 'na'
+                    score = ''
+                elif score <= score_tiers[dataset]['low']:
+                    tier = 'low'
+                elif score >= score_tiers[dataset]['hi']:
+                    tier = 'hi'
+                else:
+                    tier = 'default'
+
+                row.append({ 'score': score, 'opponent': opponent, 'tier': tier} )
+            scoresTable[pos].append(row)
 
     return render_template('content.html', **locals())

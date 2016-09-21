@@ -19,9 +19,9 @@ dataFiles = [
     {'pos': 'qb', 'name': 'data/espn.nfl.defense.passing.2015.txt', 'weight': 1},
     {'pos': 'rb', 'name': 'data/espn.nfl.defense.rushing.2015.txt', 'weight': 1},
     {'pos': 'wr', 'name': 'data/espn.nfl.defense.receiving.2015.txt', 'weight': 1},
-    {'pos': 'qb', 'name': 'data/espn.nfl.defense.passing.2016.txt', 'weight': 1},
-    {'pos': 'rb', 'name': 'data/espn.nfl.defense.rushing.2016.txt', 'weight': 1},
-    {'pos': 'wr', 'name': 'data/espn.nfl.defense.receiving.2016.txt', 'weight': 1}
+    {'pos': 'qb', 'name': 'data/espn.nfl.defense.passing.2016.txt', 'weight': 2},
+    {'pos': 'rb', 'name': 'data/espn.nfl.defense.rushing.2016.txt', 'weight': 2},
+    {'pos': 'wr', 'name': 'data/espn.nfl.defense.receiving.2016.txt', 'weight': 2}
 ]
 
 
@@ -108,9 +108,9 @@ for i in xrange(len(wrData)):
     team_scores[wrData[i]['name']]['wrRank'] = i + 1
 
 score_tiers = {
-    'qb': { 'low': 10, 'hi': 18},
-    'rb': { 'low': 10, 'hi': 18},
-    'wr': { 'low': 28, 'hi': 41},
+    'qb': { 'low':  9, 'hi': 19},
+    'rb': { 'low': 10, 'hi': 17},
+    'wr': { 'low': 28, 'hi': 42},
 }
 
 def getSchedules(teams):
