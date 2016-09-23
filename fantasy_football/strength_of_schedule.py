@@ -4,10 +4,13 @@ from colorama import Fore, Back, Style
 
 import team_names 
 
+# Config
+WORK_DIR = 'fantasy_football/'
+
 # Load up the team schedule, from
 # http://www.espn.com/nfl/schedulegrid
 schedule = {}
-scheduleFile = 'data/schedule.2016.txt'
+scheduleFile = WORK_DIR + 'data/schedule.2016.txt'
 with open(scheduleFile,'r') as input:
     for line in input:
         items = line.split()
@@ -16,12 +19,12 @@ with open(scheduleFile,'r') as input:
 # pulled data from files like:
 # http://www.espn.com/nfl/statistics/team/_/stat/rushing/position/defense
 dataFiles = [
-    {'pos': 'qb', 'name': 'data/espn.nfl.defense.passing.2015.txt', 'weight': 1},
-    {'pos': 'rb', 'name': 'data/espn.nfl.defense.rushing.2015.txt', 'weight': 1},
-    {'pos': 'wr', 'name': 'data/espn.nfl.defense.receiving.2015.txt', 'weight': 1},
-    {'pos': 'qb', 'name': 'data/espn.nfl.defense.passing.2016.txt', 'weight': 2},
-    {'pos': 'rb', 'name': 'data/espn.nfl.defense.rushing.2016.txt', 'weight': 2},
-    {'pos': 'wr', 'name': 'data/espn.nfl.defense.receiving.2016.txt', 'weight': 2}
+    {'pos': 'qb', 'name': WORK_DIR + 'data/espn.nfl.defense.passing.2015.txt', 'weight': 1},
+    {'pos': 'rb', 'name': WORK_DIR + 'data/espn.nfl.defense.rushing.2015.txt', 'weight': 1},
+    {'pos': 'wr', 'name': WORK_DIR + 'data/espn.nfl.defense.receiving.2015.txt', 'weight': 1},
+    {'pos': 'qb', 'name': WORK_DIR + 'data/espn.nfl.defense.passing.2016.txt', 'weight': 2},
+    {'pos': 'rb', 'name': WORK_DIR + 'data/espn.nfl.defense.rushing.2016.txt', 'weight': 2},
+    {'pos': 'wr', 'name': WORK_DIR + 'data/espn.nfl.defense.receiving.2016.txt', 'weight': 2}
 ]
 
 
