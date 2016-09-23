@@ -1,1 +1,1 @@
-recursive-include fantasy_football/data *
+recursive-include fantasy_football/ *

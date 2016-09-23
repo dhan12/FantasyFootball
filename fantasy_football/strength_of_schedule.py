@@ -1,11 +1,13 @@
+import os
 import sys
 import argparse
 from colorama import Fore, Back, Style
 
 import team_names 
 
-# Config
-WORK_DIR = 'fantasy_football/'
+# Configure working directory
+WORK_DIR = os.path.dirname(os.path.realpath(__file__)) + '/'
+
 
 # Load up the team schedule, from
 # http://www.espn.com/nfl/schedulegrid
