@@ -104,4 +104,4 @@ def content():
                 row.append({ 'score': score, 'opponent': opponent, 'tier': tier} )
             scoresTable[pos].append(row)
 
-    return render_template('content.html', **locals())
+    return render_template('ff_strength_of_schedule.html', **locals())

@@ -17,4 +17,5 @@ fantasy_football/data/espn.nfl.defense.rushing.2015.txt
 fantasy_football/data/espn.nfl.defense.rushing.2016.txt
 fantasy_football/data/point.spread.week2.txt
 fantasy_football/data/schedule.2016.txt
-fantasy_football/templates/content.html
+fantasy_football/templates/base.html
+fantasy_football/templates/ff_strength_of_schedule.html
