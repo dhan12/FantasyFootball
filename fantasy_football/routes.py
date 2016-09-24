@@ -21,6 +21,10 @@ def _getVersion():
 def content():
     version = _getVersion() 
 
+    # Get a base html that we'll inherit from
+    if current_app.config.get('SIMPLE_PAGE_BASE_HTML'):
+        base_html = current_app.config.get('SIMPLE_PAGE_BASE_HTML')
+
     # Get arguments
     form = TeamsForm()
 
