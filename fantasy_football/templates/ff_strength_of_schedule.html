@@ -61,14 +61,18 @@
     </form>
 
     <!-- User output area --> 
-    {% for pos in scoresTable %}
-        <h3>{{ pos }}</h3>
+    <table class="output">
+    {% for data in scoresTable %}
 
-        <table class="output">
             {% for col in headers %}
-                <th class="">{{col}}</th>
+                {% if col %}
+                    <th class="">{{col}}</th>
+                {% else %}
+                    <!-- Print the position in column 0 --> 
+                    <th class="">{{data.pos}}</th>
+                {% endif %}
             {% endfor %}
-            {% for row in scoresTable[pos] %}
+            {% for row in data.scores %}
                 <tr>
                     {% for col in row %}
                         {% if col.name is defined %}
@@ -79,8 +83,8 @@
                     {% endfor %}
                 </tr>
             {% endfor %}
-        </table>
     {% endfor %}
+    </table>
 
     {{ content }}
 

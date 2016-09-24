@@ -38,13 +38,12 @@ def content():
         receivingTeams  = form.receivingTeams.data.split()
         receivingTeams2  = form.receivingTeams2.data.split()
 
-
-    posToTeamsMap = {
-        'qb': passingTeams,
-        'rb': rushingTeams,
-        'wr': receivingTeams,
-        'te': receivingTeams2,
-    }
+    posToTeams = [
+        { 'pos': 'qb', 'teams' : passingTeams},
+        { 'pos': 'rb', 'teams' : rushingTeams},
+        { 'pos': 'wr', 'teams' : receivingTeams},
+        { 'pos': 'te', 'teams' : receivingTeams2},
+    ]
 
 
     # Get input data
@@ -53,18 +52,16 @@ def content():
     score_tiers = strength_of_schedule.score_tiers
 
     # Output
+    scoresTable = []
     headers = ['']
     for i in xrange(16): headers.append('Week ' + str(i + 1))
-    scoresTable = {
-        'qb': [],
-        'rb': [],
-        'wr': [],
-        'te': []
-    }
 
     # Process data
-    for pos in posToTeamsMap:
-        teamsToShow = strength_of_schedule.getSchedules(posToTeamsMap[pos])
+    for agg in posToTeams:
+        pos = agg['pos']
+        teams = agg['teams']
+        teamsToShow = strength_of_schedule.getSchedules(teams)
+        scores = []
 
         dataset = pos
         if dataset == 'te': dataset = 'wr'
@@ -102,6 +99,7 @@ def content():
                     tier = 'default'
 
                 row.append({ 'score': score, 'opponent': opponent, 'tier': tier} )
-            scoresTable[pos].append(row)
+            scores.append(row)
+        scoresTable.append({'pos': pos.upper(), 'scores': scores})
 
     return render_template('ff_strength_of_schedule.html', **locals())
