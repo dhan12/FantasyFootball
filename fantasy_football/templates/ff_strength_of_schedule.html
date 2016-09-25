@@ -4,10 +4,25 @@
 {% block page_content %}
 
     <style>
+        .scrolled {
+            width: 300px; 
+            overflow-x:scroll;  
+            /*--
+            padding-left:5em; 
+            overflow-y:visible;
+            padding-bottom:1px;
+            float: left;
+            */
+            display:inline-block;
+        }
         .output table {
             font-family: arial, sans-serif;
             border-collapse: collapse;
+            /*
             width: 100%;
+            float: left;
+            */
+            display:inline-block;
         }
 
         .output td, th {
@@ -29,12 +44,23 @@
         .output td.na {
             color: grey;
         }
+        .headcol {
+            /*position:absolute; /*relative;*/
+            width:10em; 
+            left:0;
+            top:auto;
+            border-right: 0px none black; 
+            border-top-width:3px; /*only relevant for first row*/
+            margin-top:-3px; /*compensate for top border*/
+
+            /*overflow:hidden;*/
+        }
+
     </style>
 
     
     <!-- User input area --> 
     <h3>Input area</h3>
-    <!-- {{ wtf.quick_form(form) }} -->
 
     <form class="form form-horizontal" method="post" role="form">
         {{ form.hidden_tag() }}
@@ -63,28 +89,50 @@
     <!-- User output area --> 
     <table class="output">
     {% for data in scoresTable %}
-
-            {% for col in headers %}
-                {% if col %}
-                    <th class="">{{col}}</th>
-                {% else %}
-                    <!-- Print the position in column 0 --> 
-                    <th class="">{{data.pos}}</th>
-                {% endif %}
-            {% endfor %}
-            {% for row in data.scores %}
-                <tr>
-                    {% for col in row %}
-                        {% if col.name is defined %}
-                            <td class="">{{col.name}}</td>
-                        {% else %}
-                            <td class={{col.tier}}>{{col.score}} {{col.opponent}}</td>
-                        {% endif %}
-                    {% endfor %}
-                </tr>
-            {% endfor %}
+        {% for col in headers %}
+            {% if not col %}
+                <!-- Print the position in column 0 --> 
+                <th class="headcol">{{data.pos}}</th>
+            {% endif %}
+        {% endfor %}
+        {% for row in data.scores %}
+            <tr>
+                {% for col in row %}
+                    {% if col.name is defined %}
+                        <td class="headcol">{{col.name}}</td>
+                    {% endif %}
+                {% endfor %}
+            </tr>
+        {% endfor %}
     {% endfor %}
     </table>
+    
+
+    <!-- <div class="scrolled"> --> 
+    <table class="output">
+    {% for data in scoresTable %}
+        {% for col in headers %}
+            {% if col %}
+                <th class="">{{col}}</th>
+            {% else %}
+                <!-- Print the position in column 0 --> 
+                <th class="">{{data.pos}}</th>
+            {% endif %}
+        {% endfor %}
+        {% for row in data.scores %}
+            <tr>
+                {% for col in row %}
+                    {% if col.name is defined %}
+                        <td class="">{{col.name}}</td>
+                    {% else %}
+                        <td class={{col.tier}}>{{col.score}} {{col.opponent}}</td>
+                    {% endif %}
+                {% endfor %}
+            </tr>
+        {% endfor %}
+    {% endfor %}
+    </table>
+    <!-- </div> <!-- class="scrolled"> --> 
 
     {{ content }}
 

@@ -21,12 +21,14 @@ with open(scheduleFile,'r') as input:
 # pulled data from files like:
 # http://www.espn.com/nfl/statistics/team/_/stat/rushing/position/defense
 dataFiles = [
-    {'pos': 'qb', 'name': WORK_DIR + 'data/espn.nfl.defense.passing.2015.txt', 'weight': 1},
-    {'pos': 'rb', 'name': WORK_DIR + 'data/espn.nfl.defense.rushing.2015.txt', 'weight': 1},
-    {'pos': 'wr', 'name': WORK_DIR + 'data/espn.nfl.defense.receiving.2015.txt', 'weight': 1},
-    {'pos': 'qb', 'name': WORK_DIR + 'data/espn.nfl.defense.passing.2016.txt', 'weight': 2},
-    {'pos': 'rb', 'name': WORK_DIR + 'data/espn.nfl.defense.rushing.2016.txt', 'weight': 2},
-    {'pos': 'wr', 'name': WORK_DIR + 'data/espn.nfl.defense.receiving.2016.txt', 'weight': 2}
+    {'pos': 'qb', 'name': WORK_DIR + 'data/points.against.qb.2015.txt', 'weight': 1},
+    {'pos': 'qb', 'name': WORK_DIR + 'data/points.against.qb.2016.txt', 'weight': 2},
+    {'pos': 'rb', 'name': WORK_DIR + 'data/points.against.rb.2015.txt', 'weight': 1},
+    {'pos': 'rb', 'name': WORK_DIR + 'data/points.against.rb.2016.txt', 'weight': 2},
+    {'pos': 'wr', 'name': WORK_DIR + 'data/points.against.wr.2015.txt', 'weight': 1},
+    {'pos': 'wr', 'name': WORK_DIR + 'data/points.against.wr.2016.txt', 'weight': 2},
+    {'pos': 'te', 'name': WORK_DIR + 'data/points.against.te.2015.txt', 'weight': 1},
+    {'pos': 'te', 'name': WORK_DIR + 'data/points.against.te.2016.txt', 'weight': 2},
 ]
 
 
@@ -42,50 +44,41 @@ for key in team_names.abbreviations:
         'rbWeight': 0,
         'wr': 0,
         'wrWeight': 0,
+        'te': 0,
+        'teWeight': 0,
     }
 
 for dataInput in dataFiles:
     with open(dataInput['name'],'r') as input:
-        for line in input:
-            items = team_names.cleanName(line).split()
-            if len(items) < 9: continue
+        lines = input.readlines()
+        numLines = len(lines)
+        index = 0
+        while index < numLines:
+            line = lines[index]
+            items = line.split()
+
+            # Try to get team name
             try:
-                int(items[0])
+                name = team_names.nickNames[items[0]]
+                if len(items) == 3:
+                    index += 1 # skip unneeded line
+                    index += 1 # get to the line that has the score
+                score = float(lines[index].split()[-1])
             except:
+                index += 1
                 continue
-
+    
+            index += 1
             pos = dataInput['pos']
-            if pos == 'qb':
-                yards = float(items[5])
-                yardsPerGame = float(items[13])
-                tds = float(items[8])
-                ints = float(items[9])
-                totalPoints = (yards * .04) + (tds * 4) - (ints * 2)
-            elif pos == 'rb':
-                yards = float(items[3])
-                yardsPerGame = float(items[7])
-                tds = float(items[6])
-                fumbles = float(items[9])
-                totalPoints = (yards * .1) + (tds * 6) - (fumbles * 2)
-            elif pos == 'wr':
-                yards = float(items[3])
-                yardsPerGame = float(items[7])
-                tds = float(items[6])
-                fumbles = float(items[9])
-                totalPoints = (yards * .1) + (tds * 6) - (fumbles * 2)
 
-            name = items[1]
-            numGames = yards / yardsPerGame
-            totalPerGame = totalPoints / numGames
-
-            # Increment values
-            team_scores[name][pos] += totalPerGame * dataInput['weight']
+            team_scores[name][pos] += (score * dataInput['weight'])
             team_scores[name][pos + 'Weight'] += dataInput['weight']
 
 # Set ranks
 qbData = []
 rbData = []
 wrData = []
+teData = []
 for t in team_scores:
     try:
         qbData.append({ 'name': t, 'qb' : team_scores[t]['qb'] / team_scores[t]['qbWeight'] })
@@ -99,6 +92,10 @@ for t in team_scores:
         wrData.append({ 'name': t, 'wr' : team_scores[t]['wr'] / team_scores[t]['wrWeight'] })
     except ZeroDivisionError:
         wrData.append({ 'name': t, 'wr' : 0 })
+    try:
+        teData.append({ 'name': t, 'te' : team_scores[t]['te'] / team_scores[t]['teWeight'] })
+    except ZeroDivisionError:
+        teData.append({ 'name': t, 'te' : 0 })
 
 qbData.sort(key = lambda x: x['qb'])
 for i in xrange(len(qbData)):
@@ -112,10 +109,15 @@ wrData.sort(key = lambda x: x['wr'])
 for i in xrange(len(wrData)):
     team_scores[wrData[i]['name']]['wrRank'] = i + 1
 
+teData.sort(key = lambda x: x['te'])
+for i in xrange(len(teData)):
+    team_scores[teData[i]['name']]['teRank'] = i + 1
+
 score_tiers = {
     'qb': { 'low':  9, 'hi': 19},
-    'rb': { 'low': 10, 'hi': 17},
-    'wr': { 'low': 28, 'hi': 42},
+    'rb': { 'low': 11, 'hi': 19},
+    'wr': { 'low': 17, 'hi': 26},
+    'te': { 'low':  4, 'hi':  9},
 }
 
 def getSchedules(teams):
@@ -152,8 +154,6 @@ if __name__ == '__main__':
     pos = args.position.lower()
     print 'Displaying position = {}, teams = {}\n'.format(
             pos.upper(), args.teams)
-    if pos == 'te':
-        pos = 'wr'
 
     teamsToShow = getSchedules(args.teams)
 
