@@ -90,28 +90,6 @@
     <table class="output">
     {% for data in scoresTable %}
         {% for col in headers %}
-            {% if not col %}
-                <!-- Print the position in column 0 --> 
-                <th class="headcol">{{data.pos}}</th>
-            {% endif %}
-        {% endfor %}
-        {% for row in data.scores %}
-            <tr>
-                {% for col in row %}
-                    {% if col.name is defined %}
-                        <td class="headcol">{{col.name}}</td>
-                    {% endif %}
-                {% endfor %}
-            </tr>
-        {% endfor %}
-    {% endfor %}
-    </table>
-    
-
-    <!-- <div class="scrolled"> --> 
-    <table class="output">
-    {% for data in scoresTable %}
-        {% for col in headers %}
             {% if col %}
                 <th class="">{{col}}</th>
             {% else %}
@@ -132,8 +110,6 @@
         {% endfor %}
     {% endfor %}
     </table>
-    <!-- </div> <!-- class="scrolled"> --> 
 
-    {{ content }}
 
 {% endblock %}
