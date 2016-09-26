@@ -61,7 +61,7 @@ class MyHtmlParser(HTMLParser):
             self.reset_team()
 
 def getPointsAgainstFiles(year):
-    return [CURRENT_DIR + '/data/points_against.' + str(year) + '.' + pos
+    return [CURRENT_DIR + '/data/points_against.' + str(year) + '.' + pos + '.txt'
             for pos in ['QB', 'RB', 'WR', 'TE']]
 
 def processFromWeb(year):
@@ -94,7 +94,7 @@ def processFromWeb(year):
 
 def saveParsedData(year, data):
     # Save parsed data
-    output = CURRENT_DIR + '/data/points_against.' + str(year) + '.' + data['pos']
+    output = CURRENT_DIR + '/data/points_against.' + str(year) + '.' + data['pos'] + '.txt'
     with open(output,'w') as writer:
         for name, score  in data['data'].iteritems():
             writer.write(name + ',' + str(score) + '\n')
@@ -110,7 +110,7 @@ def processFromFile():
             print name, score
 
 def getLastUpdated(year):
-    path = CURRENT_DIR + '/data/points_against.' + str(year) + '.QB'
+    path = CURRENT_DIR + '/data/points_against.' + str(year) + '.QB.txt'
     return time.ctime(os.path.getmtime(path))
 
 if __name__ == '__main__':

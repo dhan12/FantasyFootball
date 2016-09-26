@@ -21,14 +21,14 @@ with open(scheduleFile,'r') as input:
 # pulled data from files like:
 # http://www.espn.com/nfl/statistics/team/_/stat/rushing/position/defense
 dataFiles = [
-    {'pos': 'qb', 'name': WORK_DIR + 'data/points_against.2015.QB', 'weight': 1},
-    {'pos': 'rb', 'name': WORK_DIR + 'data/points_against.2015.RB', 'weight': 1},
-    {'pos': 'wr', 'name': WORK_DIR + 'data/points_against.2015.WR', 'weight': 1},
-    {'pos': 'te', 'name': WORK_DIR + 'data/points_against.2015.TE', 'weight': 1},
-    {'pos': 'qb', 'name': WORK_DIR + 'data/points_against.2016.QB', 'weight': 2},
-    {'pos': 'rb', 'name': WORK_DIR + 'data/points_against.2016.RB', 'weight': 2},
-    {'pos': 'wr', 'name': WORK_DIR + 'data/points_against.2016.WR', 'weight': 2},
-    {'pos': 'te', 'name': WORK_DIR + 'data/points_against.2016.TE', 'weight': 2},
+    {'pos': 'qb', 'name': WORK_DIR + 'data/points_against.2015.QB.txt', 'weight': 1},
+    {'pos': 'rb', 'name': WORK_DIR + 'data/points_against.2015.RB.txt', 'weight': 1},
+    {'pos': 'wr', 'name': WORK_DIR + 'data/points_against.2015.WR.txt', 'weight': 1},
+    {'pos': 'te', 'name': WORK_DIR + 'data/points_against.2015.TE.txt', 'weight': 1},
+    {'pos': 'qb', 'name': WORK_DIR + 'data/points_against.2016.QB.txt', 'weight': 2},
+    {'pos': 'rb', 'name': WORK_DIR + 'data/points_against.2016.RB.txt', 'weight': 2},
+    {'pos': 'wr', 'name': WORK_DIR + 'data/points_against.2016.WR.txt', 'weight': 2},
+    {'pos': 'te', 'name': WORK_DIR + 'data/points_against.2016.TE.txt', 'weight': 2},
 ]
 
 
