@@ -21,14 +21,14 @@ with open(scheduleFile,'r') as input:
 # pulled data from files like:
 # http://www.espn.com/nfl/statistics/team/_/stat/rushing/position/defense
 dataFiles = [
-    {'pos': 'qb', 'name': WORK_DIR + 'data/points.against.qb.2015.txt', 'weight': 1},
-    {'pos': 'qb', 'name': WORK_DIR + 'data/points.against.qb.2016.txt', 'weight': 2},
-    {'pos': 'rb', 'name': WORK_DIR + 'data/points.against.rb.2015.txt', 'weight': 1},
-    {'pos': 'rb', 'name': WORK_DIR + 'data/points.against.rb.2016.txt', 'weight': 2},
-    {'pos': 'wr', 'name': WORK_DIR + 'data/points.against.wr.2015.txt', 'weight': 1},
-    {'pos': 'wr', 'name': WORK_DIR + 'data/points.against.wr.2016.txt', 'weight': 2},
-    {'pos': 'te', 'name': WORK_DIR + 'data/points.against.te.2015.txt', 'weight': 1},
-    {'pos': 'te', 'name': WORK_DIR + 'data/points.against.te.2016.txt', 'weight': 2},
+    {'pos': 'qb', 'name': WORK_DIR + 'data/points_against.2015.QB', 'weight': 1},
+    {'pos': 'rb', 'name': WORK_DIR + 'data/points_against.2015.RB', 'weight': 1},
+    {'pos': 'wr', 'name': WORK_DIR + 'data/points_against.2015.WR', 'weight': 1},
+    {'pos': 'te', 'name': WORK_DIR + 'data/points_against.2015.TE', 'weight': 1},
+    {'pos': 'qb', 'name': WORK_DIR + 'data/points_against.2016.QB', 'weight': 2},
+    {'pos': 'rb', 'name': WORK_DIR + 'data/points_against.2016.RB', 'weight': 2},
+    {'pos': 'wr', 'name': WORK_DIR + 'data/points_against.2016.WR', 'weight': 2},
+    {'pos': 'te', 'name': WORK_DIR + 'data/points_against.2016.TE', 'weight': 2},
 ]
 
 
@@ -50,25 +50,16 @@ for key in team_names.abbreviations:
 
 for dataInput in dataFiles:
     with open(dataInput['name'],'r') as input:
-        lines = input.readlines()
-        numLines = len(lines)
-        index = 0
-        while index < numLines:
-            line = lines[index]
-            items = line.split()
+        for line in input:
 
             # Try to get team name
             try:
-                name = team_names.nickNames[items[0]]
-                if len(items) == 3:
-                    index += 1 # skip unneeded line
-                    index += 1 # get to the line that has the score
-                score = float(lines[index].split()[-1])
+                items = line.split(',')
+                name = items[0].strip()
+                score = float(items[1].strip())
             except:
-                index += 1
                 continue
     
-            index += 1
             pos = dataInput['pos']
 
             team_scores[name][pos] += (score * dataInput['weight'])

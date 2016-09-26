@@ -5,6 +5,7 @@ from HTMLParser import HTMLParser
 import requests
 import team_names
 import os
+import time
 CURRENT_DIR = os.path.dirname(os.path.realpath(__file__))
 
 class MyHtmlParser(HTMLParser):
@@ -59,17 +60,22 @@ class MyHtmlParser(HTMLParser):
             self.data[self.teamToProcess] = score 
             self.reset_team()
 
-def processFromWeb():
+def getPointsAgainstFiles(year):
+    return [CURRENT_DIR + '/data/points_against.' + str(year) + '.' + pos
+            for pos in ['QB', 'RB', 'WR', 'TE']]
 
-    year = '2015'
+def processFromWeb(year):
+
+    yearStr = str(year)
     urls = [
-        {'pos': 'QB', 'url': 'http://games.espn.com/ffl/pointsagainst?positionId=1&seasonId=' + year},
-        {'pos': 'RB', 'url': 'http://games.espn.com/ffl/pointsagainst?positionId=2&seasonId=' + year},
-        {'pos': 'WR', 'url': 'http://games.espn.com/ffl/pointsagainst?positionId=3&seasonId=' + year},
-        {'pos': 'TE', 'url': 'http://games.espn.com/ffl/pointsagainst?positionId=4&seasonId=' + year},
+        {'pos': 'QB', 'url': 'http://games.espn.com/ffl/pointsagainst?positionId=1&seasonId=' + yearStr},
+        {'pos': 'RB', 'url': 'http://games.espn.com/ffl/pointsagainst?positionId=2&seasonId=' + yearStr},
+        {'pos': 'WR', 'url': 'http://games.espn.com/ffl/pointsagainst?positionId=3&seasonId=' + yearStr},
+        {'pos': 'TE', 'url': 'http://games.espn.com/ffl/pointsagainst?positionId=4&seasonId=' + yearStr},
     ]
 
 
+    retData = []
     for agg in urls:
         pos = agg['pos']
         url = agg['url']
@@ -81,11 +87,17 @@ def processFromWeb():
         parser = MyHtmlParser()
         parser.feed(resp.text)
 
-        # Save parsed data
-        output = CURRENT_DIR + '/data/points_against.' + year + '.' + pos
-        with open(output,'w') as writer:
-            for name, score  in parser.data.iteritems():
-                writer.write(name + ', ' + str(score) + '\n')
+        # Return data
+        retData.append({'pos': pos, 'data': parser.data})
+
+    return retData
+
+def saveParsedData(year, data):
+    # Save parsed data
+    output = CURRENT_DIR + '/data/points_against.' + str(year) + '.' + data['pos']
+    with open(output,'w') as writer:
+        for name, score  in data['data'].iteritems():
+            writer.write(name + ',' + str(score) + '\n')
 
 def processFromFile():
     with open(CURRENT_DIR + '/data/test_points_against.html','r') as inputHtml:
@@ -97,6 +109,14 @@ def processFromFile():
         for name, score  in parser.data.iteritems():
             print name, score
 
+def getLastUpdated(year):
+    path = CURRENT_DIR + '/data/points_against.' + str(year) + '.QB'
+    return time.ctime(os.path.getmtime(path))
+
 if __name__ == '__main__':
     # processFromFile()
-    processFromWeb()
+    year = 2016
+    data = processFromWeb(year)
+    for agg in data:
+        saveParsedData(year, agg)
+

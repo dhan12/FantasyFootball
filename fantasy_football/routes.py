@@ -4,7 +4,8 @@ import markdown
 from . import fantasy_football
 import strength_of_schedule
 import team_names
-from .forms import TeamsForm
+import points_against
+import forms
 
 def _getVersion():
     import subprocess
@@ -20,13 +21,14 @@ def _getVersion():
 @fantasy_football.route('/', methods=['GET','POST'])
 def content():
     version = _getVersion() 
+    last_updated = points_against.getLastUpdated(2016)
 
     # Get a base html that we'll inherit from
     if current_app.config.get('SIMPLE_PAGE_BASE_HTML'):
         base_html = current_app.config.get('SIMPLE_PAGE_BASE_HTML')
 
     # Get arguments
-    form = TeamsForm()
+    form = forms.TeamsForm()
 
     passingTeams  = []
     rushingTeams  = []
@@ -103,3 +105,44 @@ def content():
         scoresTable.append({'pos': pos.upper(), 'scores': scores})
 
     return render_template('ff_strength_of_schedule.html', **locals())
+
+@fantasy_football.route('/raw', methods=['GET','POST'])
+def raw():
+    version = _getVersion() 
+    data = []
+
+    # Get a base html that we'll inherit from
+    if current_app.config.get('SIMPLE_PAGE_BASE_HTML'):
+        base_html = current_app.config.get('SIMPLE_PAGE_BASE_HTML')
+
+    # Get arguments
+    form = forms.RefreshData()
+    if form.validate_on_submit():
+        if form.refresh:
+            newData = points_against.processFromWeb(2016)
+            for agg in newData:
+                points_against.saveParsedData(2016, agg)
+                data.append({'file_name': 'new data for ' + agg['pos'], 
+                            'lines': agg['data'] })
+
+            data_updated = 'Data was just updated !'
+            return render_template('ff_points_against_raw.html', **locals())
+
+    # Get input data
+    files = points_against.getPointsAgainstFiles(2015)
+    for f in files:
+        with open(f, 'r') as fInput:
+            data.append({'file_name': f, 'lines': fInput.read()})
+    files = points_against.getPointsAgainstFiles(2016)
+    for f in files:
+        with open(f, 'r') as fInput:
+            data.append({'file_name': f, 'lines': fInput.read()})
+
+    # Retrieve data from web
+    newData = points_against.processFromWeb(2016)
+    for agg in newData:
+        data.append({'file_name': 'new data for ' + agg['pos'], 
+                     'lines': agg['data'] })
+
+
+    return render_template('ff_points_against_raw.html', **locals())

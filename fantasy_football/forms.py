@@ -8,7 +8,8 @@ class TeamsForm(Form):
     rushingTeams = StringField('RB Teams')
     receivingTeams = StringField('WR Teams')
     receivingTeams2 = StringField('TE Teams')
-    #password = PasswordField('Password', validators=[Required()])
-    #remember_me = BooleanField('Remember me')
     submit = SubmitField('Submit')
+
+class RefreshData(Form):
+    refresh = SubmitField('Refresh')
 
