@@ -49,7 +49,7 @@ def content():
 
 
     # Get input data
-    team_scores = strength_of_schedule.team_scores
+    team_scores = strength_of_schedule.getPointsAgainst()
     schedule = strength_of_schedule.schedule
     score_tiers = strength_of_schedule.score_tiers
 
@@ -85,8 +85,7 @@ def content():
                 else:
                     fullName = team_names.abbreviations[opponent.replace('@','')]
                     try:
-                        score = int(team_scores[ fullName ][dataset + ''] / 
-                                team_scores[ fullName ][dataset + 'Weight'] )
+                        score = int(team_scores[ fullName ][dataset] )
                     except ZeroDivisionError:
                         score = 0
 
