@@ -34,11 +34,16 @@ def content():
     rushingTeams  = []
     receivingTeams  = []
     receivingTeams2  = []
+    weeksToSkip  = 0
     if form.validate_on_submit():
-        passingTeams  = form.passingTeams.data.split()
-        rushingTeams  = form.rushingTeams.data.split()
-        receivingTeams  = form.receivingTeams.data.split()
-        receivingTeams2  = form.receivingTeams2.data.split()
+        passingTeams  = form.passingTeams.data.upper().split()
+        rushingTeams  = form.rushingTeams.data.upper().split()
+        receivingTeams  = form.receivingTeams.data.upper().split()
+        receivingTeams2  = form.receivingTeams2.data.upper().split()
+        try:
+            weeksToSkip  = int(form.weeksToSkip.data)
+        except:
+            pass
 
     posToTeams = [
         { 'pos': 'qb', 'teams' : passingTeams},
@@ -56,7 +61,9 @@ def content():
     # Output
     scoresTable = []
     headers = ['']
-    for i in xrange(16): headers.append('Week ' + str(i + 1))
+    for i in xrange(16): 
+        if i < weeksToSkip: continue
+        headers.append('Week ' + str(i + 1))
 
     # Process data
     for agg in posToTeams:
@@ -70,10 +77,12 @@ def content():
             teamName = team_names.abbreviations[abbr]
             row = [{'name': teamName}]
 
-            week = 1
+            week = 0
             for opponent in schedule[abbr]:
-                if week >= 17: break
                 week += 1 
+                if week >= 17: break
+                if week <= weeksToSkip:
+                    continue
 
                 # Get the score
                 if opponent == 'BYE':

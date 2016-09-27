@@ -8,6 +8,7 @@ class TeamsForm(Form):
     rushingTeams = StringField('RB Teams')
     receivingTeams = StringField('WR Teams')
     receivingTeams2 = StringField('TE Teams')
+    weeksToSkip = StringField('Skip through week ')
     submit = SubmitField('Submit')
 
 class RefreshData(Form):
