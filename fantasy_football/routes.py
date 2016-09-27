@@ -65,9 +65,6 @@ def content():
         teamsToShow = strength_of_schedule.getSchedules(teams)
         scores = []
 
-        dataset = pos
-        if dataset == 'te': dataset = 'wr'
-
         for t in teamsToShow:
             abbr = t['team']
             teamName = team_names.abbreviations[abbr]
@@ -85,16 +82,16 @@ def content():
                 else:
                     fullName = team_names.abbreviations[opponent.replace('@','')]
                     try:
-                        score = int(team_scores[ fullName ][dataset] )
+                        score = int(team_scores[ fullName ][pos] )
                     except ZeroDivisionError:
                         score = 0
 
                 if   score == -1:
                     tier = 'na'
                     score = ''
-                elif score <= score_tiers[dataset]['low']:
+                elif score <= score_tiers[pos]['low']:
                     tier = 'low'
-                elif score >= score_tiers[dataset]['hi']:
+                elif score >= score_tiers[pos]['hi']:
                     tier = 'hi'
                 else:
                     tier = 'default'
