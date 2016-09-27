@@ -74,6 +74,9 @@ def getPointsAgainst():
 
                 team_scores[name][pos] += (score * (dataInput['weight'] / totalWeight))
 
+    for n in team_scores:
+        print n
+
     return team_scores
 
 def getSchedules(teams):
