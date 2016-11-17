@@ -89,13 +89,13 @@ def getPointsAgainst():
     tmpwr = sorted(tmpwr)
     tmpte = sorted(tmpte)
     score_tiers['qb']['low'] = tmpqb[4]
-    score_tiers['qb']['high'] = tmpqb[-5]
+    score_tiers['qb']['hi'] = tmpqb[-5]
     score_tiers['rb']['low'] = tmprb[4]
-    score_tiers['rb']['high'] = tmprb[-5]
+    score_tiers['rb']['hi'] = tmprb[-5]
     score_tiers['wr']['low'] = tmpwr[4]
-    score_tiers['wr']['high'] = tmpwr[-5]
+    score_tiers['wr']['hi'] = tmpwr[-5]
     score_tiers['te']['low'] = tmpte[4]
-    score_tiers['te']['high'] = tmpte[-5]
+    score_tiers['te']['hi'] = tmpte[-5]
 
     return team_scores
 
