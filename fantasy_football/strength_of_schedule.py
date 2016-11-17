@@ -88,14 +88,17 @@ def getPointsAgainst():
     tmprb = sorted(tmprb)
     tmpwr = sorted(tmpwr)
     tmpte = sorted(tmpte)
-    score_tiers['qb']['low'] = tmpqb[4]
-    score_tiers['qb']['hi'] = tmpqb[-5]
-    score_tiers['rb']['low'] = tmprb[4]
-    score_tiers['rb']['hi'] = tmprb[-5]
-    score_tiers['wr']['low'] = tmpwr[4]
-    score_tiers['wr']['hi'] = tmpwr[-5]
-    score_tiers['te']['low'] = tmpte[4]
-    score_tiers['te']['hi'] = tmpte[-5]
+
+    bottom_cutoff = 5
+    top_cutoff = -6
+    score_tiers['qb']['low'] = tmpqb[bottom_cutoff]
+    score_tiers['qb']['hi'] = tmpqb[top_cutoff]
+    score_tiers['rb']['low'] = tmprb[bottom_cutoff]
+    score_tiers['rb']['hi'] = tmprb[top_cutoff]
+    score_tiers['wr']['low'] = tmpwr[bottom_cutoff]
+    score_tiers['wr']['hi'] = tmpwr[top_cutoff]
+    score_tiers['te']['low'] = tmpte[bottom_cutoff]
+    score_tiers['te']['hi'] = tmpte[top_cutoff]
 
     return team_scores
 
