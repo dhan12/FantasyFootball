@@ -1,5 +1,5 @@
 import team_names
-filename = 'data/point.spread.week2.txt'
+filename = 'fantasy_football/data/point.spread.week7.txt'
 
 with open(filename, 'r') as data:
     for line in data:

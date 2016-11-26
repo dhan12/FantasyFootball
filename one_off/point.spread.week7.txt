@@ -1,0 +1,16 @@
+Favorite    Line    Underdog    Total
+At Green Bay    -8  Chicago 46
+NY Giants   -3  Los Angeles (at London) 43.5
+Minnesota   -2.5    At Philadelphia 40
+At Kansas City  -7  New Orleans 50.5
+At Detroit  -1  Washington  48.5
+At Cincinnati   -10 Cleveland   46
+Buffalo -3  At Miami    45
+At Jacksonville -1  Oakland 49
+At Tennessee    -2.5    Indianapolis    48.5
+At NY Jets  -1  Baltimore   41.5
+At Atlanta  -6.5    San Diego   53.5
+Tampa Bay   -2  At San Francisco    47.5
+New England -7  At Pittsburgh   45.5
+At Arizona  -1.5    Seattle 43.5
+At Denver -7.5    Houston 41.5

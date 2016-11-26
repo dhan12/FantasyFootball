@@ -2,6 +2,7 @@
 setup.py
 fantasy_football/__init__.py
 fantasy_football/forms.py
+fantasy_football/implied.odds.py
 fantasy_football/points_against.py
 fantasy_football/routes.py
 fantasy_football/strength_of_schedule.py
@@ -17,6 +18,7 @@ fantasy_football/data/espn.nfl.defense.receiving.2016.txt
 fantasy_football/data/espn.nfl.defense.rushing.2015.txt
 fantasy_football/data/espn.nfl.defense.rushing.2016.txt
 fantasy_football/data/point.spread.week2.txt
+fantasy_football/data/point.spread.week7.txt
 fantasy_football/data/points_against.2015.QB.txt
 fantasy_football/data/points_against.2015.RB.txt
 fantasy_football/data/points_against.2015.TE.txt
