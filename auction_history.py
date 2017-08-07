@@ -1,6 +1,8 @@
 #!/usr/bin/python
 
 positions = ['QB', 'RB', 'WR', 'TE', 'D/ST', 'K']
+_DATA_DIR = './data/'
+
 
 class AuctionPlayer():
     def __init__(self, line=None, position=None, name=None, price=None):
@@ -33,22 +35,23 @@ class AuctionPlayer():
         j = 2
         while items[j][-1] != ',' and j < numItems:
             j = j + 1
-        if j == (numItems -1):
+        if j == (numItems - 1):
             raise TypeError('Player must have a valid name')
         self.name = ' '.join(items[1:j + 1])[:-1]
 
         # Get the position
         self.position = items[4]
 
+
 class AuctionHistory():
     def __init__(self):
 
-        files = [ 'data/' + x for x in [
-            'draft.2013.raw.txt', 
-            'draft.2014.raw.txt', 
+        files = [_DATA_DIR + x for x in [
+            'draft.2013.raw.txt',
+            'draft.2014.raw.txt',
             'draft.2015.raw.txt',
-            'draft.2016.raw.txt'] ]
-
+            'draft.2016.raw.txt',
+            'draft.2016.raw.txt']]
 
         '''
         QB -> [50,47,...]
@@ -58,7 +61,7 @@ class AuctionHistory():
         '''
         self.positionToValues = {}
 
-        for f in files: 
+        for f in files:
             players = self._makePlayers(f)
             for p in positions:
                 prices = self._getPricesFor(players, p)
@@ -80,7 +83,6 @@ class AuctionHistory():
             for i in zipped:
                 self.prices[p].append(self._average(i))
 
-
     def _makePlayers(self, filename):
         players = []
         with open(filename, 'r') as inputSrc:
@@ -88,9 +90,9 @@ class AuctionHistory():
                 try:
                     p = AuctionPlayer(line)
                     players.append(p)
-                    #print p
+                    # print p
                 except TypeError as e:
-                    #print 'Could not convert to player:', line
+                    # print 'Could not convert to player:', line
                     pass
         return players
 
@@ -105,26 +107,31 @@ class AuctionHistory():
         return prices
 
     def _average(self, vals):
-        if len(vals) == 0: 
+        if len(vals) == 0:
             return 0
-        else: 
-            return (sum(vals) * 1.0) /(len(vals) * 1.0)
-
+        else:
+            return (sum(vals) * 1.0) / (len(vals) * 1.0)
 
     def addPricesToPlayers(self, players):
         for _, p in players.iteritems():
             pos = p.pos
-            if pos == 'DF': pos = 'D/ST'
-            if pos == 'KI': pos = 'K'
+            if pos == 'DF':
+                pos = 'D/ST'
+            if pos == 'KI':
+                pos = 'K'
             if pos in self.prices:
                 if p.posRank < len(self.prices[pos]):
-                    if p.status == 'ownd':
-                        p.expectedCost = p.willingToPay
-                    else:
-                        p.expectedCost = self.prices[pos][p.posRank-1]
+                    # if p.status == 'ownd':
+                    # p.cost = p.value
+                    # else:
+                    p.cost = self.prices[pos][p.posRank - 1]
+
+                # If we didn't give a projected value in the notes,
+                # use the projection to estimate a value
+                if p.posRankByProj < len(self.prices[pos]) and p.value == -1:
+                    p.value = max(1, self.prices[pos][p.posRankByProj - 1])
             else:
                 raise Exception('cannot find ' + pos)
-
 
 
 if __name__ == '__main__':

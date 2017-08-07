@@ -1,35 +1,47 @@
 This holds a few scripts related to fantasy football.
 
-Flask app
+Modes
+====================
+So far, there are three "modes".
+
+1. Draft
+--------------------
+Run `./run.bash draft`
+
+Use this during and/or in preparation of an auction draft.
+
+2. Trade
+--------------------
+Run `./run.bash trade`
+
+Use this to generate trade proposals.
+
+3. Stength of schedule
+--------------------
+Run `./run.bash schedule`
+
+This generates a strength of schedule map.
+
+Data 
+====================
+All of this fantasy data is based on data. Some of it may be obtained from the internet, and others may be your custom data.
+
+Parsers
 ---------
-This contains a flask app that shows a strength of schedule.
+See `./src/parsers/`
 
-Run it by doing the following:
+The parser scripts convert raw text downloaded from different websites into formatted csv files.
 
-    . venv/bin/activate
-    ./run.py
+Raw data
+---------
+See `./data-raw/`
 
-Reuse
------
+Raw data downloaded from a few websites are placed here.
 
-The flask app can be used as a blueprint in other flask projects. 
+Processed data
+---------
+See `./data-processed/`
 
-    # Install the code
+Data convered from the data-raw files are saved here. 
 
-    pip install -I git+https://github.com/dhan12/FantasyFootball
-
-
-    # Then use the blue print in flask
-
-    from fantasy_football import fantasy_football as fantasy_football_blueprint
-
-    app.register_blueprint(fantasy_football_blueprint, url_prefix='/fantasyfootball') 
-
-You can also create a distribution like this
-
-    # python setup.py sdist
-
-One off
--------
-A bunch of other quick scripts are in the one_off folder. These are not part of the flask application.
-
+These files are generated, and subject to modification.
