@@ -3,12 +3,12 @@ import sys
 import player
 from colorama import Fore, Back, Style
 from personal_notes import PersonalNotes
-from espn import Espn
 from util import POSITIONS
 import auction_history
 import roster
 from curated_lineups import CuratedLineups
 import src.parsers.numberfire_projections as numberfire_projections
+import src.parsers.espn_rankings as espn_rankings
 
 _SHOW_ALL = True
 _NUM_LINES_TO_SHOW = 40
@@ -122,19 +122,30 @@ def initData():
     players = pn.players
 
     print 'processing projections - how much is everyone worth?'
-
     numberfire_projections.parse(
             players,
             _RAW_DATA_DIR + 'numberfire.projections.2017.aug.01.md',
             _PROCESSED_DIR + 'numbefire.projections.csv')
-
     with open(_PROCESSED_DIR + 'numbefire.projections.csv', 'r') as input:
         for line in input:
             items = line[:-1].split(';')
             players[items[0]].projection = float(items[1])
 
     print 'processing espn rankings'
-    er = Espn(_RAW_DATA_DIR + 'espn.rankings.2017.aug.01.md', players)
+    espn_rankings.parse(
+            players,
+            _RAW_DATA_DIR + 'espn.rankings.2017.aug.01.md',
+            _PROCESSED_DIR + 'espn.rankings.csv')
+    with open(_PROCESSED_DIR + 'espn.rankings.csv', 'r') as input:
+        posRanks = {'QB': 1, 'RB': 1, 'WR': 1, 'TE': 1, 'D/ST': 1, 'K': 1}
+        for line in input:
+            items = line[:-1].split(';')
+            rank = int(items[0]) + 1
+            name = items[1]
+
+            players[name].overallRank = rank
+            players[name].posRank = posRanks[players[name].pos]
+            posRanks[players[name].pos] += 1
 
     print 'processing historical auction prices'
     ah = auction_history.AuctionHistory()

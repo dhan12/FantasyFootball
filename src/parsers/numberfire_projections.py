@@ -13,7 +13,7 @@ def parse(players, rawDataFileName, outputFileName):
     with open(rawDataFileName, 'r') as input:
         names = []
         projections = []
-        uniqNames = {}
+        uniqNames = set()
 
         for line in input:
             # Get the player name
@@ -28,6 +28,7 @@ def parse(players, rawDataFileName, outputFileName):
                     raise Exception('Found duplicate %s -> %s' % (name, n))
 
                 names.append(n)
+                uniqNames.add(n)
                 continue
 
             # Get player projections

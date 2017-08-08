@@ -17,8 +17,8 @@ class Roster():
         # Get current team
         self.myPlayers = self._getMyPlayers(players)
         self.comboPlayer = Player(
-                ','.join([p.name for p in self.myPlayers]),
-                team=','.join([p.team for p in self.myPlayers]))
+            ','.join([p.name for p in self.myPlayers]),
+            team=','.join([p.team for p in self.myPlayers]))
         self.comboPlayer.numIncluded = len(self.myPlayers)
         self.comboPlayer.cost = sum(
             [p.cost for p in self.myPlayers])
@@ -35,9 +35,9 @@ class Roster():
         self.pool = {}
         for pos in POSITIONS:
             self.pool[pos] = self._getAvailablePlayers(
-                    players,
-                    pos,
-                    self.comboPlayer.team.split(','))
+                players,
+                pos,
+                self.comboPlayer.team.split(','))
 
             self.pool[pos].sort(key=lambda p: p.cost, reverse=True)
             self.pool[pos].sort(key=lambda p: p.projection, reverse=True)
