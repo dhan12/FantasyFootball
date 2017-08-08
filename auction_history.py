@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
 positions = ['QB', 'RB', 'WR', 'TE', 'D/ST', 'K']
-_DATA_DIR = './data/'
+_DATA_DIR = './data-raw/'
 
 
 class AuctionPlayer():

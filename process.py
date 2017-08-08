@@ -3,17 +3,17 @@ import sys
 import player
 from colorama import Fore, Back, Style
 from personal_notes import PersonalNotes
-from number_fire import NumberFire
 from espn import Espn
 from util import POSITIONS
 import auction_history
 import roster
 from curated_lineups import CuratedLineups
-
+import src.parsers.numberfire_projections as numberfire_projections
 
 _SHOW_ALL = True
 _NUM_LINES_TO_SHOW = 40
-_DATA_DIR = './data/'
+_RAW_DATA_DIR = './data-raw/'
+_PROCESSED_DIR = './data-processed/'
 
 
 def loadData(line):
@@ -116,17 +116,25 @@ def printOptions():
 
 
 def initData():
+
     print 'process league notes - who owns each player?'
     pn = PersonalNotes('notes.csv')
     players = pn.players
 
     print 'processing projections - how much is everyone worth?'
-    nf = NumberFire(
-        _DATA_DIR + 'numberfire.projections.2017.aug.01.md')
-    nf.addProjectionToPlayers(players)
+
+    numberfire_projections.parse(
+            players,
+            _RAW_DATA_DIR + 'numberfire.projections.2017.aug.01.md',
+            _PROCESSED_DIR + 'numbefire.projections.csv')
+
+    with open(_PROCESSED_DIR + 'numbefire.projections.csv', 'r') as input:
+        for line in input:
+            items = line[:-1].split(';')
+            players[items[0]].projection = float(items[1])
 
     print 'processing espn rankings'
-    er = Espn(_DATA_DIR + 'espn.rankings.2017.aug.01.md', players)
+    er = Espn(_RAW_DATA_DIR + 'espn.rankings.2017.aug.01.md', players)
 
     print 'processing historical auction prices'
     ah = auction_history.AuctionHistory()

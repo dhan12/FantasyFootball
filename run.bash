@@ -25,7 +25,7 @@ if [[ $# -gt 0 ]]; then
     elif [[ "$1" = "autopep8" ]]; then
         echo "Will run autopep8"
         start_virtualenv
-        autopep8 --in-place *.py
+        autopep8 --in-place *.py src/parsers/*py
     else
         echo "Unknown argument: $1"
     fi
@@ -52,7 +52,7 @@ fi
 #
 # Do some style checks
 #
-pep8 *.py
+pep8 *.py src/parsers/*.py
 rc=$?
 if [ $rc -ne 0 ]; then
     echo "style checks failed. rc=$rc"
