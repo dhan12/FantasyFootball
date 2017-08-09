@@ -4,11 +4,11 @@ import player
 from colorama import Fore, Back, Style
 from personal_notes import PersonalNotes
 from util import POSITIONS
-import auction_history
 import roster
 from curated_lineups import CuratedLineups
 import src.parsers.numberfire_projections as numberfire_projections
 import src.parsers.espn_rankings as espn_rankings
+import src.parsers.auction_history as auction_history
 
 _SHOW_ALL = True
 _NUM_LINES_TO_SHOW = 40
@@ -123,19 +123,20 @@ def initData():
 
     print 'processing projections - how much is everyone worth?'
     numberfire_projections.parse(
-            players,
-            _RAW_DATA_DIR + 'numberfire.projections.2017.aug.01.md',
-            _PROCESSED_DIR + 'numbefire.projections.csv')
+        players,
+        _RAW_DATA_DIR + 'numberfire.projections.2017.aug.01.md',
+        _PROCESSED_DIR + 'numbefire.projections.csv')
     with open(_PROCESSED_DIR + 'numbefire.projections.csv', 'r') as input:
         for line in input:
             items = line[:-1].split(';')
             players[items[0]].projection = float(items[1])
+    player.setProjectionBasedRankings(players)
 
     print 'processing espn rankings'
     espn_rankings.parse(
-            players,
-            _RAW_DATA_DIR + 'espn.rankings.2017.aug.01.md',
-            _PROCESSED_DIR + 'espn.rankings.csv')
+        players,
+        _RAW_DATA_DIR + 'espn.rankings.2017.aug.01.md',
+        _PROCESSED_DIR + 'espn.rankings.csv')
     with open(_PROCESSED_DIR + 'espn.rankings.csv', 'r') as input:
         posRanks = {'QB': 1, 'RB': 1, 'WR': 1, 'TE': 1, 'D/ST': 1, 'K': 1}
         for line in input:
@@ -148,16 +149,25 @@ def initData():
             posRanks[players[name].pos] += 1
 
     print 'processing historical auction prices'
-    ah = auction_history.AuctionHistory()
-    totalPriceData = {}
-    for p in auction_history.positions:
-        totalPriceData[p] = {
-            'totalToPay': sum(ah.prices[p]),
-            'numPlayers': len(filter(lambda x: x >= 0.6, ah.prices[p]))
-        }
-    ah.addPricesToPlayers(players)
+    auctionFiles = [_RAW_DATA_DIR + x for x in [
+        'draft.2013.raw.txt',
+        'draft.2014.raw.txt',
+        'draft.2015.raw.txt',
+        'draft.2016.raw.txt',
+        'draft.2017.raw.txt']]
+    prices = auction_history.parse(auctionFiles)
 
-    return players, totalPriceData
+    for _, p in players.iteritems():
+        pos = p.pos
+        if p.posRank < len(prices[pos]):
+            p.cost = prices[pos][p.posRank - 1]
+
+        # If we didn't give a projected value in the notes,
+        # use the projection to estimate a value
+        if p.value == -1:
+            p.value = max(1, prices[pos][p.posRankByProj - 1])
+
+    return players
 
 
 if __name__ == '__main__':
@@ -167,14 +177,11 @@ if __name__ == '__main__':
         (now.year, now.month, now.day,
          now.hour, now.minute, now.second)
 
-    players, totalPriceData = initData()
+    players = initData()
 
     reprint = True
     while True:
         if reprint:
-            print 'processing live auction price'
-            player.updateWillingToPay(players, totalPriceData)
-
             print 'processing display'
             printPlayersInColumns(players=players,
                                   showAll=_SHOW_ALL,

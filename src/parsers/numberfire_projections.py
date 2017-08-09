@@ -50,23 +50,3 @@ def parse(players, rawDataFileName, outputFileName):
         with open(outputFileName, 'w') as output:
             for i in xrange(len(names)):
                 output.write('%s;%s\n' % (names[i], projections[i]))
-
-
-def addProjectionToPlayers(self, players):
-
-    sorted_players = []
-    numPlayers = len(self.names)
-    for i in xrange(numPlayers):
-        name = nameDict[self.names[i]]
-        players[name].projection = self.projections[i]
-        sorted_players.append(players[name])
-
-    sorted_players.sort(cmp=posProjSort)
-    lastPos = ''
-    index = 0
-    for i in xrange(numPlayers):
-        if sorted_players[i].pos != lastPos:
-            lastPos = sorted_players[i].pos
-            index = 0
-        index += 1
-        players[sorted_players[i].name].posRankByProj = index
