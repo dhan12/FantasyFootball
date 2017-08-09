@@ -12,6 +12,7 @@ function stop_virtualenv {
 
 # Check arguments
 if [[ $# -gt 0 ]]; then
+    finished=0
     if [[ "$1" = "install" ]]; then
         echo "Will install packages"
         virtualenv venv
@@ -22,16 +23,18 @@ if [[ $# -gt 0 ]]; then
         pip install pytest
         pip install mock
         pip install parse
+        finished=1
     elif [[ "$1" = "autopep8" ]]; then
         echo "Will run autopep8"
         start_virtualenv
         autopep8 --in-place *.py src/parsers/*py
-    else
-        echo "Unknown argument: $1"
+        finished=1
     fi
 
-    stop_virtualenv
-    exit
+    if [[ $finished -eq 1 ]]; then
+        stop_virtualenv
+        exit
+    fi
 fi
 
 
@@ -62,7 +65,7 @@ fi
 
 
 # Run the program
-python process.py
+python process.py $@
 
 
 # Clean up
