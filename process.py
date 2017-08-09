@@ -1,6 +1,6 @@
 import sys
-import player
-from personal_notes import PersonalNotes
+import src.player as player
+import src.parsers.personal_notes as personal_notes
 import src.parsers.numberfire_projections as numberfire_projections
 import src.parsers.espn_rankings as espn_rankings
 import src.parsers.auction_history as auction_history
@@ -13,8 +13,7 @@ _PROCESSED_DIR = './data-processed/'
 def initData():
 
     print 'process league notes - who owns each player?'
-    pn = PersonalNotes('notes.csv')
-    players = pn.players
+    players = personal_notes.parse(_RAW_DATA_DIR + 'notes.csv')
 
     print 'processing projections - how much is everyone worth?'
     numberfire_projections.parse(
