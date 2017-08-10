@@ -23,11 +23,12 @@ if [[ $# -gt 0 ]]; then
         pip install pytest
         pip install mock
         pip install parse
+        pip install requests
         finished=1
     elif [[ "$1" = "autopep8" ]]; then
         echo "Will run autopep8"
         start_virtualenv
-        autopep8 --in-place *.py src/parsers/*py
+        autopep8 --in-place src/*.py src/parsers/*py
         finished=1
     fi
 
@@ -55,7 +56,7 @@ fi
 #
 # Do some style checks
 #
-pep8 *.py src/parsers/*.py
+pep8 src/*.py src/parsers/*py
 rc=$?
 if [ $rc -ne 0 ]; then
     echo "style checks failed. rc=$rc"
@@ -65,7 +66,7 @@ fi
 
 
 # Run the program
-python process.py $@
+python src/process.py $@
 
 
 # Clean up

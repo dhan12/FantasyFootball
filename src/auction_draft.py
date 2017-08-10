@@ -5,6 +5,7 @@ import player
 import roster
 import util
 
+
 def _getAverage(players):
     ''' get the average cost and projection for the set of players '''
     numPlayers = len(players) * 1.0
@@ -14,6 +15,7 @@ def _getAverage(players):
         retPlayer.projection += (p.projection) / numPlayers
 
     return retPlayer
+
 
 def _loadData(line):
     items = line.split(' ')
@@ -114,7 +116,6 @@ def printOptions():
     print '7. refresh'
 
 
-
 def run(players):
 
     _SHOW_ALL = True
@@ -125,14 +126,13 @@ def run(players):
         (now.year, now.month, now.day,
          now.hour, now.minute, now.second)
 
-
     reprint = True
     while True:
         if reprint:
             print 'processing display'
             _printPlayersInColumns(players=players,
-                                  showAll=_SHOW_ALL,
-                                  numLines=_NUM_LINES_TO_SHOW)
+                                   showAll=_SHOW_ALL,
+                                   numLines=_NUM_LINES_TO_SHOW)
 
         # Get user input
         line = sys.stdin.readline().strip()
@@ -186,7 +186,7 @@ def run(players):
             for b in bulkData:
                 print b
                 _update(players, backup_file, b['name'],
-                       b['value'], b['status'])
+                        b['value'], b['status'])
             continue
 
         # Do single update

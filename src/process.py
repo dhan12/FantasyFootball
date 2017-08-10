@@ -1,10 +1,12 @@
 import sys
-import src.player as player
-import src.parsers.personal_notes as personal_notes
-import src.parsers.numberfire_projections as numberfire_projections
-import src.parsers.espn_rankings as espn_rankings
-import src.parsers.auction_history as auction_history
-import src.auction_draft as auction_draft
+import player as player
+import schedule as schedule
+import auction_draft as auction_draft
+import parsers.personal_notes as personal_notes
+import parsers.numberfire_projections as numberfire_projections
+import parsers.espn_rankings as espn_rankings
+import parsers.auction_history as auction_history
+import parsers.points_against as points_against
 
 _RAW_DATA_DIR = './data-raw/'
 _PROCESSED_DIR = './data-processed/'
@@ -75,3 +77,7 @@ if __name__ == '__main__':
 
     if sys.argv[1] == 'draft':
         auction_draft.run(players)
+
+    elif sys.argv[1] == 'schedule':
+        points_against.parse(2017, _PROCESSED_DIR)
+        schedule.run()
