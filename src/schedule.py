@@ -112,14 +112,12 @@ def _getPointsAgainst():
     return team_scores
 
 
-def run():
-    '''
+def run(commandArgs):
     parser = argparse.ArgumentParser()
     parser.add_argument('--pos', dest='position', default='qb')
     parser.add_argument('--team', dest='teams', default=[], nargs='+',
-            help='List teams like "MIA SEA"')
-    args = parser.parse_args()
-    '''
+                        help='List teams like "MIA SEA"')
+    args = parser.parse_args(commandArgs)
 
     # Load up the team schedule, from
     # http://www.espn.com/nfl/schedulegrid
@@ -132,12 +130,11 @@ def run():
             items = line.split()
             schedule[items[0]] = items[1:]
 
-    # pos = args.position.lower()
-    pos = 'qb'  # args.position.lower()
-    print 'Displaying position = {}, teams = {}\n'.format(
-        pos.upper(), [])  # args.teams)
+    pos = args.position.lower()
+    print 'Displaying position = %s, teams = %s\n' % \
+        (pos.upper(), ' '.join(args.teams))
 
-    teamsToShow = _getSchedules(schedule, [])  # args.teams)
+    teamsToShow = _getSchedules(schedule, args.teams)
 
     # Print week headings
     print '{:10.10}'.format(''),

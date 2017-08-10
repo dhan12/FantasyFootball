@@ -1,7 +1,7 @@
 import sys
-import player as player
-import schedule as schedule
-import auction_draft as auction_draft
+import player
+import schedule
+import auction_draft
 import parsers.personal_notes as personal_notes
 import parsers.numberfire_projections as numberfire_projections
 import parsers.espn_rankings as espn_rankings
@@ -13,11 +13,12 @@ _PROCESSED_DIR = './data-processed/'
 
 
 def initData():
+    print 'Initializing data'
 
-    print 'process league notes - who owns each player?'
+    # print 'process league notes - who owns each player?'
     players = personal_notes.parse(_RAW_DATA_DIR + 'notes.csv')
 
-    print 'processing projections - how much is everyone worth?'
+    # print 'processing projections - how much is everyone worth?'
     numberfire_projections.parse(
         players,
         _RAW_DATA_DIR + 'numberfire.projections.2017.aug.01.md',
@@ -28,7 +29,7 @@ def initData():
             players[items[0]].projection = float(items[1])
     player.setProjectionBasedRankings(players)
 
-    print 'processing espn rankings'
+    # print 'processing espn rankings'
     espn_rankings.parse(
         players,
         _RAW_DATA_DIR + 'espn.rankings.2017.aug.01.md',
@@ -44,7 +45,7 @@ def initData():
             players[name].posRank = posRanks[players[name].pos]
             posRanks[players[name].pos] += 1
 
-    print 'processing historical auction prices'
+    # print 'processing historical auction prices'
     auctionFiles = [_RAW_DATA_DIR + x for x in [
         'draft.2013.raw.txt',
         'draft.2014.raw.txt',
@@ -80,4 +81,4 @@ if __name__ == '__main__':
 
     elif sys.argv[1] == 'schedule':
         points_against.parse(2017, _PROCESSED_DIR)
-        schedule.run()
+        schedule.run(sys.argv[2:])
