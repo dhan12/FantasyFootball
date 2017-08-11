@@ -103,7 +103,7 @@ def saveParsedData(outputDir, year, data):
 def parse(year, outputFileDir):
     try:
         with open(outputFileDir + '/points_against.%d.QB.txt' % year, 'r'):
-            print 'Points against file already exists.'
+            # print 'Points against file already exists.'
             return
     except IOError:
         pass

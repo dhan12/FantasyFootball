@@ -5,7 +5,7 @@ def parse(players, rawDataFileName, outputFileName):
 
     try:
         with open(outputFileName, 'r'):
-            print '%s already exists. Skipping parsing' % (outputFileName)
+            # print '%s already exists. Skipping parsing' % (outputFileName)
             return
     except IOError:
         pass

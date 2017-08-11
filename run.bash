@@ -1,5 +1,5 @@
 #!/bin/bash
-echo "start"
+# echo "start"
 
 
 function start_virtualenv {
@@ -44,7 +44,7 @@ start_virtualenv
 #
 # Unit tests
 #
-python -m pytest -x tests
+python -m pytest -q -x tests
 rc=$?
 if [ $rc -ne 0 ]; then
     echo "unit tests failed. rc=$rc"
