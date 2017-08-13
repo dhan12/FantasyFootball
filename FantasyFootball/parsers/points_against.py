@@ -3,7 +3,7 @@ Refresh points against data.
 '''
 from html.parser import HTMLParser
 import requests
-from src.team_names import nickNames
+from FantasyFootball.team_names import nickNames
 
 
 class MyHtmlParser(HTMLParser):

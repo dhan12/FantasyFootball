@@ -1,14 +1,14 @@
 import sys
-from src.player import Player
-from src.player import setProjectionBasedRankings
-from src.schedule import run as schedule_run
-from src.auction_draft import run as auction_draft_run
-from src.parsers.personal_notes import parse as personal_notes_parse
-from src.parsers.numberfire_projections import parse as numberfire_projections_parse
-from src.parsers.espn_rankings import parse as espn_rankings_parse
-from src.parsers.auction_history import parse as auction_history_parse
-from src.parsers.points_against import parse as points_against_parse
-from src.parsers.espn_teams import parse as espn_teams_parse
+from FantasyFootball.player import Player
+from FantasyFootball.player import setProjectionBasedRankings
+from FantasyFootball.schedule import run as schedule_run
+from FantasyFootball.auction_draft import run as auction_draft_run
+from FantasyFootball.parsers.personal_notes import parse as personal_notes_parse
+from FantasyFootball.parsers.numberfire_projections import parse as numberfire_projections_parse
+from FantasyFootball.parsers.espn_rankings import parse as espn_rankings_parse
+from FantasyFootball.parsers.auction_history import parse as auction_history_parse
+from FantasyFootball.parsers.points_against import parse as points_against_parse
+from FantasyFootball.parsers.espn_teams import parse as espn_teams_parse
 
 _RAW_DATA_DIR = './data-raw/'
 _PROCESSED_DIR = './data-processed/'

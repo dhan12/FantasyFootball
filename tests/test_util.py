@@ -1,6 +1,6 @@
 import unittest
-from   src.util import findMatch
-import src.player as player
+from   FantasyFootball.util import findMatch
+import FantasyFootball.player as player
 
 
 class TestFindMatch(unittest.TestCase):

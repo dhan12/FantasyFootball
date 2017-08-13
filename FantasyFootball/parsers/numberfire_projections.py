@@ -1,4 +1,4 @@
-from src.util import findMatches
+from FantasyFootball.util import findMatches
 
 
 def parse(players, rawDataFileName, outputFileName):

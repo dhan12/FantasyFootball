@@ -1,5 +1,5 @@
 import re
-from src.player import Player
+from FantasyFootball.player import Player
 
 
 '''

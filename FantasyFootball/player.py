@@ -3,12 +3,10 @@ A model of a player.
 '''
 from colorama import Fore, Back, Style
 import copy
-from src.util import findMatches
+from FantasyFootball.util import findMatches
 TOTAL_BUDGET = 200
 ROSTER_SIZE = 15 - 2  # Skip kicker and def
 NUM_TEAMS = 14
-
-
 LAST_RANK = 999
 
 
