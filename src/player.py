@@ -3,7 +3,7 @@ A model of a player.
 '''
 from colorama import Fore, Back, Style
 import copy
-import util
+from src.util import findMatches
 TOTAL_BUDGET = 200
 ROSTER_SIZE = 15 - 2  # Skip kicker and def
 NUM_TEAMS = 14
@@ -79,7 +79,7 @@ class Player:
 def getPlayerMatches(players, items):
 
     try:
-        matches = util.findMatches(players, items[0].strip(), threshold=.3)
+        matches = findMatches(players, items[0].strip(), threshold=.3)
         if len(matches) == 0:
             return None, None, None
 
@@ -90,6 +90,31 @@ def getPlayerMatches(players, items):
         owner = None
 
     return matches, value, owner
+
+
+def cmp_to_key(mycmp):
+    class K:
+        def __init__(self, obj, *args):
+            self.obj = obj
+
+        def __lt__(self, other):
+            return mycmp(self.obj, other.obj) < 0
+
+        def __gt__(self, other):
+            return mycmp(self.obj, other.obj) > 0
+
+        def __eq__(self, other):
+            return mycmp(self.obj, other.obj) == 0
+
+        def __le__(self, other):
+            return mycmp(self.obj, other.obj) <= 0
+
+        def __ge__(self, other):
+            return mycmp(self.obj, other.obj) >= 0
+
+        def __ne__(self, other):
+            return mycmp(self.obj, other.obj) != 0
+    return K
 
 
 def _posProjSort(a, b):
@@ -105,10 +130,10 @@ def setProjectionBasedRankings(players):
     for p in players:
         sorted_players.append(players[p])
 
-    sorted_players.sort(cmp=_posProjSort)
+    sorted_players.sort(key=cmp_to_key(_posProjSort))
     lastPos = ''
     index = 0
-    for i in xrange(len(sorted_players)):
+    for i in range(len(sorted_players)):
         if sorted_players[i].pos != lastPos:
             lastPos = sorted_players[i].pos
             index = 0

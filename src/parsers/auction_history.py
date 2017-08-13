@@ -31,7 +31,7 @@ def parse(inputFiles):
     prices = {}
     for p in POSITIONS:
         prices[p] = []
-        zipped = zip(*positionToValues[p])
+        zipped = list(zip(*positionToValues[p]))
         for i in zipped:
             prices[p].append(_average(i))
 
@@ -74,7 +74,7 @@ def _getPricesForPosition(filename):
                 else:
                     prices[position] = [price]
             except TypeError as e:
-                print 'Could not parse e: %s line: %s:' % (e, line)
+                print('Could not parse e: %s line: %s:' % (e, line))
                 pass
 
     # Sort from high to low
@@ -84,7 +84,7 @@ def _getPricesForPosition(filename):
         # Pad end with 0's
         start = len(prices[pos])
         end = 200
-        for i in xrange(start, end, 1):
+        for i in range(start, end, 1):
             prices[pos].append(0)
 
     return prices

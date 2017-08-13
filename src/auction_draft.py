@@ -1,9 +1,9 @@
 import sys
 import datetime
 from colorama import Fore, Back, Style
-import player
-import roster
-import util
+from . import player
+from . import roster
+from . import util
 
 
 def _getAverage(players):
@@ -38,7 +38,7 @@ def _loadData(line):
                         "status": fitems[2]
                     })
     except IOError as e:
-        print 'Error could not read %s' % fname
+        print('Error could not read %s' % fname)
 
     if len(data) > 0:
         return data
@@ -63,9 +63,9 @@ def _printPlayersInColumns(players=None, showAll=True, numLines=150):
     positionToPlayers = {}
     for pos in util.POSITIONS:
         if showAll:
-            pp = [p for _, p in players.iteritems() if p.pos == pos]
+            pp = [p for _, p in players.items() if p.pos == pos]
         else:
-            pp = [p for _, p in players.iteritems()
+            pp = [p for _, p in players.items()
                   if p.pos == pos and (p.status == 'open' or
                                        p.status == 'mine')]
         pp.sort(key=lambda x: x.posRank)
@@ -83,7 +83,7 @@ def _printPlayersInColumns(players=None, showAll=True, numLines=150):
                 quit = False
             else:
                 line = line + ' |                                         '
-        print line
+        print(line)
         index = index + 1
 
         if (index % 6) == 0:
@@ -95,25 +95,25 @@ def _printPlayersInColumns(players=None, showAll=True, numLines=150):
                     .format(str(av.cost),
                             str(av.projection))
             line += Fore.RESET + Back.RESET
-            print line
+            print(line)
 
         if index >= numLines:
             break
 
-    print(Style.RESET_ALL)
+    print((Style.RESET_ALL))
 
 
 def printOptions():
-    print '--- Options ---'
-    print '0. help'
-    print '1. quit'
-    print '2. load <filename>'
-    print '3. roster (show roster)'
-    print '4. owned  (toggle showing hidden players'
-    print '5. lines <#>'
-    print '6. Make updates: '
-    print '   <player name>;<auction price>;<owner>'
-    print '7. refresh'
+    print('--- Options ---')
+    print('0. help')
+    print('1. quit')
+    print('2. load <filename>')
+    print('3. roster (show roster)')
+    print('4. owned  (toggle showing hidden players')
+    print('5. lines <#>')
+    print('6. Make updates: ')
+    print('   <player name>;<auction price>;<owner>')
+    print('7. refresh')
 
 
 def run(players):
@@ -129,7 +129,7 @@ def run(players):
     reprint = True
     while True:
         if reprint:
-            print 'processing display'
+            print('processing display')
             _printPlayersInColumns(players=players,
                                    showAll=_SHOW_ALL,
                                    numLines=_NUM_LINES_TO_SHOW)
@@ -153,11 +153,11 @@ def run(players):
             if _SHOW_ALL:
                 _SHOW_ALL = False
                 reprint = True
-                print 'Hiding players owned by another team'
+                print('Hiding players owned by another team')
             else:
                 _SHOW_ALL = True
                 reprint = True
-                print 'Showing all owned/unowned players'
+                print('Showing all owned/unowned players')
             continue
 
         if line == 'roster':
@@ -172,7 +172,7 @@ def run(players):
             try:
                 numLines = int(items[1])
             except:
-                print 'bad input. Should be `lines <numLines`'
+                print('bad input. Should be `lines <numLines`')
                 reprint = False
                 continue
             _NUM_LINES_TO_SHOW = numLines
@@ -182,9 +182,9 @@ def run(players):
         # Do bulk update
         bulkData = _loadData(line)
         if bulkData:
-            print 'loading bulk data'
+            print('loading bulk data')
             for b in bulkData:
-                print b
+                print(b)
                 _update(players, backup_file, b['name'],
                         b['value'], b['status'])
             continue
@@ -193,10 +193,10 @@ def run(players):
         matches, value, notes = player.getPlayerMatches(
             players, line.split(';'))
         if value and notes:
-            print 'Set data to: '
-            for m in xrange(min(5, len(matches))):
-                print ' %d. $%d (%s) -- %s' % \
-                      (m + 1, value, notes, players[matches[m]['name']])
+            print('Set data to: ')
+            for m in range(min(5, len(matches))):
+                print(' %d. $%d (%s) -- %s' %
+                      (m + 1, value, notes, players[matches[m]['name']]))
 
             line = sys.stdin.readline().strip()
             try:
@@ -207,10 +207,10 @@ def run(players):
                 reprint = True
                 continue
             except ValueError:
-                print 'Oops. Ok. Try again'
+                print('Oops. Ok. Try again')
                 reprint = False
 
         # Bad input, ask user to try again
-        print 'Bad input'
+        print('Bad input')
         printOptions()
         reprint = False

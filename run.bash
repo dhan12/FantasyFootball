@@ -17,13 +17,13 @@ if [[ $# -gt 0 ]]; then
         echo "Will install packages"
         virtualenv venv
         start_virtualenv
-        pip install colorama
-        pip install pep8
-        pip install autopep8
-        pip install pytest
-        pip install mock
-        pip install parse
-        pip install requests
+        pip3 install colorama
+        pip3 install pep8
+        pip3 install autopep8
+        pip3 install pytest
+        pip3 install mock
+        pip3 install parse
+        pip3 install requests
         finished=1
     elif [[ "$1" = "autopep8" ]]; then
         echo "Will run autopep8"
@@ -66,7 +66,7 @@ fi
 
 
 # Run the program
-python src/process.py $@
+python main.py $@
 
 
 # Clean up

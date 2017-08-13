@@ -1,5 +1,5 @@
 import re
-import util
+from src.util import findMatches
 
 
 def parse(players, inputFileName, outputFileName):
@@ -35,5 +35,5 @@ def parse(players, inputFileName, outputFileName):
             orderedNameList.append(n)
 
     with open(outputFileName, 'w') as output:
-        for i in xrange(len(orderedNameList)):
+        for i in range(len(orderedNameList)):
             output.write('%d;%s\n' % (i, orderedNameList[i]))

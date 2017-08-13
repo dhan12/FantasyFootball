@@ -1,5 +1,5 @@
 '''
-Refresh points against data.
+Get data for a league.
 '''
 from html.parser import HTMLParser
 import requests
@@ -60,53 +60,35 @@ class MyHtmlParser(HTMLParser):
             self.reset_team()
 
 
-def processFromWeb(year):
-
-    yearStr = str(year)
-    urls = [
-        {'pos': 'QB',
-         'url': 'http://games.espn.com/ffl/pointsagainst?positionId=1'},
-        {'pos': 'RB',
-         'url': 'http://games.espn.com/ffl/pointsagainst?positionId=2'},
-        {'pos': 'WR',
-         'url': 'http://games.espn.com/ffl/pointsagainst?positionId=3'},
-        {'pos': 'TE',
-         'url': 'http://games.espn.com/ffl/pointsagainst?positionId=4'},
-    ]
-
-    retData = []
-    for agg in urls:
-        pos = agg['pos']
-        url = agg['url']
-
-        # Make remote call to get data
-        resp = requests.get(url)
-
-        # Process the data
-        parser = MyHtmlParser()
-        parser.feed(resp.text)
-
-        # Return data
-        retData.append({'pos': pos, 'data': parser.data})
-
-    return retData
-
-
-def saveParsedData(outputDir, year, data):
-    # Save parsed data
-    output = '%s/points_against.%d.%s.txt' % (outputDir, year, data['pos'])
-    with open(output, 'w') as writer:
-        for name, score in data['data'].items():
-            writer.write(name + ',' + str(score) + '\n')
-
-
-def parse(year, outputFileDir):
+def processFromWeb(htmlFile):
+    '''
     try:
-        with open(outputFileDir + '/points_against.%d.QB.txt' % year, 'r'):
-            # print 'Points against file already exists.'
-            return
+        # If file exists, don't fetch again
+        with open(htmlFile, 'r'):
+            pass
     except IOError:
-        pass
-    data = processFromWeb(year)
-    for agg in data:
-        saveParsedData(outputFileDir, year, agg)
+        # If file doesn't exist, fetch file.
+    '''
+    ROSTER_URL = 'http://games.espn.com/ffl/leaguerosters?leagueId=225977'
+
+    # Make remote call to get data
+    resp = requests.get(ROSTER_URL)
+    print(dir(resp))
+    help(resp)
+    print(resp)
+
+    # Save response
+    with open(htmlFile, 'w') as output:
+        output.write(resp.text)
+
+    # Process the data
+    '''
+    with open(htmlFile, 'r') as inputFile:
+        parser = MyHtmlParser()
+        parser.feed(inputFile.read())
+    '''
+
+
+def parse(outputFileDir):
+    htmlFile = outputFileDir + '/espn_teams.html'
+    data = processFromWeb(htmlFile)

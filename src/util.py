@@ -8,7 +8,7 @@ POSITIONS = ['RB', 'WR', 'QB', 'TE']
 def getNameDict(filename, nameList, players):
     try:
         with open(filename, 'r') as input:
-            print 'using existing name cache %s' % filename
+            print('using existing name cache %s' % filename)
             return json.loads(input.read())
     except IOError:
         pass
@@ -31,7 +31,7 @@ def getNameDict(filename, nameList, players):
 def findMatch(players, aName, threshold=.6):
 
     bestMatch = 0
-    for key, p in players.iteritems():
+    for key, p in players.items():
         m = SequenceMatcher(None, p.nameAndTeamStr, aName).ratio()
         if m > bestMatch and m >= threshold:
             bestMatch = m
@@ -48,7 +48,7 @@ def findMatch(players, aName, threshold=.6):
 def findMatches(players, aName, maxResults=10, threshold=.6):
 
     matches = []
-    for key, p in players.iteritems():
+    for key, p in players.items():
         m1 = SequenceMatcher(None, p.name, aName).ratio()
         # print '%s vs %s, score=%f' % (p.name, aName, m1)
 

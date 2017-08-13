@@ -1,4 +1,4 @@
-import util
+from src.util import findMatches
 
 
 def parse(players, rawDataFileName, outputFileName):
@@ -48,5 +48,5 @@ def parse(players, rawDataFileName, outputFileName):
         assert(len(names) == len(projections))
 
         with open(outputFileName, 'w') as output:
-            for i in xrange(len(names)):
+            for i in range(len(names)):
                 output.write('%s;%s\n' % (names[i], projections[i]))

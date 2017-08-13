@@ -1,5 +1,5 @@
 import re
-from player import Player
+from src.player import Player
 
 
 '''

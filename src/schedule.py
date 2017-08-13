@@ -1,6 +1,6 @@
 from colorama import Fore, Back, Style
 import argparse
-import team_names
+from . import team_names
 
 _SCORE_TIERS = {
     'qb': {'low':  9, 'hi': 19},
@@ -27,18 +27,18 @@ def _getSchedules(schedule, teams):
         it = iter(sorted(schedule.keys()))
         while True:
             try:
-                abbr = it.next()
+                abbr = next(it)
                 teamsToShow.append({'team': abbr, 'opponents': schedule[abbr]})
             except StopIteration as e:
                 break
     else:
         teamsToShow = []
-        for a in xrange(numTeams):
+        for a in range(numTeams):
             team = teams[a]
             if team in schedule:
                 teamsToShow.append({'team': team, 'opponents': schedule[team]})
             else:
-                print 'cant find', team
+                print('cant find', team)
     return teamsToShow
 
 
@@ -131,20 +131,20 @@ def run(commandArgs):
             schedule[items[0]] = items[1:]
 
     pos = args.position.lower()
-    print 'Displaying position = %s, teams = %s\n' % \
-        (pos.upper(), ' '.join(args.teams))
+    print('Displaying position = %s, teams = %s\n' %
+          (pos.upper(), ' '.join(args.teams)))
 
     teamsToShow = _getSchedules(schedule, args.teams)
 
     # Print week headings
-    print '{:10.10}'.format(''),
-    for i in xrange(16):
-        print 'Week {:3.3}'.format(str(i + 1)),
-    print ''
-    print '{:10.10}'.format(''),
-    for i in xrange(16):
-        print '--------',
-    print ''
+    print('{:10.10}'.format(''), end=' ')
+    for i in range(16):
+        print('Week {:3.3}'.format(str(i + 1)), end=' ')
+    print('')
+    print('{:10.10}'.format(''), end=' ')
+    for i in range(16):
+        print('--------', end=' ')
+    print('')
 
     pointsAgainst = _getPointsAgainst()
 
@@ -152,7 +152,7 @@ def run(commandArgs):
     for t in teamsToShow:
         abbr = t['team']
         teamName = team_names.abbreviations[abbr]
-        print '{:10.10}'.format(teamName),
+        print('{:10.10}'.format(teamName), end=' ')
 
         week = 1
         for opponent in schedule[abbr]:
@@ -180,7 +180,7 @@ def run(commandArgs):
                 color = Fore.RED
             elif rank >= _SCORE_TIERS[pos]['hi']:
                 color = Fore.GREEN
-            print color + '{:>2.2} {:>4.4}{:1.1}'.format(
-                str(rank), opponent, '') + Fore.RESET,
-        print ''
-    print ''
+            print(color + '{:>2.2} {:>4.4}{:1.1}'.format(
+                str(rank), opponent, '') + Fore.RESET, end=' ')
+        print('')
+    print('')

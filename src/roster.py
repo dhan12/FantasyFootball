@@ -1,6 +1,6 @@
 import copy
-from util import POSITIONS
-from player import Player
+from .util import POSITIONS
+from .player import Player
 
 TOTAL_BUDGET = 200
 ROSTER_SIZE = 15  # Q, T, RB, RB, WR, WR, FLEX, D, K, 6 subs
@@ -25,11 +25,11 @@ class Roster():
         self.comboPlayer.projection = \
             sum([p.projection for p in self.myPlayers])
         self.originalNameLen = len(self.comboPlayer.name)
-        print 'Current team cost: %d' % \
-            sum([p.value for p in self.myPlayers])
+        print('Current team cost: %d' %
+              sum([p.value for p in self.myPlayers]))
 
         for p in self.myPlayers:
-            print 'owned player %d %3.2f %s' % (p.cost, p.projection, p.name)
+            print('owned player %d %3.2f %s' % (p.cost, p.projection, p.name))
 
         # Get players to pick up
         self.pool = {}
@@ -56,7 +56,7 @@ class Roster():
             combo.sort(key=lambda p: p.projection, reverse=True)
 
             uniqNames = set()
-            for i in xrange(len(combo)):
+            for i in range(len(combo)):
                 items = combo[i].name[self.originalNameLen + 1:].split(',')
                 items.sort()
                 name = ','.join(items)
@@ -64,7 +64,7 @@ class Roster():
                 if name in uniqNames:
                     continue
                 uniqNames.add(name)
-                print 'Players to add: %s' % name
+                print('Players to add: %s' % name)
 
                 if len(uniqNames) >= 10:
                     break
@@ -99,14 +99,14 @@ class Roster():
         return combos
 
     def _getMyPlayers(self, players):
-        owned = [p for _, p in players.iteritems() if p.status == 'mine']
+        owned = [p for _, p in players.items() if p.status == 'mine']
         return owned
 
     def _filter(self, items):
         playersToDelete = set()
         numPlayers = len(items)
         benchmark = items[-1]
-        for i in xrange(numPlayers - 1):
+        for i in range(numPlayers - 1):
             playerToCompare = items[numPlayers - i - 1]
             if (playerToCompare.cost >= benchmark.cost) and \
                (playerToCompare.projection <= benchmark.projection):
@@ -116,7 +116,7 @@ class Roster():
         return items
 
     def _getAvailablePlayers(self, players, pos, usedTeams):
-        play = [p for _, p in players.iteritems()
+        play = [p for _, p in players.items()
                 if p.pos == pos and
                 p.status == 'open' and
                 p.notes != 'hate' and
