@@ -3,7 +3,7 @@ A model of a player.
 '''
 from colorama import Fore, Back, Style
 import copy
-from FantasyFootball.util import findMatches
+from .util import findMatches
 TOTAL_BUDGET = 200
 ROSTER_SIZE = 15 - 2  # Skip kicker and def
 NUM_TEAMS = 14

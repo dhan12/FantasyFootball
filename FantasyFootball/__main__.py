@@ -1,14 +1,13 @@
 import sys
-from FantasyFootball.player import Player
-from FantasyFootball.player import setProjectionBasedRankings
-from FantasyFootball.schedule import run as schedule_run
-from FantasyFootball.auction_draft import run as auction_draft_run
-from FantasyFootball.parsers.personal_notes import parse as personal_notes_parse
-from FantasyFootball.parsers.numberfire_projections import parse as numberfire_projections_parse
-from FantasyFootball.parsers.espn_rankings import parse as espn_rankings_parse
-from FantasyFootball.parsers.auction_history import parse as auction_history_parse
-from FantasyFootball.parsers.points_against import parse as points_against_parse
-from FantasyFootball.parsers.espn_teams import parse as espn_teams_parse
+from . import player
+from . import schedule
+from . import auction_draft
+from .parsers import personal_notes
+from .parsers import numberfire_projections
+from .parsers import espn_rankings
+from .parsers import auction_history
+from .parsers import points_against
+from .parsers import espn_teams
 
 _RAW_DATA_DIR = './data-raw/'
 _PROCESSED_DIR = './data-processed/'
@@ -18,10 +17,10 @@ def initData():
     print('Initializing data')
 
     # print 'process league notes - who owns each player?'
-    players = personal_notes_parse(_RAW_DATA_DIR + 'notes.csv')
+    players = personal_notes.parse(_RAW_DATA_DIR + 'notes.csv')
 
     # print 'processing projections - how much is everyone worth?'
-    numberfire_projections_parse(
+    numberfire_projections.parse(
         players,
         _RAW_DATA_DIR + 'numberfire.projections.2017.aug.01.md',
         _PROCESSED_DIR + 'numbefire.projections.csv')
@@ -29,10 +28,10 @@ def initData():
         for line in input:
             items = line[:-1].split(';')
             players[items[0]].projection = float(items[1])
-    setProjectionBasedRankings(players)
+    player.setProjectionBasedRankings(players)
 
     # print 'processing espn rankings'
-    espn_rankings_parse(
+    espn_rankings.parse(
         players,
         _RAW_DATA_DIR + 'espn.rankings.2017.aug.01.md',
         _PROCESSED_DIR + 'espn.rankings.csv')
@@ -54,7 +53,7 @@ def initData():
         'draft.2015.raw.txt',
         'draft.2016.raw.txt',
         'draft.2017.raw.txt']]
-    prices = auction_history_parse(auctionFiles)
+    prices = auction_history.parse(auctionFiles)
 
     for _, p in players.items():
         pos = p.pos
@@ -69,8 +68,7 @@ def initData():
     return players
 
 
-if __name__ == '__main__':
-
+def main():
     if len(sys.argv) < 2:
         print('Not enough args. Valid options:')
         print(' python process.py draft')
@@ -79,11 +77,15 @@ if __name__ == '__main__':
     players = initData()
 
     if sys.argv[1] == 'draft':
-        auction_draft_run(players)
+        auction_draft.run(players)
 
     elif sys.argv[1] == 'schedule':
-        points_against_parse(2017, _PROCESSED_DIR)
-        schedule_run(sys.argv[2:])
+        points_against.parse(2017, _PROCESSED_DIR)
+        schedule.run(sys.argv[2:])
 
     elif sys.argv[1] == 'trade':
-        espn_teams_parse(_PROCESSED_DIR)
+        espn_teams.parse(_PROCESSED_DIR)
+
+
+if __name__ == '__main__':
+    main()

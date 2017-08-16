@@ -2,6 +2,7 @@
 *.swp
 *.pyc
 *.xlsx
-venv/
+.venv*
 dist
 .cache*
+*.egg-info

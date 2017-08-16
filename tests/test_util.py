@@ -1,6 +1,10 @@
 import unittest
-from   FantasyFootball.util import findMatch
-import FantasyFootball.player as player
+#from .context import util
+#from .context import player
+from FantasyFootball import util
+from FantasyFootball import player
+#import FantasyFootball.player
+#import player
 
 
 class TestFindMatch(unittest.TestCase):
@@ -12,7 +16,7 @@ class TestFindMatch(unittest.TestCase):
         p2 = player.Player(name='b', team='def')
         players = {}
 
-        self.assertEquals('', findMatch(players, 'a'))
+        self.assertEquals('', util.findMatch(players, 'a'))
 
     def test_exact_match(self):
         players = {
@@ -20,7 +24,7 @@ class TestFindMatch(unittest.TestCase):
             'b': player.Player(name='b', team='abc')
         }
 
-        self.assertEquals('a', findMatch(players, 'a, abc', threshold=1))
+        self.assertEquals('a', util.findMatch(players, 'a, abc', threshold=1))
 
     def test_exact_match_low_threshold(self):
         players = {
@@ -28,7 +32,7 @@ class TestFindMatch(unittest.TestCase):
             'b': player.Player(name='b', team='abc')
         }
 
-        self.assertEquals('a', findMatch(players, 'a', threshold=.1))
+        self.assertEquals('a', util.findMatch(players, 'a', threshold=.1))
 
     def test_close_match(self):
         players = {
@@ -36,7 +40,7 @@ class TestFindMatch(unittest.TestCase):
             'bbb1': player.Player(name='bbb1', team='abc')
         }
 
-        self.assertEquals('aaa1', findMatch(players, 'aaa', threshold=.1))
+        self.assertEquals('aaa1', util.findMatch(players, 'aaa', threshold=.1))
 
     def test_close_match_w_high_threshold_is_no_match(self):
         players = {
@@ -44,4 +48,4 @@ class TestFindMatch(unittest.TestCase):
             'bbb1': player.Player(name='bbb1', team='abc')
         }
 
-        self.assertEquals('', findMatch(players, 'aaa', threshold=1))
+        self.assertEquals('', util.findMatch(players, 'aaa', threshold=1))

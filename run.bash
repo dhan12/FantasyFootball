@@ -3,7 +3,7 @@
 
 
 function start_virtualenv {
-    . venv/bin/activate
+    . .venv/bin/activate
 }
 
 function stop_virtualenv {
@@ -15,7 +15,7 @@ if [[ $# -gt 0 ]]; then
     finished=0
     if [[ "$1" = "install" ]]; then
         echo "Will install packages"
-        virtualenv venv
+        virtualenv .venv
         start_virtualenv
         pip3 install colorama
         pip3 install pep8
@@ -28,7 +28,8 @@ if [[ $# -gt 0 ]]; then
     elif [[ "$1" = "autopep8" ]]; then
         echo "Will run autopep8"
         start_virtualenv
-        autopep8 --in-place FantasyFootball/*.py FantasyFootball/parsers/*py
+        autopep8 --in-place *.py FantasyFootball/*.py FantasyFootball/parsers/*py
+        pep8 FantasyFootball/*.py FantasyFootball/parsers/*py
         finished=1
     fi
 
@@ -40,11 +41,13 @@ fi
 
 
 start_virtualenv
+python setup.py -q develop
+
 
 #
 # Unit tests
 #
-python -m pytest -q -x tests
+python -m pytest tests
 rc=$?
 if [ $rc -ne 0 ]; then
     echo "unit tests failed. rc=$rc"
@@ -56,7 +59,7 @@ fi
 #
 # Do some style checks
 #
-pep8 FantasyFootball/*.py FantasyFootball/parsers/*py
+pep8 *.py FantasyFootball/*.py FantasyFootball/parsers/*py
 rc=$?
 if [ $rc -ne 0 ]; then
     echo "style checks failed. rc=$rc"
@@ -66,7 +69,7 @@ fi
 
 
 # Run the program
-python main.py $@
+FantasyFootball $@
 
 
 # Clean up
