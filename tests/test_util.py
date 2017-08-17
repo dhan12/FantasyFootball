@@ -1,10 +1,6 @@
 import unittest
-#from .context import util
-#from .context import player
 from FantasyFootball import util
 from FantasyFootball import player
-#import FantasyFootball.player
-#import player
 
 
 class TestFindMatch(unittest.TestCase):

@@ -1,77 +1,28 @@
 #!/bin/bash
-# echo "start"
 
 
-function start_virtualenv {
-    . .venv/bin/activate
-}
-
-function stop_virtualenv {
+function clean_and_exit {
     deactivate
+    echo $1
 }
 
-# Check arguments
-if [[ $# -gt 0 ]]; then
-    finished=0
-    if [[ "$1" = "install" ]]; then
-        echo "Will install packages"
-        virtualenv .venv
-        start_virtualenv
-        pip3 install colorama
-        pip3 install pep8
-        pip3 install autopep8
-        pip3 install pytest
-        pip3 install mock
-        pip3 install parse
-        pip3 install requests
-        finished=1
-    elif [[ "$1" = "autopep8" ]]; then
-        echo "Will run autopep8"
-        start_virtualenv
-        autopep8 --in-place *.py FantasyFootball/*.py FantasyFootball/parsers/*py
-        pep8 FantasyFootball/*.py FantasyFootball/parsers/*py
-        finished=1
-    fi
-
-    if [[ $finished -eq 1 ]]; then
-        stop_virtualenv
-        exit
-    fi
+if [[ "$1" = "install" ]]; then
+	virtualenv .venv
+	. .venv/bin/activate
+	pip3 install -r requirements.txt
+	pip3 install pep8 autopep8 pytest mock
+    exit 0
 fi
 
-
-start_virtualenv
+# Set up environment
+. .venv/bin/activate
 python setup.py -q develop
 
+# Test
+autopep8 --in-place -r setup.py FantasyFootball tests
+pep8 -r setup.py FantasyFootball tests || clean_and_exit 2
+python -m pytest tests || clean_and_exit 3
 
-#
-# Unit tests
-#
-python -m pytest tests
-rc=$?
-if [ $rc -ne 0 ]; then
-    echo "unit tests failed. rc=$rc"
-    stop_virtualenv
-    exit
-fi
-
-
-#
-# Do some style checks
-#
-pep8 *.py FantasyFootball/*.py FantasyFootball/parsers/*py
-rc=$?
-if [ $rc -ne 0 ]; then
-    echo "style checks failed. rc=$rc"
-    stop_virtualenv
-    exit
-fi
-
-
-# Run the program
+# Run and exit
 FantasyFootball $@
-
-
-# Clean up
-stop_virtualenv
-exit $rc
+clean_and_exit 0
